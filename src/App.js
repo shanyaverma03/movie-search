@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./Pages/RootLayout";
 import HomePage from "./Pages/HomePage";
+import Favourites from "./Pages/Favourites";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "favourites",
+        element: <Favourites />,
       },
     ],
   },
