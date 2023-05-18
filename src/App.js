@@ -13,8 +13,12 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "favourites",
+        path: "Favourites",
         element: <Favourites />,
+      },
+      {
+        path: "Home",
+        element: <HomePage />,
       },
     ],
   },

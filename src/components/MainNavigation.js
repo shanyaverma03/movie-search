@@ -13,7 +13,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
-
+import { Link } from "react-router-dom";
 const pages = ["Home", "Favourites", "Blog"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -125,7 +125,14 @@ function MainNavigation() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link
+                      style={{ textDecoration: "none", color: "white" }}
+                      to={page}
+                    >
+                      {page}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -156,7 +163,12 @@ function MainNavigation() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  to={page}
+                >
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
