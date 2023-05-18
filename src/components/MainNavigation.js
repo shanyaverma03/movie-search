@@ -14,6 +14,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import debounce from "lodash.debounce";
+
 const pages = ["Home", "Favourites", "Blog"];
 
 const Search = styled("div")(({ theme }) => ({
