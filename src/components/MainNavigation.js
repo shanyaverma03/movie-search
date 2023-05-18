@@ -15,6 +15,7 @@ import InputBase from "@mui/material/InputBase";
 import { styled, alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
+import { useMemo } from "react";
 
 const pages = ["Home", "Favourites", "Blog"];
 
@@ -183,7 +184,7 @@ function MainNavigation() {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
-                onChange={searchHandler}
+                onChange={debounce(searchHandler, 800)}
               />
             </Search>
           </Box>
