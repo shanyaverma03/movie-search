@@ -10,58 +10,21 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { styled, alpha } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
-import { useMemo } from "react";
+import axios from "axios";
+import { apiInfo } from "../config/rapidAPI";
+import { useState } from "react";
+
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const pages = ["Home", "Favourites", "Blog"];
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
 function MainNavigation() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const [movieRecs, setMovieRecs] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -71,8 +34,48 @@ function MainNavigation() {
     setAnchorElNav(null);
   };
 
-  const searchHandler = (event) => {
+  const searchHandler = async (event) => {
     console.log(event.target.value);
+    const options = {
+      method: "GET",
+      url: "https://imdb8.p.rapidapi.com/auto-complete",
+      params: { q: event.target.value },
+      headers: {
+        "X-RapidAPI-Key": apiInfo["X-RapidAPI-Key"],
+        "X-RapidAPI-Host": apiInfo["X-RapidAPI-Host"],
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      const list = response.data.d;
+      let moviesList = [];
+      list.map((item) => {
+        const title = item.l;
+        const year = item.y;
+        const rank = item.rank;
+        const poster = item.i.imageUrl;
+        const movie = {
+          title,
+          year,
+          rank,
+          poster,
+        };
+
+        moviesList.push(movie);
+      });
+
+      setMovieRecs(moviesList);
+      console.log(moviesList);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const selectionHandler = (value) => {
+    // setSelectedValue(value.toString());
+    console.log("selected value is " + value);
   };
 
   return (
@@ -175,18 +178,19 @@ function MainNavigation() {
               </Button>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onChange={debounce(searchHandler, 800)}
-              />
-            </Search>
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={movieRecs}
+              getOptionLabel={(movieRecs) => movieRecs.title || ""}
+              onInputCapture={debounce(searchHandler, 800)}
+              onChange={(event, value) => console.log(value)}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Search..." />
+              )}
+            />
           </Box>
         </Toolbar>
       </Container>
