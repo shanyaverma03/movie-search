@@ -127,6 +127,15 @@ function MainNavigation() {
               </Button>
             ))}
           </Box>
+          <Link to="login" style={{ textDecoration: "none", color: "white" }}>
+            <Button color="inherit">Login</Button>
+          </Link>
+          <Link
+            to="register"
+            style={{ textDecoration: "none", color: "white" }}
+          >
+            <Button color="inherit">Register</Button>
+          </Link>
         </Toolbar>
       </Container>
     </AppBar>

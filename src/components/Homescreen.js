@@ -5,6 +5,10 @@ import debounce from "lodash.debounce";
 import axios from "axios";
 import { apiInfo } from "../config/rapidAPI";
 import { useState } from "react";
+import Container from "@mui/material/Container/Container";
+import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
+import classes from "./Homescreen.module.css";
+
 const Homescreen = () => {
   const [movieRecs, setMovieRecs] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
@@ -50,24 +54,25 @@ const Homescreen = () => {
 
   const selectionHandler = (value) => {
     // setSelectedValue(value.toString());
-    console.log("selected value is " + value);
+    console.log("in selection handler ");
+    console.log(value);
   };
 
   return (
     <>
-      <h1>I am in homescreen</h1>
-      <Box sx={{ flexGrow: 0 }}>
+      <div className={classes.wrapper}>
+        <CssBaseline />
         <Autocomplete
           disablePortal
           id="combo-box-demo"
           options={movieRecs}
           getOptionLabel={(movieRecs) => movieRecs.title || ""}
           onInputCapture={debounce(searchHandler, 800)}
-          onChange={(event, value) => console.log(value)}
+          onChange={(event, value) => selectionHandler(value)}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Search..." />}
         />
-      </Box>
+      </div>
     </>
   );
 };
