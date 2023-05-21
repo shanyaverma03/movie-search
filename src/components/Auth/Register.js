@@ -12,6 +12,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { auth } from "../../config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import debounce from "lodash.debounce";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -43,6 +47,9 @@ const Register = () => {
       email: data.get("email"),
       password: data.get("password"),
     });
+    const email = data.get("email");
+    const password = data.get("password");
+    createUserWithEmailAndPassword(auth, email, password);
   };
 
   return (
