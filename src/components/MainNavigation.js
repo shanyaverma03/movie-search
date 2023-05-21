@@ -19,7 +19,7 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-const pages = ["Home", "Favourites", "Blog"];
+const pages = ["Home", "My List"];
 function MainNavigation() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -134,7 +134,7 @@ function MainNavigation() {
                   <Typography textAlign="center">
                     <Link
                       style={{ textDecoration: "none", color: "white" }}
-                      to={page}
+                      to={page.replace(/ +/g, "").toLowerCase()}
                     >
                       {page}
                     </Link>
@@ -171,7 +171,7 @@ function MainNavigation() {
               >
                 <Link
                   style={{ textDecoration: "none", color: "white" }}
-                  to={page}
+                  to={page.replace(/ +/g, "").toLowerCase()}
                 >
                   {page}
                 </Link>
