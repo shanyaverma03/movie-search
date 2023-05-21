@@ -52,7 +52,11 @@ const Register = () => {
     //const password = data.get("password");
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    await createUserWithEmailAndPassword(auth, email, password);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      console.error(err);
+    }
     firstNameRef.current.value = "";
     lastNameRef.current.value = "";
     emailRef.current.value = "";
