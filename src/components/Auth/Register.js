@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import debounce from "lodash.debounce";
-import { useState } from "react";
+import { useRef } from "react";
 
 function Copyright(props) {
   return (
@@ -40,16 +40,23 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Register = () => {
-  const handleSubmit = (event) => {
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    const email = data.get("email");
-    const password = data.get("password");
-    createUserWithEmailAndPassword(auth, email, password);
+    //const data = new FormData(event.currentTarget);
+    //const email = data.get("email");
+    //const password = data.get("password");
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    await createUserWithEmailAndPassword(auth, email, password);
+    firstNameRef.current.value = "";
+    lastNameRef.current.value = "";
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
   };
 
   return (
@@ -86,6 +93,7 @@ const Register = () => {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  inputRef={firstNameRef}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -96,6 +104,7 @@ const Register = () => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  inputRef={lastNameRef}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -106,6 +115,7 @@ const Register = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  inputRef={emailRef}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -117,6 +127,7 @@ const Register = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  inputRef={passwordRef}
                 />
               </Grid>
               <Grid item xs={12}>
