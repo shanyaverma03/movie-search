@@ -13,6 +13,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useValidate from "../../hooks/use-validate";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase";
+import { useNavigate } from "react-router";
 
 function Copyright(props) {
   return (
@@ -60,14 +63,25 @@ const Login = () => {
     formIsValid = true;
   }
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!formIsValid) {
       return;
     }
 
-    emailReset();
-    passwordReset();
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
+
+      emailReset();
+      passwordReset();
+      return navigate("/mylist");
+    } catch (err) {
+      console.error(err);
+      return;
+    }
   };
 
   return (
