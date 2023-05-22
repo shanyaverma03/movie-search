@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-const pages = ["Home", "My List"];
+const pages = ["Browse", "My List"];
 function MainNavigation() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 

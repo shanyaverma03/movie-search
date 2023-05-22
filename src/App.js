@@ -4,6 +4,7 @@ import HomePage from "./Pages/HomePage";
 import MyList from "./Pages/MyList";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
+import BrowsePage from "./Pages/BrowsePage";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
         element: <MyList />,
       },
       {
-        path: "home",
+        index: true,
         element: <HomePage />,
       },
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <RegisterPage />,
+      },
+      {
+        path: "browse",
+        element: <BrowsePage />,
       },
     ],
   },
