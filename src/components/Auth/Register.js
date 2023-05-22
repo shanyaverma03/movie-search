@@ -14,8 +14,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useRef, useState } from "react";
 import debounce from "lodash.debounce";
-import { useRef } from "react";
 
 function Copyright(props) {
   return (
@@ -40,27 +40,39 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Register = () => {
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [firstName, setFirstName] = useState("");
+  const [firstNameWasTouched, setFirstNameWasTouched] = useState(false);
+
+  const firstNameIsValid = firstName.trim() !== "";
+  const firstNameIsInvalid = !firstNameIsValid && firstNameWasTouched;
+  let formIsValid = false;
+
+  if (firstNameIsValid) {
+    formIsValid = true;
+  }
+
+  const firstNameChangeHandler = (event) => {
+    console.log(event.target.value);
+    setFirstName(event.target.value);
+  };
+  const firstNameBlurHandler = (event) => {
+    setFirstNameWasTouched(true);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     //const data = new FormData(event.currentTarget);
     //const email = data.get("email");
     //const password = data.get("password");
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    if (!formIsValid) {
+      return;
+    }
+
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      //await createUserWithEmailAndPassword(auth, email, password);
     } catch (err) {
       console.error(err);
     }
-    firstNameRef.current.value = "";
-    lastNameRef.current.value = "";
-    emailRef.current.value = "";
-    passwordRef.current.value = "";
   };
 
   return (
@@ -91,13 +103,16 @@ const Register = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
+                  error={firstNameIsInvalid}
+                  helperText={firstNameIsInvalid ? "Empty field!" : " "}
                   name="firstName"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  inputRef={firstNameRef}
+                  onChange={firstNameChangeHandler}
+                  onBlur={firstNameBlurHandler}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -108,7 +123,6 @@ const Register = () => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
-                  inputRef={lastNameRef}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -119,7 +133,6 @@ const Register = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  inputRef={emailRef}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -131,7 +144,17 @@ const Register = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  inputRef={passwordRef}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="confirmpassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmpassword"
+                  autoComplete="confirm-password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -148,6 +171,7 @@ const Register = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={!formIsValid}
             >
               Sign Up
             </Button>
