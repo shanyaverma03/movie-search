@@ -50,9 +50,51 @@ const Register = () => {
     reset: firstNameReset,
   } = useValidate((value) => value.trim() !== "");
 
-  let formIsValid = false;
+  const {
+    enteredValue: lastName,
+    valueIsValid: lastNameIsValid,
+    valueIsInvalid: lastNameIsInvalid,
+    valueChangeHandler: lastNameChangeHandler,
+    valueBlurHandler: lastNameBlurHandler,
+    reset: lastNameReset,
+  } = useValidate((value) => value.trim() !== "");
 
-  if (firstNameIsValid) {
+  const {
+    enteredValue: email,
+    valueIsValid: emailIsValid,
+    valueIsInvalid: emailIsInvalid,
+    valueChangeHandler: emailChangeHandler,
+    valueBlurHandler: emailBlurHandler,
+    reset: emailReset,
+  } = useValidate((value) => value.includes("@") && value.trim() !== "");
+
+  const {
+    enteredValue: password,
+    valueIsValid: passwordIsValid,
+    valueIsInvalid: passwordIsInvalid,
+    valueChangeHandler: passwordChangeHandler,
+    valueBlurHandler: passwordBlurHandler,
+    reset: passwordReset,
+  } = useValidate((value) => value.trim() !== "" && value.length > 5);
+
+  const {
+    enteredValue: confirmPassword,
+    valueIsValid: confirmPasswordIsValid,
+    valueIsInvalid: confirmPasswordIsInvalid,
+    valueChangeHandler: confirmPasswordChangeHandler,
+    valueBlurHandler: confirmPasswordBlurHandler,
+    reset: confirmPasswordReset,
+  } = useValidate((value) => value === password);
+
+  let formIsValid = false;
+  //const doPasswordsMatch= confirmPasswordIsValid && confirmPassword===password
+  if (
+    firstNameIsValid &&
+    lastNameIsValid &&
+    emailIsValid &&
+    passwordIsValid &&
+    confirmPasswordIsValid
+  ) {
     formIsValid = true;
   }
 
@@ -66,12 +108,16 @@ const Register = () => {
     }
 
     try {
-      //await createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
     } catch (err) {
       console.error(err);
     }
 
     firstNameReset();
+    lastNameReset();
+    emailReset();
+    passwordReset();
+    confirmPasswordReset();
   };
 
   return (
@@ -118,43 +164,65 @@ const Register = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
+                  error={lastNameIsInvalid}
+                  helperText={lastNameIsInvalid ? "Empty field!" : " "}
                   fullWidth
                   id="lastName"
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={lastNameChangeHandler}
+                  onBlur={lastNameBlurHandler}
+                  value={lastName}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  error={emailIsInvalid}
+                  helperText={emailIsInvalid ? "Invalid email!" : " "}
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={emailChangeHandler}
+                  onBlur={emailBlurHandler}
+                  value={email}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  error={passwordIsInvalid}
+                  helperText={passwordIsInvalid ? "Invalid password!" : " "}
                   name="password"
                   label="Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={passwordChangeHandler}
+                  onBlur={passwordBlurHandler}
+                  value={password}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
+                  error={confirmPasswordIsInvalid}
+                  helperText={
+                    confirmPasswordIsInvalid ? "Passwords don't match!" : " "
+                  }
                   name="confirmpassword"
                   label="Confirm Password"
                   type="password"
                   id="confirmpassword"
                   autoComplete="confirm-password"
+                  onChange={confirmPasswordChangeHandler}
+                  onBlur={confirmPasswordBlurHandler}
+                  value={confirmPassword}
                 />
               </Grid>
               <Grid item xs={12}>
