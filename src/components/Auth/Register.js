@@ -17,6 +17,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import debounce from "lodash.debounce";
 import useValidate from "../../hooks/use-validate";
+import { useNavigate } from "react-router";
 
 function Copyright(props) {
   return (
@@ -98,6 +99,7 @@ const Register = () => {
     formIsValid = true;
   }
 
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     //const data = new FormData(event.currentTarget);
@@ -109,15 +111,16 @@ const Register = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+
+      firstNameReset();
+      lastNameReset();
+      emailReset();
+      passwordReset();
+      confirmPasswordReset();
+      return navigate("/mylist");
     } catch (err) {
       console.error(err);
     }
-
-    firstNameReset();
-    lastNameReset();
-    emailReset();
-    passwordReset();
-    confirmPasswordReset();
   };
 
   return (
