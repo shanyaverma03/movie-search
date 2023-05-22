@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import useValidate from "../../hooks/use-validate";
 
 function Copyright(props) {
   return (
@@ -36,13 +37,37 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Login = () => {
+  const {
+    enteredValue: email,
+    valueIsValid: emailIsValid,
+    valueIsInvalid: emailIsInvalid,
+    valueChangeHandler: emailChangeHandler,
+    valueBlurHandler: emailBlurHandler,
+    reset: emailReset,
+  } = useValidate((value) => value.trim() !== "" && value.includes("@"));
+
+  const {
+    enteredValue: password,
+    valueIsValid: passwordIsValid,
+    valueIsInvalid: passwordIsInvalid,
+    valueChangeHandler: passwordChangeHandler,
+    valueBlurHandler: passwordBlurHandler,
+    reset: passwordReset,
+  } = useValidate((value) => value.trim() !== "" && value.length > 5);
+
+  let formIsValid = false;
+  if (emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    if (!formIsValid) {
+      return;
+    }
+
+    emailReset();
+    passwordReset();
   };
 
   return (
@@ -73,21 +98,31 @@ const Login = () => {
               margin="normal"
               required
               fullWidth
+              error={emailIsInvalid}
+              helperText={emailIsInvalid ? "Invalid email!" : " "}
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={emailChangeHandler}
+              onBlur={emailBlurHandler}
+              value={email}
             />
             <TextField
               margin="normal"
               required
               fullWidth
+              error={passwordIsInvalid}
+              helperText={passwordIsInvalid ? "Invalid password!" : " "}
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={passwordChangeHandler}
+              onBlur={passwordBlurHandler}
+              value={password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -98,6 +133,7 @@ const Login = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={!formIsValid}
             >
               Sign In
             </Button>
