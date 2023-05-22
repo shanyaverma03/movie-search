@@ -14,8 +14,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import debounce from "lodash.debounce";
+import useValidate from "../../hooks/use-validate";
 
 function Copyright(props) {
   return (
@@ -40,24 +41,20 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Register = () => {
-  const [firstName, setFirstName] = useState("");
-  const [firstNameWasTouched, setFirstNameWasTouched] = useState(false);
+  const {
+    enteredValue: firstName,
+    valueIsValid: firstNameIsValid,
+    valueIsInvalid: firstNameIsInvalid,
+    valueChangeHandler: firstNameChangeHandler,
+    valueBlurHandler: firstNameBlurHandler,
+    reset: firstNameReset,
+  } = useValidate((value) => value.trim() !== "");
 
-  const firstNameIsValid = firstName.trim() !== "";
-  const firstNameIsInvalid = !firstNameIsValid && firstNameWasTouched;
   let formIsValid = false;
 
   if (firstNameIsValid) {
     formIsValid = true;
   }
-
-  const firstNameChangeHandler = (event) => {
-    console.log(event.target.value);
-    setFirstName(event.target.value);
-  };
-  const firstNameBlurHandler = (event) => {
-    setFirstNameWasTouched(true);
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,6 +70,8 @@ const Register = () => {
     } catch (err) {
       console.error(err);
     }
+
+    firstNameReset();
   };
 
   return (
@@ -113,6 +112,7 @@ const Register = () => {
                   autoFocus
                   onChange={firstNameChangeHandler}
                   onBlur={firstNameBlurHandler}
+                  value={firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
