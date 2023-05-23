@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
 import * as React from "react";
 import Card from "@mui/material/Card";
@@ -10,6 +10,11 @@ import Typography from "@mui/material/Typography";
 const MovieDetail = () => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.movie);
+  const navigate = useNavigate();
+
+  const learnMoreHandler = () => {
+    navigate("learnmore");
+  };
   return (
     <>
       <h1>Movie detail</h1>
@@ -34,7 +39,9 @@ const MovieDetail = () => {
         </CardContent>
         <CardActions>
           <Button size="small">Add to 'My List'</Button>
-          <Button size="small">Learn More</Button>
+          <Button size="small" onClick={learnMoreHandler}>
+            Learn More
+          </Button>
         </CardActions>
       </Card>
     </>

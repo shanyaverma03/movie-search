@@ -6,6 +6,7 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import BrowsePage from "./Pages/BrowsePage";
 import MovieDetailPage from "./Pages/MovieDetailPage";
+import LearnMorePage from "./Pages/LearnMorePage";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,16 @@ const router = createBrowserRouter([
           },
           {
             path: ":id",
-            element: <MovieDetailPage />,
+            children: [
+              {
+                index: true,
+                element: <MovieDetailPage />,
+              },
+              {
+                path: "learnmore",
+                element: <LearnMorePage />,
+              },
+            ],
           },
         ],
       },
