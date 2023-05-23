@@ -5,6 +5,7 @@ import MyList from "./Pages/MyList";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import BrowsePage from "./Pages/BrowsePage";
+import MovieDetailPage from "./Pages/MovieDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -12,12 +13,12 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: "mylist",
-        element: <MyList />,
-      },
-      {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "mylist",
+        element: <MyList />,
       },
 
       {
@@ -30,7 +31,16 @@ const router = createBrowserRouter([
       },
       {
         path: "browse",
-        element: <BrowsePage />,
+        children: [
+          {
+            index: true,
+            element: <BrowsePage />,
+          },
+          {
+            path: ":id",
+            element: <MovieDetailPage />,
+          },
+        ],
       },
     ],
   },
