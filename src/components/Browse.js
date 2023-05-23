@@ -10,7 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
 import classes from "./Homescreen.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { movieActions } from "../store/selectedMovie";
+import { movieActions } from "../store/index";
 
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);

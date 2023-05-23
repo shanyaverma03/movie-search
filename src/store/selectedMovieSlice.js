@@ -1,4 +1,3 @@
-import { createStore } from "redux";
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -16,9 +15,4 @@ const movieSlice = createSlice({
 });
 
 //const store = createStore(movieSlice.reducer);
-const store = configureStore({
-  reducer: movieSlice.reducer,
-});
-
-export const movieActions = movieSlice.actions;
-export default store;
+export default movieSlice;
