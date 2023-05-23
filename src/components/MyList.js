@@ -6,8 +6,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
+import { myListActions } from "../store";
 const MyList = () => {
   const myList = useSelector((state) => state.mylist.mylist);
+  const dispatch = useDispatch();
+
+  const removeMovieHandler = (id) => {
+    dispatch(myListActions.remove(id));
+  };
   return (
     <>
       <h1>the list</h1>
@@ -31,7 +38,9 @@ const MyList = () => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Remove from list</Button>
+            <Button size="small" onClick={() => removeMovieHandler(movie.id)}>
+              Remove from list
+            </Button>
             <Button size="small">Learn More</Button>
           </CardActions>
         </Card>

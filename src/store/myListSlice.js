@@ -9,6 +9,12 @@ const myListSlice = createSlice({
     add(state, action) {
       state.mylist.push(action.payload);
     },
+    remove(state, action) {
+      const filtered = state.mylist.filter(
+        (movie) => movie.id !== action.payload
+      );
+      state.mylist = filtered;
+    },
   },
 });
 
