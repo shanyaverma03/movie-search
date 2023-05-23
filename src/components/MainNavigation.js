@@ -12,12 +12,13 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { useDispatch } from "react-redux";
+import { isAuthenticatedActions } from "../store";
 
 const pages = ["Browse", "My List"];
 function MainNavigation() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const browseClickHandler = () => {
     navigate("browse");
@@ -30,6 +31,10 @@ function MainNavigation() {
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
+
+  const logoutHandler = () => {
+    dispatch(isAuthenticatedActions.logout());
+  };
 
   return (
     <AppBar position="static">
@@ -71,15 +76,29 @@ function MainNavigation() {
               </Button>
             )}
           </Box>
-          <Link to="login" style={{ textDecoration: "none", color: "white" }}>
-            <Button color="inherit">Login</Button>
-          </Link>
-          <Link
-            to="register"
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <Button color="inherit">Register</Button>
-          </Link>
+          {!isAuthenticated && (
+            <>
+              <Link
+                to="login"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button color="inherit">Login</Button>
+              </Link>
+              <Link
+                to="register"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button color="inherit">Register</Button>
+              </Link>
+            </>
+          )}
+          {isAuthenticated && (
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              <Button color="inherit" onClick={logoutHandler}>
+                Logout
+              </Button>
+            </Link>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
