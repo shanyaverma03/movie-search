@@ -12,6 +12,9 @@ const isAuthenticatedSlice = createSlice({
     logout(state) {
       state.isAuthenticated = false;
     },
+    register(state) {
+      state.isAuthenticated = true;
+    },
   },
 });
 

@@ -14,8 +14,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
-import debounce from "lodash.debounce";
+import { useDispatch } from "react-redux";
+import { isAuthenticatedActions } from "../../store";
 import useValidate from "../../hooks/use-validate";
 import { useNavigate } from "react-router";
 
@@ -100,6 +100,8 @@ const Register = () => {
   }
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     //const data = new FormData(event.currentTarget);
@@ -111,7 +113,7 @@ const Register = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-
+      dispatch(isAuthenticatedActions.register());
       firstNameReset();
       lastNameReset();
       emailReset();
