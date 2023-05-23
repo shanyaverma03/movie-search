@@ -5,7 +5,7 @@ const MyList = () => {
     <>
       <h1>the list</h1>
       {myList.map((movie) => (
-        <p>{movie.title}</p>
+        <p key={movie.id}>{movie.title}</p>
       ))}
     </>
   );

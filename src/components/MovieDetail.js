@@ -7,34 +7,48 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { myListActions } from "../store/index";
+import { myListActions, isAuthenticatedActions } from "../store/index";
 import { useDispatch } from "react-redux";
+import LoginFirstModal from "./UI/LoginFirstModal";
 
 const MovieDetail = () => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
+  const isAuthenticated = useSelector(
+    (state) => state.isAuthenticated.isAuthenticated
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = React.useState(false);
 
   const learnMoreHandler = () => {
     navigate("learnmore");
   };
 
   const addToMyListHandler = () => {
-    const addedMovie = {
-      id: selectedMovie.id,
-      title: selectedMovie.title,
-      year: selectedMovie.year,
-      rank: selectedMovie.rank,
-      poster: selectedMovie.poster,
-    };
-    dispatch(myListActions.add(addedMovie));
-    navigate("/mylist");
+    if (isAuthenticated) {
+      const addedMovie = {
+        id: selectedMovie.id,
+        title: selectedMovie.title,
+        year: selectedMovie.year,
+        rank: selectedMovie.rank,
+        poster: selectedMovie.poster,
+      };
+      dispatch(myListActions.add(addedMovie));
+      navigate("/mylist");
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
   };
   return (
     <>
       <h1>Movie detail</h1>
       <p>{params.id}</p>
+      <LoginFirstModal open={showModal} closeModal={closeModal} />
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
