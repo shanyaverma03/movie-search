@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
@@ -26,6 +26,10 @@ function MainNavigation() {
   const mylistClickHandler = () => {
     navigate("mylist");
   };
+
+  const isAuthenticated = useSelector(
+    (state) => state.isAuthenticated.isAuthenticated
+  );
 
   return (
     <AppBar position="static">
@@ -57,14 +61,15 @@ function MainNavigation() {
             >
               Browse
             </Button>
-
-            <Button
-              key="mylist"
-              onClick={mylistClickHandler}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              My List
-            </Button>
+            {isAuthenticated && (
+              <Button
+                key="mylist"
+                onClick={mylistClickHandler}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                My List
+              </Button>
+            )}
           </Box>
           <Link to="login" style={{ textDecoration: "none", color: "white" }}>
             <Button color="inherit">Login</Button>
