@@ -1,9 +1,13 @@
 import { createStore } from "redux";
 
-const movieReducer = (state = { movie: {} }, action) => {
+const initialState = {
+  movie: [{ id: "", title: "", year: "", rank: "", poster: "" }],
+};
+
+const movieReducer = (state = initialState, action) => {
   if (action.type === "select") {
     return {
-      movie: state.movie,
+      movie: action.value,
     };
   }
 

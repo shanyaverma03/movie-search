@@ -9,6 +9,7 @@ import Container from "@mui/material/Container/Container";
 import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
 import classes from "./Homescreen.module.css";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
@@ -57,11 +58,14 @@ const Browse = () => {
     }
   };
 
+  const dispatch = useDispatch();
+
   const selectionHandler = (value) => {
     // setSelectedValue(value.toString());
     console.log("in selection handler ");
     console.log(value);
     setSelectedValue(value);
+    dispatch({ type: "select", value: value });
     navigate(`${value.id}`);
   };
 
