@@ -7,7 +7,7 @@ const myListSlice = createSlice({
   initialState,
   reducers: {
     add(state, action) {
-      state.mylist.push(action);
+      state.mylist.push(action.payload);
     },
   },
 });

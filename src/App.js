@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./Pages/RootLayout";
 import HomePage from "./Pages/HomePage";
-import MyList from "./Pages/MyList";
+import MyListPage from "./Pages/MyListPage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import BrowsePage from "./Pages/BrowsePage";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       },
       {
         path: "mylist",
-        element: <MyList />,
+        element: <MyListPage />,
       },
 
       {

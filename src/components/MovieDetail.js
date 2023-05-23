@@ -7,13 +7,29 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { myListActions } from "../store/index";
+import { useDispatch } from "react-redux";
+
 const MovieDetail = () => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const learnMoreHandler = () => {
     navigate("learnmore");
+  };
+
+  const addToMyListHandler = () => {
+    const addedMovie = {
+      id: selectedMovie.id,
+      title: selectedMovie.title,
+      year: selectedMovie.year,
+      rank: selectedMovie.rank,
+      poster: selectedMovie.poster,
+    };
+    dispatch(myListActions.add(addedMovie));
+    navigate("/mylist");
   };
   return (
     <>
@@ -38,7 +54,9 @@ const MovieDetail = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Add to 'My List'</Button>
+          <Button size="small" onClick={addToMyListHandler}>
+            Add to 'My List'
+          </Button>
           <Button size="small" onClick={learnMoreHandler}>
             Learn More
           </Button>
