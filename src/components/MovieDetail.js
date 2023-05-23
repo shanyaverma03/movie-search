@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 const MovieDetail = () => {
   const params = useParams();
-  const selectedMovie = useSelector((state) => state.movie);
+  const selectedMovie = useSelector((state) => state.selectedMovie.movie);
   const navigate = useNavigate();
 
   const learnMoreHandler = () => {
