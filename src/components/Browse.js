@@ -8,10 +8,12 @@ import { useState } from "react";
 import Container from "@mui/material/Container/Container";
 import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
 import classes from "./Homescreen.module.css";
+import { useNavigate } from "react-router";
 
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
+  const navigate = useNavigate();
 
   const searchHandler = async (event) => {
     console.log(event.target.value);
@@ -29,13 +31,16 @@ const Browse = () => {
       const response = await axios.request(options);
       console.log(response.data);
       const list = response.data.d;
+      console.log(list);
       let moviesList = [];
       list.map((item) => {
+        const id = item.id;
         const title = item.l;
         const year = item.y;
         const rank = item.rank;
         const poster = item.i.imageUrl;
         const movie = {
+          id,
           title,
           year,
           rank,
@@ -56,6 +61,8 @@ const Browse = () => {
     // setSelectedValue(value.toString());
     console.log("in selection handler ");
     console.log(value);
+    setSelectedValue(value);
+    navigate(`${value.id}`);
   };
 
   return (
