@@ -1,79 +1,66 @@
-import { Box } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete/Autocomplete";
-import TextField from "@mui/material/TextField/TextField";
-import debounce from "lodash.debounce";
-import axios from "axios";
-import { apiInfo } from "../config/rapidAPI";
-import { useState } from "react";
-import Container from "@mui/material/Container/Container";
-import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
-import classes from "./Homescreen.module.css";
+import * as React from "react";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router";
 
 const Homescreen = () => {
-  const [movieRecs, setMovieRecs] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
+  const navigate = useNavigate();
 
-  const searchHandler = async (event) => {
-    console.log(event.target.value);
-    const options = {
-      method: "GET",
-      url: "https://imdb8.p.rapidapi.com/auto-complete",
-      params: { q: event.target.value },
-      headers: {
-        "X-RapidAPI-Key": apiInfo["X-RapidAPI-Key"],
-        "X-RapidAPI-Host": apiInfo["X-RapidAPI-Host"],
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      console.log(response.data);
-      const list = response.data.d;
-      let moviesList = [];
-      list.map((item) => {
-        const title = item.l;
-        const year = item.y;
-        const rank = item.rank;
-        const poster = item.i.imageUrl;
-        const movie = {
-          title,
-          year,
-          rank,
-          poster,
-        };
-
-        moviesList.push(movie);
-      });
-
-      setMovieRecs(moviesList);
-      console.log(moviesList);
-    } catch (error) {
-      console.error(error);
-    }
+  const browseMovieHandler = () => {
+    navigate("/browse");
   };
-
-  const selectionHandler = (value) => {
-    // setSelectedValue(value.toString());
-    console.log("in selection handler ");
-    console.log(value);
-  };
-
+  const defaultTheme = createTheme();
   return (
-    <>
-      <div className={classes.wrapper}>
-        <CssBaseline />
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={movieRecs}
-          getOptionLabel={(movieRecs) => movieRecs.title || ""}
-          onInputCapture={debounce(searchHandler, 800)}
-          onChange={(event, value) => selectionHandler(value)}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Search..." />}
-        />
-      </div>
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+      <main>
+        {/* Hero unit */}
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Movie Search
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
+              Search the ratings and description of any movie or TV show you
+              want! Add your favourite movies to your list. Happy browsing!
+            </Typography>
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+              <Button variant="contained" onClick={browseMovieHandler}>
+                Browse a movie
+              </Button>
+              <Button variant="outlined">Secondary action</Button>
+            </Stack>
+          </Container>
+        </Box>
+      </main>
+    </ThemeProvider>
   );
 };
 
