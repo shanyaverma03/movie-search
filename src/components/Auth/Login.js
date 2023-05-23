@@ -16,6 +16,8 @@ import useValidate from "../../hooks/use-validate";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { isAuthenticatedActions } from "../../store";
 
 function Copyright(props) {
   return (
@@ -64,6 +66,7 @@ const Login = () => {
   }
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -74,7 +77,7 @@ const Login = () => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
       console.log(response);
-
+      dispatch(isAuthenticatedActions.login());
       emailReset();
       passwordReset();
       return navigate("/mylist");
