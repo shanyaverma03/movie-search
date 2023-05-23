@@ -119,7 +119,7 @@ const Register = () => {
       emailReset();
       passwordReset();
       confirmPasswordReset();
-      return navigate("/mylist");
+      return navigate(-1);
     } catch (err) {
       console.error(err);
     }

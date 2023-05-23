@@ -80,7 +80,7 @@ const Login = () => {
       dispatch(isAuthenticatedActions.login());
       emailReset();
       passwordReset();
-      return navigate("/mylist");
+      return navigate(-1);
     } catch (err) {
       console.error(err);
       return;
