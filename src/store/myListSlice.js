@@ -20,3 +20,18 @@ const myListSlice = createSlice({
 });
 
 export default myListSlice;
+
+export const addToMyListAction = (movie, userId) => {
+  return async () => {
+    const docRef = await addDoc(collection(db, "mylist"), {
+      id: movie.id,
+      poster: movie.poster,
+      rank: movie.rank,
+      title: movie.title,
+      userId: userId,
+      year: movie.year,
+    });
+
+    console.log("Document written with ID: ", docRef.id);
+  };
+};

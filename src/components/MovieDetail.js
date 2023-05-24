@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import LoginFirstModal from "./UI/LoginFirstModal";
 import { auth } from "../config/firebase";
 import { getUidOfUserAction } from "../store/isAuthenticatedSlice";
-
+import { addToMyListAction } from "../store/myListSlice";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
@@ -41,17 +41,7 @@ const MovieDetail = () => {
       };
       const userId = await dispatch(getUidOfUserAction());
       console.log(userId);
-      const docRef = await addDoc(collection(db, "mylist"), {
-        id: addedMovie.id,
-        poster: addedMovie.poster,
-        rank: addedMovie.rank,
-        title: addedMovie.title,
-        userId,
-        year: addedMovie.year,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      dispatch(myListActions.add(addedMovie));
-
+      dispatch(addToMyListAction(addedMovie, userId));
       navigate("/mylist");
     } else {
       setShowModal(true);
