@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { auth } from "../config/firebase";
+import { signOut } from "firebase/auth";
 
 const initialState = { isAuthenticated: false, userId: null };
 
@@ -11,9 +12,6 @@ const isAuthenticatedSlice = createSlice({
       state.isAuthenticated = true;
       state.userId = action.payload;
     },
-    logout(state) {
-      state.isAuthenticated = false;
-    },
     register(state) {
       state.isAuthenticated = true;
       state.userId = action.payload;
@@ -22,3 +20,13 @@ const isAuthenticatedSlice = createSlice({
 });
 
 export default isAuthenticatedSlice;
+
+export const logoutAction = () => {
+  return async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log("error");
+    }
+  };
+};

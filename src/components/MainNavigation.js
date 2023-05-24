@@ -13,7 +13,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { isAuthenticatedActions } from "../store";
+import { logoutAction } from "../store/isAuthenticatedSlice";
 
 const pages = ["Browse", "My List"];
 function MainNavigation() {
@@ -33,7 +33,7 @@ function MainNavigation() {
   );
 
   const logoutHandler = () => {
-    dispatch(isAuthenticatedActions.logout());
+    dispatch(logoutAction());
   };
 
   return (
