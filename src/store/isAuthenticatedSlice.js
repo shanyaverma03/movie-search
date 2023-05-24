@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { auth } from "../config/firebase";
 
 const initialState = { isAuthenticated: false };
 
@@ -19,3 +20,9 @@ const isAuthenticatedSlice = createSlice({
 });
 
 export default isAuthenticatedSlice;
+export const getUidOfUserAction = () => {
+  return async () => {
+    const userId = await auth.currentUser.uid;
+    return userId;
+  };
+};

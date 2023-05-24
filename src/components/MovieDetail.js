@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import { myListActions, isAuthenticatedActions } from "../store/index";
 import { useDispatch } from "react-redux";
 import LoginFirstModal from "./UI/LoginFirstModal";
+import { auth } from "../config/firebase";
+import { getUidOfUserAction } from "../store/isAuthenticatedSlice";
 
 const MovieDetail = () => {
   const params = useParams();
@@ -25,7 +27,7 @@ const MovieDetail = () => {
     navigate("learnmore");
   };
 
-  const addToMyListHandler = () => {
+  const addToMyListHandler = async () => {
     if (isAuthenticated) {
       const addedMovie = {
         id: selectedMovie.id,
@@ -35,6 +37,8 @@ const MovieDetail = () => {
         poster: selectedMovie.poster,
       };
       dispatch(myListActions.add(addedMovie));
+      const userID = await dispatch(getUidOfUserAction());
+      console.log(userID);
       navigate("/mylist");
     } else {
       setShowModal(true);
