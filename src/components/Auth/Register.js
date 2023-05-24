@@ -113,7 +113,9 @@ const Register = () => {
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      dispatch(isAuthenticatedActions.register());
+      const userId = auth.currentUser.uid;
+      dispatch(isAuthenticatedActions.register(userId));
+
       firstNameReset();
       lastNameReset();
       emailReset();
