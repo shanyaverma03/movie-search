@@ -12,21 +12,32 @@ import { getListAction } from "../store/myListSlice";
 import { getUidOfUserAction } from "../store/isAuthenticatedSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { db } from "../config/firebase";
+
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 const MyList = () => {
   const myList = useSelector((state) => state.mylist.mylist);
+  const userId = useSelector((state) => state.isAuthenticated.userId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const getUserId = () => {
-    return dispatch(getUidOfUserAction());
+  const getMovieList = async (id) => {
+    const list = [];
+    const q = query(collection(db, "mylist"), where("userId", "==", id));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      list.push({ ...doc.data(), id: doc.id });
+      //console.log(list)
+    });
+    console.log(list);
+    return list;
   };
-
   useEffect(() => {
-    const uid = getUserId();
-    if (uid) {
-      console.log(uid);
-      const movieList = dispatch(getListAction(uid));
+    if (userId) {
+      console.log(userId);
+      //const movieList = dispatch(getListAction(uid));
+      const movieList = getMovieList(userId);
       console.log("in my list component");
       console.log(movieList);
     } else {

@@ -12,7 +12,7 @@ const isAuthenticatedSlice = createSlice({
       state.isAuthenticated = true;
       state.userId = action.payload;
     },
-    register(state) {
+    register(state, action) {
       state.isAuthenticated = true;
       state.userId = action.payload;
     },

@@ -22,6 +22,7 @@ const MovieDetail = () => {
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
+  const userId = useSelector((state) => state.isAuthenticated.userId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showModal, setShowModal] = React.useState(false);
@@ -39,7 +40,6 @@ const MovieDetail = () => {
         rank: selectedMovie.rank,
         poster: selectedMovie.poster,
       };
-      const userId = await dispatch(getUidOfUserAction());
       console.log(userId);
       dispatch(addToMyListAction(addedMovie, userId));
       navigate("/mylist");
