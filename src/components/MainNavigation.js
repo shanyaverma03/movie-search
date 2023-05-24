@@ -14,8 +14,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutAction } from "../store/isAuthenticatedSlice";
+import { auth } from "../config/firebase";
+import { isAuthenticatedActions } from "../store";
+import { signOut } from "firebase/auth";
 
-const pages = ["Browse", "My List"];
 function MainNavigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,8 +34,13 @@ function MainNavigation() {
     (state) => state.isAuthenticated.isAuthenticated
   );
 
-  const logoutHandler = () => {
-    dispatch(logoutAction());
+  const logoutHandler = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log("error");
+    }
+    dispatch(isAuthenticatedActions.logout());
   };
 
   return (
