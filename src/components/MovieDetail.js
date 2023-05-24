@@ -16,6 +16,8 @@ import { addToMyListAction } from "../store/myListSlice";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
+import { query, where, getDocs } from "firebase/firestore";
+
 const MovieDetail = () => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
@@ -30,19 +32,27 @@ const MovieDetail = () => {
   const learnMoreHandler = () => {
     navigate("learnmore");
   };
-
   const addToMyListHandler = async () => {
     if (isAuthenticated) {
-      const addedMovie = {
-        id: selectedMovie.id,
-        title: selectedMovie.title,
-        year: selectedMovie.year,
-        rank: selectedMovie.rank,
-        poster: selectedMovie.poster,
-      };
-      console.log(userId);
-      dispatch(addToMyListAction(addedMovie, userId));
-      navigate("/mylist");
+      const q = query(
+        collection(db, "mylist"),
+        where("id", "==", selectedMovie.id)
+      );
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        console.log("movie alreasy in list");
+      } else {
+        const addedMovie = {
+          id: selectedMovie.id,
+          title: selectedMovie.title,
+          year: selectedMovie.year,
+          rank: selectedMovie.rank,
+          poster: selectedMovie.poster,
+        };
+        console.log(userId);
+        dispatch(addToMyListAction(addedMovie, userId));
+        navigate("/mylist");
+      }
     } else {
       setShowModal(true);
     }
