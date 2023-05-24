@@ -17,8 +17,9 @@ import { db } from "../config/firebase";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 const MyList = () => {
-  const myList = useSelector((state) => state.mylist.mylist);
+  //const myList = useSelector((state) => state.mylist.mylist);
   const userId = useSelector((state) => state.isAuthenticated.userId);
+  const [myList, setMyList] = React.useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -31,15 +32,14 @@ const MyList = () => {
       //console.log(list)
     });
     console.log(list);
-    return list;
+    setMyList(list);
   };
   useEffect(() => {
     if (userId) {
       console.log(userId);
       //const movieList = dispatch(getListAction(uid));
-      const movieList = getMovieList(userId);
+      getMovieList(userId);
       console.log("in my list component");
-      console.log(movieList);
     } else {
       navigate("/");
     }
