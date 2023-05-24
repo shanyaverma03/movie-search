@@ -19,6 +19,14 @@ const isAuthenticatedSlice = createSlice({
       state.isAuthenticated = false;
       state.userId = null;
     },
+    userFound(state, action) {
+      state.isAuthenticated = true;
+      state.userId = action.payload;
+    },
+    userNotFound(state) {
+      state.isAuthenticated = false;
+      state.userId = null;
+    },
   },
 });
 

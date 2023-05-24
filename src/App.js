@@ -7,6 +7,11 @@ import RegisterPage from "./Pages/RegisterPage";
 import BrowsePage from "./Pages/BrowsePage";
 import MovieDetailPage from "./Pages/MovieDetailPage";
 import LearnMorePage from "./Pages/LearnMorePage";
+import { useEffect } from "react";
+import { auth } from "./config/firebase";
+import { useDispatch } from "react-redux";
+import { isAuthenticatedActions } from "./store/index";
+import { onAuthStateChanged } from "firebase/auth";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +60,26 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+
+        console.log("user found " + user.uid);
+        dispatch(isAuthenticatedActions.userFound(uid));
+      } else {
+        console.log("user not found");
+        console.log(user);
+        dispatch(isAuthenticatedActions.userNotFound());
+
+        console.log(user);
+      }
+    });
+  }, []);
   return <RouterProvider router={router} />;
 }
 
