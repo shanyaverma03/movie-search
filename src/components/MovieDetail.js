@@ -38,30 +38,17 @@ const MovieDetail = () => {
   };
   const addToMyListHandler = async () => {
     if (isAuthenticated) {
-      const q = query(
-        collection(db, "mylist"),
-        where("id", "==", selectedMovie.id)
-      );
-      const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) {
-        console.log("movie alreasy in list");
-        setModalDetails({
-          showModal: true,
-          modalMessage: "Movie already exists in your list!",
-          modalTitle: "Oops",
-        });
-      } else {
-        const addedMovie = {
-          id: selectedMovie.id,
-          title: selectedMovie.title,
-          year: selectedMovie.year,
-          rank: selectedMovie.rank,
-          poster: selectedMovie.poster,
-        };
-        console.log(userId);
-        dispatch(addToMyListAction(addedMovie, userId));
-        navigate("/mylist");
-      }
+      console.log(userId);
+      const addedMovie = {
+        id: selectedMovie.id,
+        title: selectedMovie.title,
+        year: selectedMovie.year,
+        rank: selectedMovie.rank,
+        poster: selectedMovie.poster,
+      };
+
+      dispatch(addToMyListAction(addedMovie, userId, selectedMovie.id));
+      navigate("/mylist");
     } else {
       setModalDetails({
         showModal: true,
