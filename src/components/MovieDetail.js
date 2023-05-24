@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { myListActions, isAuthenticatedActions } from "../store/index";
 import { useDispatch } from "react-redux";
-import LoginFirstModal from "./UI/LoginFirstModal";
+import LoginFirstModal from "./UI/MyModal";
 import { auth } from "../config/firebase";
 import { getUidOfUserAction } from "../store/isAuthenticatedSlice";
 import { addToMyListAction } from "../store/myListSlice";
@@ -27,7 +27,11 @@ const MovieDetail = () => {
   const userId = useSelector((state) => state.isAuthenticated.userId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [showModal, setShowModal] = React.useState(false);
+  const [modalDetails, setModalDetails] = React.useState({
+    showModal: false,
+    modalMessage: "",
+    modalTitle: "",
+  });
 
   const learnMoreHandler = () => {
     navigate("learnmore");
@@ -41,6 +45,11 @@ const MovieDetail = () => {
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
         console.log("movie alreasy in list");
+        setModalDetails({
+          showModal: true,
+          modalMessage: "Movie already exists in your list!",
+          modalTitle: "Oops",
+        });
       } else {
         const addedMovie = {
           id: selectedMovie.id,
@@ -54,18 +63,31 @@ const MovieDetail = () => {
         navigate("/mylist");
       }
     } else {
-      setShowModal(true);
+      setModalDetails({
+        showModal: true,
+        modalMessage: "Please login/register first",
+        modalTitle: "Want to add the movie to your list?",
+      });
     }
   };
 
   const closeModal = () => {
-    setShowModal(false);
+    setModalDetails({
+      showModal: false,
+      modalMessage: "",
+      modalTitle: "",
+    });
   };
   return (
     <>
       <h1>Movie detail</h1>
       <p>{params.id}</p>
-      <LoginFirstModal open={showModal} closeModal={closeModal} />
+      <LoginFirstModal
+        open={modalDetails.showModal}
+        message={modalDetails.modalMessage}
+        title={modalDetails.modalTitle}
+        closeModal={closeModal}
+      />
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"

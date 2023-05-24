@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-const LoginFirstModal = (props) => {
+const MyModal = (props) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -20,11 +20,9 @@ const LoginFirstModal = (props) => {
         onClose={props.closeModal}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">
-          {"Want to add the movie to your list?"}
-        </DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{props.title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>Please log in or register first</DialogContentText>
+          <DialogContentText>{props.message}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.closeModal} autoFocus>
@@ -35,4 +33,4 @@ const LoginFirstModal = (props) => {
     </div>
   );
 };
-export default LoginFirstModal;
+export default MyModal;
