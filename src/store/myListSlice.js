@@ -36,17 +36,3 @@ export const addToMyListAction = (movie, userId) => {
     console.log("Document written with ID: ", docRef.id);
   };
 };
-
-export const getListAction = (id) => {
-  return async () => {
-    const list = [];
-    const q = query(collection(db, "mylist"), where("userId", "==", id));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      list.push({ ...doc.data(), id: doc.id });
-      //console.log(list)
-    });
-    console.log(list);
-    return list;
-  };
-};
