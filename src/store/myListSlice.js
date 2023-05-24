@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../config/firebase";
 const initialState = { mylist: [] };
 
 const myListSlice = createSlice({
