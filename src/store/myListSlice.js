@@ -48,14 +48,15 @@ export const addToMyListAction = (movie, userId, selectedMovieId) => {
   };
 };
 
-// export const getMovieListAction = async (id) => {
-//   const list = [];
-//   const q = query(collection(db, "mylist"), where("userId", "==", id));
-//   const querySnapshot = await getDocs(q);
-//   querySnapshot.forEach((doc) => {
-//     list.push({ ...doc.data(), id: doc.id });
-//     //console.log(list)
-//   });
-//   console.log(list);
-//   setMyList(list);
-// };
+export const getMovieListAction = (uid) => {
+  return async (dispatch) => {
+    const q = query(collection(db, "mylist"), where("userId", "==", uid));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      //list.push({ ...doc.data(), id: doc.id });
+      dispatch(myListSlice.actions.add(doc.data()));
+      //console.log(list)
+      //console.log(doc.data());
+    });
+  };
+};

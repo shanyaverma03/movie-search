@@ -12,6 +12,7 @@ import { auth } from "./config/firebase";
 import { useDispatch } from "react-redux";
 import { isAuthenticatedActions } from "./store/index";
 import { onAuthStateChanged } from "firebase/auth";
+import { getMovieListAction } from "./store/myListSlice";
 
 const router = createBrowserRouter([
   {
@@ -68,9 +69,9 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-
         console.log("user found " + user.uid);
         dispatch(isAuthenticatedActions.userFound(uid));
+        dispatch(getMovieListAction(uid));
       } else {
         console.log("user not found");
         console.log(user);

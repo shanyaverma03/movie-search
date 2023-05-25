@@ -19,27 +19,14 @@ import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 const MyList = () => {
   //const myList = useSelector((state) => state.mylist.mylist);
   const userId = useSelector((state) => state.isAuthenticated.userId);
-  const [myList, setMyList] = React.useState([]);
+  const myList = useSelector((state) => state.mylist.mylist);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const getMovieList = async (id) => {
-    const list = [];
-    const q = query(collection(db, "mylist"), where("userId", "==", id));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      list.push({ ...doc.data(), id: doc.id });
-      //console.log(list)
-    });
-    console.log(list);
-    setMyList(list);
-  };
   useEffect(() => {
     if (userId) {
       console.log(userId);
-      //const movieList = dispatch(getListAction(uid));
-      getMovieList(userId);
-      console.log("in my list component");
+      console.log(myList);
     } else {
       navigate("/");
     }
