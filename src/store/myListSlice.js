@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  doc,
+} from "firebase/firestore";
 import { db } from "../config/firebase";
+import { deleteDoc } from "firebase/firestore";
 
 const initialState = { mylist: [] };
 
@@ -13,9 +21,12 @@ const myListSlice = createSlice({
     },
     remove(state, action) {
       const filtered = state.mylist.filter(
-        (movie) => movie.id !== action.payload
+        (movie) => movie.docId !== action.payload
       );
       state.mylist = filtered;
+    },
+    rewriteList(state, action) {
+      state.mylist = action.payload;
     },
   },
 });
@@ -43,20 +54,28 @@ export const addToMyListAction = (movie, userId, selectedMovieId) => {
       };
       const docRef = await addDoc(collection(db, "mylist"), addedMovie);
       console.log("Document written with ID: ", docRef.id);
-      dispatch(myListSlice.actions.add(addedMovie));
+      const addedMovieWithDocId = { ...addedMovie, docId: docRef.id };
+      dispatch(myListSlice.actions.add(addedMovieWithDocId));
     }
   };
 };
 
 export const getMovieListAction = (uid) => {
   return async (dispatch) => {
+    let list = [];
     const q = query(collection(db, "mylist"), where("userId", "==", uid));
     const querySnapshot = await getDocs(q);
+    console.log("inside get movie list action");
     querySnapshot.forEach((doc) => {
-      //list.push({ ...doc.data(), id: doc.id });
-      dispatch(myListSlice.actions.add(doc.data()));
-      //console.log(list)
-      //console.log(doc.data());
+      list.push({ ...doc.data(), docId: doc.id });
     });
+    dispatch(myListSlice.actions.rewriteList(list));
+  };
+};
+
+export const removeMovieAction = (docId) => {
+  return async (dispatch) => {
+    await deleteDoc(doc(db, "mylist", docId));
+    dispatch(myListSlice.actions.remove(docId));
   };
 };

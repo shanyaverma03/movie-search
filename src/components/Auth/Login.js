@@ -76,7 +76,6 @@ const Login = () => {
 
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      console.log(response);
       const userId = auth.currentUser.uid;
       dispatch(isAuthenticatedActions.login(userId));
       emailReset();

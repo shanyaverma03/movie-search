@@ -6,14 +6,14 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useDispatch } from "react-redux";
-import { myListActions } from "../store";
+import { removeMovieAction } from "../store/myListSlice";
 import { useEffect } from "react";
 import { getListAction } from "../store/myListSlice";
 import { getUidOfUserAction } from "../store/isAuthenticatedSlice";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { db } from "../config/firebase";
-
+import { getMovieListAction } from "../store/myListSlice";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 const MyList = () => {
@@ -32,8 +32,8 @@ const MyList = () => {
     }
   }, []);
 
-  const removeMovieHandler = (id) => {
-    dispatch(myListActions.remove(id));
+  const removeMovieHandler = (docId) => {
+    dispatch(removeMovieAction(docId));
   };
   return (
     <>
@@ -58,7 +58,10 @@ const MyList = () => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => removeMovieHandler(movie.id)}>
+            <Button
+              size="small"
+              onClick={() => removeMovieHandler(movie.docId)}
+            >
               Remove from list
             </Button>
             <Button size="small">Learn More</Button>
