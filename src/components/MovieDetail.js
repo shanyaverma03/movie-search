@@ -15,14 +15,15 @@ import { getUidOfUserAction } from "../store/isAuthenticatedSlice";
 import { addToMyListAction } from "../store/myListSlice";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import classes from "./MovieDetail.module.css";
 
 import { query, where, getDocs } from "firebase/firestore";
 
 const MovieDetail = () => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
-  const myList= useSelector(state=> state.mylist.mylist);
-  const [movieAlreadyInList, setMovieAlreadyInList]= React.useState(false);
+  const myList = useSelector((state) => state.mylist.mylist);
+  const [movieAlreadyInList, setMovieAlreadyInList] = React.useState(false);
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
@@ -35,19 +36,18 @@ const MovieDetail = () => {
     modalTitle: "",
   });
 
-  React.useEffect(()=>{
-//first check if the movie is already in the list or not
-const indexOfMovie= myList.some(movie=> movie.id===selectedMovie.id);
-if(indexOfMovie){
-  setMovieAlreadyInList(true);
-}
-  },[myList, selectedMovie.id])
+  React.useEffect(() => {
+    //first check if the movie is already in the list or not
+    const indexOfMovie = myList.some((movie) => movie.id === selectedMovie.id);
+    if (indexOfMovie) {
+      setMovieAlreadyInList(true);
+    }
+  }, [myList, selectedMovie.id]);
   const learnMoreHandler = () => {
     navigate("learnmore");
   };
   const addToMyListHandler = async () => {
     if (isAuthenticated) {
-      
       console.log(userId);
       const addedMovie = {
         id: selectedMovie.id,
@@ -68,9 +68,9 @@ if(indexOfMovie){
     }
   };
 
-  const goToListHandler =()=>{
-    navigate('/mylist');
-  }
+  const goToListHandler = () => {
+    navigate("/mylist");
+  };
 
   const closeModal = () => {
     setModalDetails({
@@ -81,45 +81,68 @@ if(indexOfMovie){
   };
   return (
     <>
-      <h1>Movie detail</h1>
-      <p>{params.id}</p>
-      <LoginFirstModal
-        open={modalDetails.showModal}
-        message={modalDetails.modalMessage}
-        title={modalDetails.modalTitle}
-        closeModal={closeModal}
-      />
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          sx={{ height: 500 }}
-          image={selectedMovie.poster}
-          title="movie-detail"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {selectedMovie.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Rank: {selectedMovie.rank}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Something about the movie- to figure out
-          </Typography>
-        </CardContent>
-        <CardActions>
-          {movieAlreadyInList ? <Button size="small" onClick={goToListHandler}>
-            Go to 'My List'
-          </Button> : <Button size="small" onClick={addToMyListHandler}>
-            Add to 'My List'
-          </Button>}
-          
-          <Button size="small" onClick={learnMoreHandler}>
-            Learn More
-          </Button>
-        </CardActions>
-      </Card>
+      <main>
+        <div className={classes.movie_header}>
+          <div>
+            <h1>{selectedMovie.title}</h1>
+            <p>{selectedMovie.type}</p>
+          </div>
+          <div className={classes.rating}>
+            <div>Imdb Rating</div>
+            <div>the rating</div>
+          </div>
+          <div className={classes.rank}>
+            <div>Rank</div>
+            <div>{selectedMovie.rank}</div>
+          </div>
+        </div>
+        <section>
+          <div className={classes.poster}>
+            <img src={selectedMovie.poster} alt="poster of the movie" />
+          </div>
+        </section>
+      </main>
     </>
+    // <>
+    //   <h1>Movie detail</h1>
+    //   <p>{params.id}</p>
+    //   <LoginFirstModal
+    //     open={modalDetails.showModal}
+    //     message={modalDetails.modalMessage}
+    //     title={modalDetails.modalTitle}
+    //     closeModal={closeModal}
+    //   />
+    //   <Card sx={{ maxWidth: 345 }}>
+    //     <CardMedia
+    //       component="img"
+    //       sx={{ height: 500 }}
+    //       image={selectedMovie.poster}
+    //       title="movie-detail"
+    //     />
+    //     <CardContent>
+    //       <Typography gutterBottom variant="h5" component="div">
+    //         {selectedMovie.title}
+    //       </Typography>
+    //       <Typography variant="body2" color="text.secondary">
+    //         Rank: {selectedMovie.rank}
+    //       </Typography>
+    //       <Typography variant="body2" color="text.secondary">
+    //         Something about the movie- to figure out
+    //       </Typography>
+    //     </CardContent>
+    //     <CardActions>
+    //       {movieAlreadyInList ? <Button size="small" onClick={goToListHandler}>
+    //         Go to 'My List'
+    //       </Button> : <Button size="small" onClick={addToMyListHandler}>
+    //         Add to 'My List'
+    //       </Button>}
+
+    //       <Button size="small" onClick={learnMoreHandler}>
+    //         Learn More
+    //       </Button>
+    //     </CardActions>
+    //   </Card>
+    // </>
   );
 };
 

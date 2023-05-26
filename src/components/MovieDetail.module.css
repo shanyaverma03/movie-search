@@ -1,0 +1,14 @@
+.movie_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating,
+.rank {
+  padding-top: 2%;
+}
+
+.poster img {
+  height: 50%;
+  width: 20%;
+}

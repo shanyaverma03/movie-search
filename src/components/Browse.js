@@ -10,7 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
 import classes from "./Homescreen.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { movieActions } from "../store/index";
+import { movieActions } from "../store/index"; 
 
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
@@ -31,9 +31,8 @@ const Browse = () => {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data);
       const list = response.data.d;
-      console.log(list);
+      console.log(list  )
       let moviesList = [];
       list.map((item) => {
         const id = item.id;
@@ -41,14 +40,15 @@ const Browse = () => {
         const year = item.y;
         const rank = item.rank;
         const poster = item.i.imageUrl;
+        const type= item.qid
         const movie = {
           id,
           title,
           year,
           rank,
           poster,
+          type
         };
-
         moviesList.push(movie);
       });
 

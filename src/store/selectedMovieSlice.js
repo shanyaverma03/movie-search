@@ -1,7 +1,7 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
-  movie: { id: "", title: "", year: "", rank: "", poster: "" },
+  movie: { id: "", title: "", year: "", rank: "", poster: "" , type:""},
 };
 
 const movieSlice = createSlice({

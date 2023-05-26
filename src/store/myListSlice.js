@@ -51,6 +51,7 @@ export const addToMyListAction = (movie, userId, selectedMovieId) => {
         title: movie.title,
         userId: userId,
         year: movie.year,
+        type: movie.type
       };
       const docRef = await addDoc(collection(db, "mylist"), addedMovie);
       console.log("Document written with ID: ", docRef.id);
