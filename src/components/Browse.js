@@ -7,11 +7,11 @@ import { apiInfo } from "../config/rapidAPI";
 import { useState } from "react";
 import Container from "@mui/material/Container/Container";
 import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
-import classes from "./Homescreen.module.css";
+import classes from "./Browse.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { movieActions } from "../store/index"; 
-
+import { movieActions } from "../store/index";
+import createStyles from "@mui/material/styles";
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
@@ -32,7 +32,7 @@ const Browse = () => {
     try {
       const response = await axios.request(options);
       const list = response.data.d;
-      console.log(list  )
+      console.log(list);
       let moviesList = [];
       list.map((item) => {
         const id = item.id;
@@ -40,14 +40,14 @@ const Browse = () => {
         const year = item.y;
         const rank = item.rank;
         const poster = item.i.imageUrl;
-        const type= item.qid
+        const type = item.qid;
         const movie = {
           id,
           title,
           year,
           rank,
           poster,
-          type
+          type,
         };
         moviesList.push(movie);
       });
@@ -69,7 +69,6 @@ const Browse = () => {
     dispatch(movieActions.select(value));
     navigate(`${value.id}`);
   };
-
   return (
     <>
       <div className={classes.wrapper}>
@@ -81,7 +80,7 @@ const Browse = () => {
           getOptionLabel={(movieRecs) => movieRecs.title || ""}
           onInputCapture={debounce(searchHandler, 800)}
           onChange={(event, value) => selectionHandler(value)}
-          sx={{ width: 300 }}
+          sx={{ width: 300, background: "white" }}
           renderInput={(params) => <TextField {...params} label="Search..." />}
         />
       </div>

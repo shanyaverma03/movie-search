@@ -1,4 +1,8 @@
 .wrapper {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,

@@ -17,6 +17,7 @@ import { logoutAction } from "../store/isAuthenticatedSlice";
 import { auth } from "../config/firebase";
 import { isAuthenticatedActions } from "../store";
 import { signOut } from "firebase/auth";
+import { createMuiTheme, createTheme } from "@mui/material";
 
 function MainNavigation() {
   const navigate = useNavigate();
@@ -42,9 +43,21 @@ function MainNavigation() {
     }
     dispatch(isAuthenticatedActions.logout());
   };
-
+  const theme = createTheme({
+    typography: {
+      allVariants: {
+        color: "pink",
+      },
+    },
+  });
   return (
-    <AppBar position="static">
+    <AppBar
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(9,7,45,1) 42%, rgba(85,122,149,0.9710477941176471) 100%)",
+      }}
+      position="static"
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

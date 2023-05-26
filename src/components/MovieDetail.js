@@ -16,8 +16,10 @@ import { addToMyListAction } from "../store/myListSlice";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import classes from "./MovieDetail.module.css";
-
+import ReactPlayer from "react-player";
+import movieTrailer from "movie-trailer";
 import { query, where, getDocs } from "firebase/firestore";
+import { useState } from "react";
 
 const MovieDetail = () => {
   const params = useParams();
@@ -36,13 +38,23 @@ const MovieDetail = () => {
     modalTitle: "",
   });
 
+  const video = selectedMovie.title;
+  const [videoURL, setVideoURL] = useState("");
+
   React.useEffect(() => {
     //first check if the movie is already in the list or not
     const indexOfMovie = myList.some((movie) => movie.id === selectedMovie.id);
     if (indexOfMovie) {
       setMovieAlreadyInList(true);
     }
+    function handleSearch() {
+      movieTrailer(video).then((res) => {
+        setVideoURL(res);
+      });
+    }
+    handleSearch();
   }, [myList, selectedMovie.id]);
+
   const learnMoreHandler = () => {
     navigate("learnmore");
   };
@@ -81,9 +93,9 @@ const MovieDetail = () => {
   };
   return (
     <>
-      <main>
+      <main className={classes.container}>
         <div className={classes.movie_header}>
-          <div>
+          <div className={classes.movie_info}>
             <h1>{selectedMovie.title}</h1>
             <p>{selectedMovie.type}</p>
           </div>
@@ -96,9 +108,12 @@ const MovieDetail = () => {
             <div>{selectedMovie.rank}</div>
           </div>
         </div>
-        <section>
+        <section className={classes.graphics}>
           <div className={classes.poster}>
             <img src={selectedMovie.poster} alt="poster of the movie" />
+          </div>
+          <div>
+            <ReactPlayer url={videoURL} controls={true} />
           </div>
         </section>
       </main>
