@@ -69,15 +69,10 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log("user found " + user.uid);
         dispatch(isAuthenticatedActions.userFound(uid));
         dispatch(getMovieListAction(uid));
       } else {
-        console.log("user not found");
-        console.log(user);
         dispatch(isAuthenticatedActions.userNotFound());
-
-        console.log(user);
       }
     });
   }, []);
