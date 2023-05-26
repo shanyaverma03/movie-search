@@ -64,7 +64,6 @@ const Homescreen = () => {
           </Container>
         </Box>
       </main>
-      <Footer />
     </div>
   );
 };
