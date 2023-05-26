@@ -21,6 +21,8 @@ import { query, where, getDocs } from "firebase/firestore";
 const MovieDetail = () => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
+  const myList= useSelector(state=> state.mylist.mylist);
+  const [movieAlreadyInList, setMovieAlreadyInList]= React.useState(false);
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
@@ -33,11 +35,19 @@ const MovieDetail = () => {
     modalTitle: "",
   });
 
+  React.useEffect(()=>{
+//first check if the movie is already in the list or not
+const indexOfMovie= myList.some(movie=> movie.id===selectedMovie.id);
+if(indexOfMovie){
+  setMovieAlreadyInList(true);
+}
+  },[myList, selectedMovie.id])
   const learnMoreHandler = () => {
     navigate("learnmore");
   };
   const addToMyListHandler = async () => {
     if (isAuthenticated) {
+      
       console.log(userId);
       const addedMovie = {
         id: selectedMovie.id,
@@ -57,6 +67,10 @@ const MovieDetail = () => {
       });
     }
   };
+
+  const goToListHandler =()=>{
+    navigate('/mylist');
+  }
 
   const closeModal = () => {
     setModalDetails({
@@ -94,9 +108,12 @@ const MovieDetail = () => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={addToMyListHandler}>
+          {movieAlreadyInList ? <Button size="small" onClick={goToListHandler}>
+            Go to 'My List'
+          </Button> : <Button size="small" onClick={addToMyListHandler}>
             Add to 'My List'
-          </Button>
+          </Button>}
+          
           <Button size="small" onClick={learnMoreHandler}>
             Learn More
           </Button>
