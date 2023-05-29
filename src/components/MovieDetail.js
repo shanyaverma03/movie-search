@@ -20,8 +20,9 @@ import ReactPlayer from "react-player";
 import movieTrailer from "movie-trailer";
 import { query, where, getDocs } from "firebase/firestore";
 import { useState } from "react";
+import Grid from "@mui/material/Grid";
 
-const MovieDetail = () => {
+const MovieDetail = (props) => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
   const myList = useSelector((state) => state.mylist.mylist);
@@ -91,6 +92,7 @@ const MovieDetail = () => {
       modalTitle: "",
     });
   };
+
   return (
     // <main className={classes.container}>
     //   <div className={classes.movie_header}>
@@ -117,50 +119,29 @@ const MovieDetail = () => {
     //   </section>
     // </main>
 
-    <>
-      <h1>Movie detail</h1>
-      <p>{params.id}</p>
+    <div className={classes.container}>
       <LoginFirstModal
         open={modalDetails.showModal}
         message={modalDetails.modalMessage}
         title={modalDetails.modalTitle}
         closeModal={closeModal}
       />
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          sx={{ height: 500 }}
-          image={selectedMovie.poster}
-          title="movie-detail"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {selectedMovie.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Rank: {selectedMovie.rank}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Something about the movie- to figure out
-          </Typography>
-        </CardContent>
-        <CardActions>
+      <div className={classes.card}>
+        <img src={selectedMovie.poster} alt="poster of the movie" />
+        <div className={classes.insideCard}>
+          <h3>{selectedMovie.title}</h3>
+          <p>{selectedMovie.rank}</p>
           {movieAlreadyInList ? (
-            <Button size="small" onClick={goToListHandler}>
-              Go to 'My List'
-            </Button>
+            <Button onClick={goToListHandler}>Go to 'My List'</Button>
           ) : (
-            <Button size="small" onClick={addToMyListHandler}>
-              Add to 'My List'
-            </Button>
+            <Button onClick={addToMyListHandler}>Add to 'My List'</Button>
           )}
-
-          <Button size="small" onClick={learnMoreHandler}>
-            Learn More
-          </Button>
-        </CardActions>
-      </Card>
-    </>
+        </div>
+      </div>
+      <div>
+        <ReactPlayer url={videoURL} controls={true} />
+      </div>
+    </div>
   );
 };
 
