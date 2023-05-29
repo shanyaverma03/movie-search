@@ -1,39 +1,28 @@
 import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { myListActions, isAuthenticatedActions } from "../store/index";
 import { useDispatch } from "react-redux";
 import LoginFirstModal from "./UI/MyModal";
-import { auth } from "../config/firebase";
-import { getUidOfUserAction } from "../store/isAuthenticatedSlice";
 import { addToMyListAction } from "../store/myListSlice";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../config/firebase";
 import classes from "./MovieDetail.module.css";
 import ReactPlayer from "react-player";
 import movieTrailer from "movie-trailer";
-import { query, where, getDocs } from "firebase/firestore";
 import { useState } from "react";
-import Grid from "@mui/material/Grid";
+import { getSelectedMovieDetails } from "../store/selectedMovieSlice";
+import { useEffect } from "react";
 
 const MovieDetail = (props) => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
   const myList = useSelector((state) => state.mylist.mylist);
-  const [movieAlreadyInList, setMovieAlreadyInList] = React.useState(false);
+  const [movieAlreadyInList, setMovieAlreadyInList] = useState(false);
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
   const userId = useSelector((state) => state.isAuthenticated.userId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [modalDetails, setModalDetails] = React.useState({
+  const [modalDetails, setModalDetails] = useState({
     showModal: false,
     modalMessage: "",
     modalTitle: "",
@@ -42,20 +31,24 @@ const MovieDetail = (props) => {
   const video = selectedMovie.title;
   const [videoURL, setVideoURL] = useState("");
 
-  React.useEffect(() => {
+  const paramsMovieId = useParams();
+
+  useEffect(() => {
     //first check if the movie is already in the list or not
-    const indexOfMovie = myList.some((movie) => movie.id === selectedMovie.id);
+    const indexOfMovie = myList.some((movie) => movie.id === paramsMovieId);
     if (indexOfMovie) {
       console.log("movie is already in the list");
       setMovieAlreadyInList(true);
     }
+    console.log("in use effect" + paramsMovieId.id);
+    dispatch(getSelectedMovieDetails(paramsMovieId.id));
     function handleSearch() {
       movieTrailer(video).then((res) => {
         setVideoURL(res);
       });
     }
     handleSearch();
-  }, [myList, selectedMovie.id]);
+  }, [myList, dispatch, paramsMovieId, video]);
 
   const learnMoreHandler = () => {
     navigate("learnmore");
