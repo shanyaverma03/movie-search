@@ -70,21 +70,19 @@ const Browse = () => {
     navigate(`${value.id}`);
   };
   return (
-    <>
-      <div className={classes.wrapper}>
-        <CssBaseline />
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={movieRecs}
-          getOptionLabel={(movieRecs) => movieRecs.title || ""}
-          onInputCapture={debounce(searchHandler, 800)}
-          onChange={(event, value) => selectionHandler(value)}
-          sx={{ width: 300, background: "white" }}
-          renderInput={(params) => <TextField {...params} label="Search..." />}
-        />
-      </div>
-    </>
+    <div className={classes.searchContainer}>
+      <CssBaseline />
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={movieRecs}
+        getOptionLabel={(movieRecs) => movieRecs.title || ""}
+        onInputCapture={debounce(searchHandler, 800)}
+        onChange={(event, value) => selectionHandler(value)}
+        sx={{ width: 300, background: "white" }}
+        renderInput={(params) => <TextField {...params} label="Search..." />}
+      />
+    </div>
   );
 };
 

@@ -92,72 +92,75 @@ const MovieDetail = () => {
     });
   };
   return (
-    <>
-      <main className={classes.container}>
-        <div className={classes.movie_header}>
-          <div className={classes.movie_info}>
-            <h1>{selectedMovie.title}</h1>
-            <p>{selectedMovie.type}</p>
-          </div>
-          <div className={classes.rating}>
-            <div>Imdb Rating</div>
-            <div>the rating</div>
-          </div>
-          <div className={classes.rank}>
-            <div>Rank</div>
-            <div>{selectedMovie.rank}</div>
-          </div>
-        </div>
-        <section className={classes.graphics}>
-          <div className={classes.poster}>
-            <img src={selectedMovie.poster} alt="poster of the movie" />
-          </div>
-          <div>
-            <ReactPlayer url={videoURL} controls={true} />
-          </div>
-        </section>
-      </main>
-    </>
-    // <>
-    //   <h1>Movie detail</h1>
-    //   <p>{params.id}</p>
-    //   <LoginFirstModal
-    //     open={modalDetails.showModal}
-    //     message={modalDetails.modalMessage}
-    //     title={modalDetails.modalTitle}
-    //     closeModal={closeModal}
-    //   />
-    //   <Card sx={{ maxWidth: 345 }}>
-    //     <CardMedia
-    //       component="img"
-    //       sx={{ height: 500 }}
-    //       image={selectedMovie.poster}
-    //       title="movie-detail"
-    //     />
-    //     <CardContent>
-    //       <Typography gutterBottom variant="h5" component="div">
-    //         {selectedMovie.title}
-    //       </Typography>
-    //       <Typography variant="body2" color="text.secondary">
-    //         Rank: {selectedMovie.rank}
-    //       </Typography>
-    //       <Typography variant="body2" color="text.secondary">
-    //         Something about the movie- to figure out
-    //       </Typography>
-    //     </CardContent>
-    //     <CardActions>
-    //       {movieAlreadyInList ? <Button size="small" onClick={goToListHandler}>
-    //         Go to 'My List'
-    //       </Button> : <Button size="small" onClick={addToMyListHandler}>
-    //         Add to 'My List'
-    //       </Button>}
+    // <main className={classes.container}>
+    //   <div className={classes.movie_header}>
+    //     <div className={classes.movie_info}>
+    //       <h1>{selectedMovie.title}</h1>
+    //       <p>{selectedMovie.type}</p>
+    //     </div>
+    //     <div className={classes.rating}>
+    //       <div>Imdb Rating</div>
+    //       <div>the rating</div>
+    //     </div>
+    //     <div className={classes.rank}>
+    //       <div>Rank</div>
+    //       <div>{selectedMovie.rank}</div>
+    //     </div>
+    //   </div>
+    //   <section className={classes.graphics}>
+    //     <div className={classes.poster}>
+    //       <img src={selectedMovie.poster} alt="poster of the movie" />
+    //     </div>
+    //     <div>
+    //       <ReactPlayer url={videoURL} controls={true} />
+    //     </div>
+    //   </section>
+    // </main>
 
-    //       <Button size="small" onClick={learnMoreHandler}>
-    //         Learn More
-    //       </Button>
-    //     </CardActions>
-    //   </Card>
-    // </>
+    <>
+      <h1>Movie detail</h1>
+      <p>{params.id}</p>
+      <LoginFirstModal
+        open={modalDetails.showModal}
+        message={modalDetails.modalMessage}
+        title={modalDetails.modalTitle}
+        closeModal={closeModal}
+      />
+      <Card sx={{ maxWidth: 345 }}>
+        <CardMedia
+          component="img"
+          sx={{ height: 500 }}
+          image={selectedMovie.poster}
+          title="movie-detail"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {selectedMovie.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Rank: {selectedMovie.rank}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Something about the movie- to figure out
+          </Typography>
+        </CardContent>
+        <CardActions>
+          {movieAlreadyInList ? (
+            <Button size="small" onClick={goToListHandler}>
+              Go to 'My List'
+            </Button>
+          ) : (
+            <Button size="small" onClick={addToMyListHandler}>
+              Add to 'My List'
+            </Button>
+          )}
+
+          <Button size="small" onClick={learnMoreHandler}>
+            Learn More
+          </Button>
+        </CardActions>
+      </Card>
+    </>
   );
 };
 

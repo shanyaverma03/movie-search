@@ -55,6 +55,7 @@ function MainNavigation() {
       style={{
         background:
           "linear-gradient(90deg, rgba(9,7,45,1) 42%, rgba(85,122,149,0.9710477941176471) 100%)",
+        flex: "0 1 auto",
       }}
       position="static"
     >
