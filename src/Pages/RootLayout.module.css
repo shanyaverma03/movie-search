@@ -5,11 +5,11 @@
 }
 
 .wrapper {
+  background: rgb(221, 208, 200);
   background: linear-gradient(
     90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(92, 112, 128, 1) 23%,
-    rgba(85, 122, 149, 0.9710477941176471) 64%
+    rgba(221, 208, 200, 1) 0%,
+    rgba(50, 50, 50, 1) 95%
   );
   flex: 1 1 auto;
 }
