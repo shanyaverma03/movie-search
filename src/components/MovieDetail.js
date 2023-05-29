@@ -46,6 +46,7 @@ const MovieDetail = (props) => {
     //first check if the movie is already in the list or not
     const indexOfMovie = myList.some((movie) => movie.id === selectedMovie.id);
     if (indexOfMovie) {
+      console.log("movie is already in the list");
       setMovieAlreadyInList(true);
     }
     function handleSearch() {
@@ -68,8 +69,10 @@ const MovieDetail = (props) => {
         year: selectedMovie.year,
         rank: selectedMovie.rank,
         poster: selectedMovie.poster,
+        type: selectedMovie.type,
       };
-
+      console.log("added movie");
+      console.log(addedMovie);
       dispatch(addToMyListAction(addedMovie, userId, selectedMovie.id));
       navigate("/mylist");
     } else {
