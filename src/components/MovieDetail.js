@@ -35,7 +35,12 @@ const MovieDetail = (props) => {
 
   useEffect(() => {
     //first check if the movie is already in the list or not
-    const indexOfMovie = myList.some((movie) => movie.id === paramsMovieId);
+
+    console.log(paramsMovieId);
+    const indexOfMovie = myList.some((movie) => movie.id === paramsMovieId.id);
+    //const indexOfMovie = myList.some((movie) => console.log(movie.id));
+    console.log(myList);
+    console.log(indexOfMovie);
     if (indexOfMovie) {
       console.log("movie is already in the list");
       setMovieAlreadyInList(true);
