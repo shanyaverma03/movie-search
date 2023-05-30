@@ -8,7 +8,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import classes from "./Homescreen.module.css";
-import Footer from "./Footer";
+import { useEffect } from "react";
+
 const Homescreen = () => {
   const navigate = useNavigate();
 
@@ -16,6 +17,7 @@ const Homescreen = () => {
     navigate("/browse");
   };
 
+  useEffect(() => {}, []);
   return (
     <div>
       {/* Hero unit */}
@@ -54,6 +56,8 @@ const Homescreen = () => {
             <Button onClick={browseMovieHandler} message="Browse a movie" />
           </Stack>
         </Container>
+
+        <h2>What to watch</h2>
       </Box>
     </div>
   );
