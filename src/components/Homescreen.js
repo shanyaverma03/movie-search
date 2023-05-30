@@ -1,5 +1,5 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
+import Button from "./UI/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -15,11 +15,6 @@ const Homescreen = () => {
   const browseMovieHandler = () => {
     navigate("/browse");
   };
-
-  const { palette } = createTheme();
-  const { augmentColor } = palette;
-  const createColor = (mainColor) =>
-    augmentColor({ color: { main: mainColor } });
 
   return (
     <div>
@@ -56,9 +51,7 @@ const Homescreen = () => {
             spacing={2}
             justifyContent="center"
           >
-            <Button variant="contained" onClick={browseMovieHandler}>
-              Browse a movie
-            </Button>
+            <Button onClick={browseMovieHandler} message="Browse a movie" />
           </Stack>
         </Container>
       </Box>
