@@ -26,3 +26,15 @@
   color: #323232;
   padding-bottom: 1rem;
 }
+
+.fromYourList h3 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: #323232;
+  padding-bottom: 1rem;
+  padding-top: 2rem;
+}

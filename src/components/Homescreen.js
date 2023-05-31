@@ -14,12 +14,16 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import TopMovieDetail from "./TopMovieDetail";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import MyMovieDetail from "./MyMovieDetail";
 
 const Homescreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const topMoviesList = useSelector((state) => state.topMovies.topList);
-
+  const isAuthenticated = useSelector(
+    (state) => state.isAuthenticated.isAuthenticated
+  );
+  const myList = useSelector((state) => state.mylist.mylist);
   const browseMovieHandler = () => {
     navigate("/browse");
   };
@@ -28,13 +32,22 @@ const Homescreen = () => {
     dispatch(getTopMovies());
   }, []);
 
-  const sliderLeft = () => {
-    const slider = document.getElementById("slider");
+  const sliderLeftTopMovies = () => {
+    const slider = document.getElementById("sliderTopMovie");
     slider.scrollLeft = slider.scrollLeft - 500;
   };
 
-  const sliderRight = () => {
-    const slider = document.getElementById("slider");
+  const sliderRightTopMovies = () => {
+    const slider = document.getElementById("sliderTopMovie");
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
+  const sliderLeftMyList = () => {
+    const slider = document.getElementById("sliderMyList");
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+
+  const sliderRightMyList = () => {
+    const slider = document.getElementById("sliderMyList");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
   return (
@@ -83,11 +96,11 @@ const Homescreen = () => {
             <div className="relative flex items-center">
               <MdChevronLeft
                 size={40}
-                onClick={sliderLeft}
+                onClick={sliderLeftTopMovies}
                 className="opacity-50 cursor-pointer hover:opacity-100"
               />
               <div
-                id="slider"
+                id="sliderTopMovie"
                 className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
               >
                 {topMoviesList.map((topMovie) => (
@@ -108,10 +121,44 @@ const Homescreen = () => {
               </div>
               <MdChevronRight
                 size={40}
-                onClick={sliderRight}
+                onClick={sliderRightTopMovies}
                 className="opacity-50 cursor-pointer hover:opacity-100"
               />
             </div>
+          </div>
+          <div className={classes.fromYourList}>
+            <h3>From your List</h3>
+            {isAuthenticated ? (
+              <div className="relative flex items-center">
+                <MdChevronLeft
+                  size={40}
+                  onClick={sliderLeftMyList}
+                  className="opacity-50 cursor-pointer hover:opacity-100"
+                />
+                <div
+                  id="sliderMyList"
+                  className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+                >
+                  {myList.map((topMovie) => (
+                    <MyMovieDetail
+                      key={topMovie.id}
+                      image={topMovie.poster}
+                      title={topMovie.title}
+                      rank={topMovie.rank}
+                      type={topMovie.type}
+                      year={topMovie.year}
+                    />
+                  ))}
+                </div>
+                <MdChevronRight
+                  size={40}
+                  onClick={sliderRightMyList}
+                  className="opacity-50 cursor-pointer hover:opacity-100"
+                />
+              </div>
+            ) : (
+              <p>Pls sign it</p>
+            )}
           </div>
         </div>
       </Box>
