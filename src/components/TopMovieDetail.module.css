@@ -1,0 +1,20 @@
+.topMovies {
+  display: inline-block;
+  width: 20%;
+  margin: 2rem;
+}
+.card {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.card img {
+  height: 40vh;
+  width: 20vw;
+}
+
+.container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}

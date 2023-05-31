@@ -9,15 +9,34 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import classes from "./Homescreen.module.css";
 import { useEffect } from "react";
+import { getTopMovies } from "../store/topMoviesSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import TopMovieDetail from "./TopMovieDetail";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const Homescreen = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const topMoviesList = useSelector((state) => state.topMovies.topList);
 
   const browseMovieHandler = () => {
     navigate("/browse");
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(getTopMovies());
+  }, []);
+
+  const sliderLeft = () => {
+    const slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+
+  const sliderRight = () => {
+    const slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
   return (
     <div>
       {/* Hero unit */}
@@ -58,6 +77,38 @@ const Homescreen = () => {
         </Container>
 
         <h2>What to watch</h2>
+        <div className="relative flex items-center">
+          <MdChevronLeft
+            size={40}
+            onClick={sliderLeft}
+            className="opacity-50 cursor-pointer hover:opacity-100"
+          />
+          <div
+            id="slider"
+            className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+          >
+            {topMoviesList.map((topMovie) => (
+              <TopMovieDetail
+                key={topMovie.imdbid}
+                imdbid={topMovie.imdbid}
+                description={topMovie.description}
+                genre={topMovie.genre}
+                rank={topMovie.rank}
+                rating={topMovie.rating}
+                thumbnail={topMovie.thumbnail}
+                title={topMovie.title}
+                trailer={topMovie.trailer}
+                year={topMovie.year}
+                image={topMovie.image}
+              />
+            ))}
+          </div>
+          <MdChevronRight
+            size={40}
+            onClick={sliderRight}
+            className="opacity-50 cursor-pointer hover:opacity-100"
+          />
+        </div>
       </Box>
     </div>
   );

@@ -3,6 +3,9 @@ body,
 #root {
   height: 100%;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
