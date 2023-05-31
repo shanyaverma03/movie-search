@@ -76,38 +76,43 @@ const Homescreen = () => {
           </Stack>
         </Container>
 
-        <h2>What to watch</h2>
-        <div className="relative flex items-center">
-          <MdChevronLeft
-            size={40}
-            onClick={sliderLeft}
-            className="opacity-50 cursor-pointer hover:opacity-100"
-          />
-          <div
-            id="slider"
-            className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
-          >
-            {topMoviesList.map((topMovie) => (
-              <TopMovieDetail
-                key={topMovie.imdbid}
-                imdbid={topMovie.imdbid}
-                description={topMovie.description}
-                genre={topMovie.genre}
-                rank={topMovie.rank}
-                rating={topMovie.rating}
-                thumbnail={topMovie.thumbnail}
-                title={topMovie.title}
-                trailer={topMovie.trailer}
-                year={topMovie.year}
-                image={topMovie.image}
+        <div className={classes.featuredSection}>
+          <h2>What to watch</h2>
+          <div className={classes.topMovies}>
+            <h3>Top Movies</h3>
+            <div className="relative flex items-center">
+              <MdChevronLeft
+                size={40}
+                onClick={sliderLeft}
+                className="opacity-50 cursor-pointer hover:opacity-100"
               />
-            ))}
+              <div
+                id="slider"
+                className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+              >
+                {topMoviesList.map((topMovie) => (
+                  <TopMovieDetail
+                    key={topMovie.imdbid}
+                    imdbid={topMovie.imdbid}
+                    description={topMovie.description}
+                    genre={topMovie.genre}
+                    rank={topMovie.rank}
+                    rating={topMovie.rating}
+                    thumbnail={topMovie.thumbnail}
+                    title={topMovie.title}
+                    trailer={topMovie.trailer}
+                    year={topMovie.year}
+                    image={topMovie.image}
+                  />
+                ))}
+              </div>
+              <MdChevronRight
+                size={40}
+                onClick={sliderRight}
+                className="opacity-50 cursor-pointer hover:opacity-100"
+              />
+            </div>
           </div>
-          <MdChevronRight
-            size={40}
-            onClick={sliderRight}
-            className="opacity-50 cursor-pointer hover:opacity-100"
-          />
         </div>
       </Box>
     </div>

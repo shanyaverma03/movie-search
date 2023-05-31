@@ -1,1 +1,28 @@
+.featuredSection {
+  padding-top: 5rem;
+}
 
+.featuredSection h2 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: #323232;
+}
+
+.topMovies {
+  padding-top: 1rem;
+}
+
+.topMovies h3 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: #323232;
+  padding-bottom: 1rem;
+}

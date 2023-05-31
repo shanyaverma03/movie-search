@@ -1,4 +1,5 @@
 import classes from "./TopMovieDetail.module.css";
+import Button from "./UI/Button";
 
 const TopMovieDetail = (props) => {
   return (
@@ -9,7 +10,9 @@ const TopMovieDetail = (props) => {
           <p>{props.rating}</p>
           <p>{props.title}</p>
           <button>Add to list</button>
-          <button>Play trailer</button>
+
+          <div>Trailer</div>
+          <div>logo</div>
         </div>
       </div>
     </div>
