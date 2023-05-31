@@ -30,7 +30,6 @@ const TopMovieDetail = (props) => {
         type: props.genre,
       };
       dispatch(addToMyListAction(movieToBeAdded, userId, movieToBeAdded.id));
-      navigate("/mylist");
     } else {
       navigate("/login");
     }
@@ -45,6 +44,8 @@ const TopMovieDetail = (props) => {
     if (indexOfMovie) {
       //movie already in the list
       setAlreadyMovieInList(true);
+    } else {
+      setAlreadyMovieInList(false);
     }
   }, [myList, props.title]);
 

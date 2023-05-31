@@ -29,6 +29,7 @@ const Homescreen = () => {
   };
 
   useEffect(() => {
+    console.log(myList);
     dispatch(getTopMovies());
   }, []);
 
@@ -147,6 +148,7 @@ const Homescreen = () => {
                       rank={topMovie.rank}
                       type={topMovie.type}
                       year={topMovie.year}
+                      docId={topMovie.docId}
                     />
                   ))}
                 </div>
@@ -157,7 +159,12 @@ const Homescreen = () => {
                 />
               </div>
             ) : (
-              <p>Pls sign it</p>
+              <div className={classes.signInFirst}>
+                <h4>Sign in to access your List</h4>
+                <p>
+                  Save shows and movies to keep track of what you want to watch
+                </p>
+              </div>
             )}
           </div>
         </div>

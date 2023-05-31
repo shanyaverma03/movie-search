@@ -38,3 +38,9 @@
   padding-bottom: 1rem;
   padding-top: 2rem;
 }
+
+.signInFirst {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
