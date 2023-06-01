@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { addToMyListAction } from "../store/myListSlice";
 import { useDispatch } from "react-redux";
 import { ReactComponent as Star } from "../logos/star.svg";
+import { ReactComponent as Info } from "../logos/info.svg";
 
 const TopMovieDetail = (props) => {
   const [movieAlreadyInList, setAlreadyMovieInList] = useState(false);
@@ -66,14 +67,14 @@ const TopMovieDetail = (props) => {
             <p style={{ color: "#FFFFFFB3", height: "1em" }}>{props.rating}</p>
           </div>
           <p className={classes.title}>{props.title}</p>
-          {movieAlreadyInList ? (
-            <button onClick={goToListHandler}>Go to list</button>
-          ) : (
-            <button onClick={addToListHandler}>Add to list</button>
-          )}
-
-          <div>Trailer</div>
-          <div>logo</div>
+          <div className={classes.actionAndLearn}>
+            {movieAlreadyInList ? (
+              <button onClick={goToListHandler}>Go to list</button>
+            ) : (
+              <button onClick={addToListHandler}>Add to list</button>
+            )}
+            <Info className={classes.info} />
+          </div>
         </div>
       </div>
     </div>

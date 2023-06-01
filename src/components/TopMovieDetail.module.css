@@ -28,9 +28,8 @@
   justify-content: center;
 }
 
-.container button {
-  width: 100%;
-
+.actionAndLearn button {
+  width: 60%;
   background-color: #d5c8c822;
   border-radius: 6px;
   border-width: 0;
@@ -41,16 +40,13 @@
   cursor: pointer;
   font-family: -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue",
     Ubuntu, sans-serif;
-  font-size: 100%;
-  padding: 0.5em 1.5em 0.5em 1.5em;
 }
-.container button:focus {
+.actionAndLearn button:focus {
   box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
     rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0;
 }
-.container button:hover {
-  box-shadow: rgba(50, 50, 93, 0.1) 0 0 0 1px inset,
-    rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0;
+.actionAndLearn button:hover {
+  background-color: rgba(85, 85, 88, 0.2);
 }
 
 .container p {
@@ -68,4 +64,29 @@
   padding: 1em;
   line-height: 2em;
   font-weight: 600;
+}
+
+.actionAndLearn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.actionAndLearn button {
+  color: white;
+  font-weight: 600;
+  background-color: transparent;
+  padding: 0.5em 0 0.5em 0;
+}
+
+.trailerAndLogo button:hover {
+  background-color: #d5c8c822;
+}
+
+.info {
+  height: 2em;
+}
+
+.info:hover {
+  background-color: #d5c8c822;
 }
