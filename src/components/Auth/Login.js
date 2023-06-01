@@ -18,6 +18,7 @@ import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { isAuthenticatedActions } from "../../store";
+import classes from "./Login.module.css";
 
 function Copyright(props) {
   return (
@@ -88,7 +89,7 @@ const Login = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <div className={classes.login}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -170,7 +171,7 @@ const Login = () => {
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-    </ThemeProvider>
+    </div>
   );
 };
 

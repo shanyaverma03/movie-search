@@ -41,6 +41,10 @@ const TopMovieDetail = (props) => {
     navigate("/mylist");
   };
 
+  const moreInfoIconHandler = () => {
+    navigate(`/browse/${props.imdbid}`);
+  };
+
   useEffect(() => {
     const indexOfMovie = myList.some((movie) => movie.title === props.title);
     if (indexOfMovie) {
@@ -73,7 +77,7 @@ const TopMovieDetail = (props) => {
             ) : (
               <button onClick={addToListHandler}>Add to list</button>
             )}
-            <Info className={classes.info} />
+            <Info className={classes.info} onClick={moreInfoIconHandler} />
           </div>
         </div>
       </div>

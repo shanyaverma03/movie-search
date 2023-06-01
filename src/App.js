@@ -6,7 +6,6 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import BrowsePage from "./Pages/BrowsePage";
 import MovieDetailPage from "./Pages/MovieDetailPage";
-import LearnMorePage from "./Pages/LearnMorePage";
 import { useEffect } from "react";
 import { auth } from "./config/firebase";
 import { useDispatch } from "react-redux";
@@ -49,10 +48,6 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <MovieDetailPage />,
-              },
-              {
-                path: "learnmore",
-                element: <LearnMorePage />,
               },
             ],
           },
