@@ -2,6 +2,25 @@
   padding-top: 5rem;
 }
 
+.topMoviesHeader {
+  display: flex;
+  height: 1%;
+}
+
+.verticalSvg {
+  height: 2.5em;
+  width: 1.5em;
+}
+
+.arrowSvg {
+  height: 1.8em;
+  width: 1.8em;
+}
+
+.arrowSvg:hover {
+  color: #f5c518;
+}
+
 .featuredSection h2 {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-size: 2rem;
@@ -9,7 +28,7 @@
   line-height: 2.5rem;
   letter-spacing: 0.00735em;
   text-transform: none;
-  color: #323232;
+  color: #f5c518;
 }
 
 .topMovies {
@@ -23,7 +42,7 @@
   line-height: 2rem;
   letter-spacing: 0.00735em;
   text-transform: none;
-  color: #323232;
+  color: white;
   padding-bottom: 1rem;
 }
 

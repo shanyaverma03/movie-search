@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 import TopMovieDetail from "./TopMovieDetail";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import MyMovieDetail from "./MyMovieDetail";
+import { ReactComponent as VerticalLine } from "../logos/verticalLine.svg";
+import { ReactComponent as RightArrow } from "../logos/rightArrow.svg";
 
 const Homescreen = () => {
   const navigate = useNavigate();
@@ -91,9 +93,16 @@ const Homescreen = () => {
         </Container>
 
         <div className={classes.featuredSection}>
-          <h2>What to watch</h2>
+          <div className={classes.whatToWatch}>
+            <h2>What to watch</h2>
+          </div>
           <div className={classes.topMovies}>
-            <h3>Top Movies</h3>
+            <div className={classes.topMoviesHeader}>
+              <VerticalLine className={classes.verticalSvg} />
+              <h3>Top Movies</h3>
+              <RightArrow className={classes.arrowSvg} />
+            </div>
+
             <div className="relative flex items-center">
               <MdChevronLeft
                 size={40}
