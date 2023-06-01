@@ -59,3 +59,14 @@
   font-weight: 600;
   color: ivory;
 }
+
+.starSvg {
+  height: 1.3em;
+  width: 2.5em;
+}
+
+.title {
+  padding: 1em;
+  line-height: 2em;
+  font-weight: 600;
+}

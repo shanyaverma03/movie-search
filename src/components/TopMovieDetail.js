@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { addToMyListAction } from "../store/myListSlice";
 import { useDispatch } from "react-redux";
+import { ReactComponent as Star } from "../logos/star.svg";
 
 const TopMovieDetail = (props) => {
   const [movieAlreadyInList, setAlreadyMovieInList] = useState(false);
@@ -54,8 +55,17 @@ const TopMovieDetail = (props) => {
       <div className={classes.card}>
         <img src={props.image} alt="thumbnail" />
         <div className={classes.container}>
-          <p>{props.rating}</p>
-          <p>{props.title}</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Star className={classes.starSvg} />
+            <p style={{ color: "#FFFFFFB3", height: "1em" }}>{props.rating}</p>
+          </div>
+          <p className={classes.title}>{props.title}</p>
           {movieAlreadyInList ? (
             <button onClick={goToListHandler}>Go to list</button>
           ) : (
