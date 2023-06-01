@@ -35,3 +35,35 @@
 .insideCard button {
   margin: 1rem;
 }
+
+.trailerImages {
+  padding-top: 3em;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.imagesVideos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.images {
+  background-color: #d5c8c822;
+  color: white;
+  padding: 4em;
+  height: 160px;
+}
+
+.videos {
+  background-color: #d5c8c822;
+  color: white;
+  padding: 4em;
+  height: 160px;
+}
+
+.images,
+.videos:hover {
+  background-color: #9b949422;
+}

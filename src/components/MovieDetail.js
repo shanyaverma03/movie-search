@@ -95,31 +95,6 @@ const MovieDetail = (props) => {
   };
 
   return (
-    // <main className={classes.container}>
-    //   <div className={classes.movie_header}>
-    //     <div className={classes.movie_info}>
-    //       <h1>{selectedMovie.title}</h1>
-    //       <p>{selectedMovie.type}</p>
-    //     </div>
-    //     <div className={classes.rating}>
-    //       <div>Imdb Rating</div>
-    //       <div>the rating</div>
-    //     </div>
-    //     <div className={classes.rank}>
-    //       <div>Rank</div>
-    //       <div>{selectedMovie.rank}</div>
-    //     </div>
-    //   </div>
-    //   <section className={classes.graphics}>
-    //     <div className={classes.poster}>
-    //       <img src={selectedMovie.poster} alt="poster of the movie" />
-    //     </div>
-    //     <div>
-    //       <ReactPlayer url={videoURL} controls={true} />
-    //     </div>
-    //   </section>
-    // </main>
-
     <div className={classes.container}>
       <LoginFirstModal
         open={modalDetails.showModal}
@@ -139,8 +114,12 @@ const MovieDetail = (props) => {
           )}
         </div>
       </div>
-      <div>
+      <div className={classes.trailerImages}>
         <ReactPlayer url={videoURL} controls={true} />
+        <div className={classes.imagesVideos}>
+          <button className={classes.images}>images</button>
+          <button className={classes.videos}>videos</button>
+        </div>
       </div>
     </div>
   );
