@@ -53,7 +53,7 @@ function MainNavigation() {
   return (
     <AppBar
       style={{
-        background: "#323232",
+        background: "#36454F",
         flex: "0 1 auto",
       }}
       position="static"
