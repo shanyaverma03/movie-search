@@ -2,13 +2,13 @@ import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import LoginFirstModal from "./UI/MyModal";
-import { addToMyListAction } from "../store/myListSlice";
+import LoginFirstModal from "../UI/MyModal";
+import { addToMyListAction } from "../../store/myListSlice";
 import classes from "./MovieDetail.module.css";
 import ReactPlayer from "react-player";
 import movieTrailer from "movie-trailer";
 import { useState } from "react";
-import { getSelectedMovieDetails } from "../store/selectedMovieSlice";
+import { getSelectedMovieDetails } from "../../store/selectedMovieSlice";
 import { useEffect } from "react";
 
 const MovieDetail = (props) => {
@@ -55,9 +55,6 @@ const MovieDetail = (props) => {
     handleSearch();
   }, [myList, dispatch, paramsMovieId, video]);
 
-  const learnMoreHandler = () => {
-    navigate("learnmore");
-  };
   const addToMyListHandler = async () => {
     if (isAuthenticated) {
       console.log(userId);
@@ -94,6 +91,10 @@ const MovieDetail = (props) => {
     });
   };
 
+  const seeImagesHandler = () => {
+    navigate("photos");
+  };
+
   return (
     <div className={classes.container}>
       <LoginFirstModal
@@ -117,7 +118,9 @@ const MovieDetail = (props) => {
       <div className={classes.trailerImages}>
         <ReactPlayer url={videoURL} controls={true} />
         <div className={classes.imagesVideos}>
-          <button className={classes.images}>images</button>
+          <button className={classes.images} onClick={seeImagesHandler}>
+            images
+          </button>
           <button className={classes.videos}>videos</button>
         </div>
       </div>

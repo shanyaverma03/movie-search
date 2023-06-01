@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { isAuthenticatedActions } from "./store/index";
 import { onAuthStateChanged } from "firebase/auth";
 import { getMovieListAction } from "./store/myListSlice";
+import PhotosPage from "./Pages/PhotosPage";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
               {
                 index: true,
                 element: <MovieDetailPage />,
+              },
+              {
+                path: "photos",
+                element: <PhotosPage />,
               },
             ],
           },

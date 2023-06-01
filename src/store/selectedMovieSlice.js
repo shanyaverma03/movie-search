@@ -3,7 +3,14 @@ import axios from "axios";
 import { apiInfo } from "../config/rapidAPI";
 
 const initialState = {
-  movie: { id: "", title: "", year: "", rank: "", poster: "", type: "" },
+  movie: {
+    id: "",
+    title: "",
+    year: "",
+    rank: "",
+    poster: "",
+    type: "",
+  },
 };
 
 const movieSlice = createSlice({
@@ -12,6 +19,9 @@ const movieSlice = createSlice({
   reducers: {
     select(state, action) {
       state.movie = action.payload;
+    },
+    addPhotos(state, action) {
+      state.movie = { ...state.movie, photos: action.payload };
     },
   },
 });
@@ -36,6 +46,7 @@ export const getSelectedMovieDetails = (movieIdFromParams) => {
       const response = await axios.request(options);
       const list = response.data.d;
       console.log(list);
+
       list.map((item) => {
         const id = item.id;
         const title = item.l;
@@ -52,9 +63,39 @@ export const getSelectedMovieDetails = (movieIdFromParams) => {
           type,
         };
         dispatch(movieSlice.actions.select(movie));
+        dispatch(getSelectedMoviePhotos(movieIdFromParams));
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const getSelectedMoviePhotos = (movieIdFromParams) => {
+  return async (dispatch) => {
+    const options = {
+      method: "GET",
+      url: "https://imdb8.p.rapidapi.com/title/get-images",
+      params: {
+        tconst: movieIdFromParams,
+        limit: "25",
+      },
+      headers: {
+        "X-RapidAPI-Key": apiInfo["X-RapidAPI-Key"],
+        "X-RapidAPI-Host": apiInfo["X-RapidAPI-Host"],
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data.images);
+      const imagesList = response.data.images;
+      let images = [];
+      imagesList.map((image) => images.push(image.url));
+      console.log(images);
+      dispatch(movieSlice.actions.addPhotos(images));
+    } catch (error) {
+      console.error(error);
     }
   };
 };
