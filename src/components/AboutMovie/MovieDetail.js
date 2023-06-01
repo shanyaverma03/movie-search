@@ -47,6 +47,7 @@ const MovieDetail = (props) => {
     }
     console.log("in use effect" + paramsMovieId.id);
     dispatch(getSelectedMovieDetails(paramsMovieId.id));
+
     function handleSearch() {
       movieTrailer(video).then((res) => {
         setVideoURL(res);
