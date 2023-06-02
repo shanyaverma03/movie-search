@@ -7,7 +7,6 @@ import { addToMyListAction } from "../../store/myListSlice";
 import { useDispatch } from "react-redux";
 import { ReactComponent as Star } from "../../logos/star.svg";
 import { ReactComponent as Info } from "../../logos/info.svg";
-import { isLoadingActions } from "../../store";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const TopMovieDetail = (props) => {
@@ -17,16 +16,17 @@ const TopMovieDetail = (props) => {
   );
   const userId = useSelector((state) => state.isAuthenticated.userId);
   const myList = useSelector((state) => state.mylist.mylist);
-  const isLoading = useSelector((state) => state.isLoading.isLoading);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const addToListHandler = () => {
     if (isAuthenticated) {
       //add to list
       //turn the isLoading state to true
-      dispatch(isLoadingActions.setIsLoading());
+
       const movieToBeAdded = {
         id: props.imdbid,
         poster: props.image,
@@ -36,7 +36,15 @@ const TopMovieDetail = (props) => {
         year: props.year,
         type: props.genre,
       };
-      dispatch(addToMyListAction(movieToBeAdded, userId, movieToBeAdded.id));
+
+      dispatch(
+        addToMyListAction(
+          movieToBeAdded,
+          userId,
+          movieToBeAdded.id,
+          setIsLoading
+        )
+      );
     } else {
       navigate("/login");
     }
@@ -87,7 +95,11 @@ const TopMovieDetail = (props) => {
             ) : (
               <button onClick={addToListHandler}>Add to list</button>
             )}
-            {isLoading && <CircularProgress />}
+            {isLoading && (
+              <button>
+                <CircularProgress />
+              </button>
+            )}
             <Info className={classes.info} onClick={moreInfoIconHandler} />
           </div>
         </div>

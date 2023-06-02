@@ -34,9 +34,14 @@ const myListSlice = createSlice({
 
 export default myListSlice;
 
-export const addToMyListAction = (movie, userId, selectedMovieId) => {
+export const addToMyListAction = (
+  movie,
+  userId,
+  selectedMovieId,
+  setIsLoading
+) => {
   //check if the movie already exists or not in firestore, add only if it doesn't exist
-
+  setIsLoading(true);
   return async (dispatch) => {
     const q = query(
       collection(db, "mylist"),
@@ -60,7 +65,7 @@ export const addToMyListAction = (movie, userId, selectedMovieId) => {
       const addedMovieWithDocId = { ...addedMovie, docId: docRef.id };
       dispatch(myListSlice.actions.add(addedMovieWithDocId));
       //set is loading back to false
-      dispatch(isLoadingActions.setNotLoading());
+      setIsLoading && setIsLoading(false);
     }
   };
 };

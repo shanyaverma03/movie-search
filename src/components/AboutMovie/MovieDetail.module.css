@@ -25,6 +25,16 @@
   color: #f5c518;
 }
 
+.releaseInfo,
+.genre {
+  display: flex;
+  flex-direction: column;
+}
+
+.genre {
+  padding-top: 2em;
+}
+
 .releaseInfo h2,
 .genre h2 {
   font-family: Roboto, Helvetica, Arial, sans-serif;
