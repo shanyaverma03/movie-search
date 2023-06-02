@@ -11,6 +11,8 @@
 .description {
   display: flex;
   flex-direction: column;
+  padding: 0 2em 0 2em;
+  width: 50%;
 }
 
 .description h2 {
@@ -37,6 +39,7 @@
 .moreDetails {
   display: flex;
   flex-direction: column;
+  width: 20%;
 }
 .trailerImages {
   padding-top: 3em;
