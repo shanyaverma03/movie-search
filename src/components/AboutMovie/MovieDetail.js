@@ -108,16 +108,21 @@ const MovieDetail = (props) => {
         <img src={selectedMovie.poster} alt="poster of the movie" />
         <div className={classes.description}>
           <h2>ABOUT</h2>
-          <p>{selectedMovie.description}</p>
+          <p style={{ color: "white" }}>{selectedMovie.description}</p>
         </div>
         <div className={classes.moreDetails}>
           <div className={classes.releaseInfo}>
             <h2>Released In</h2>
-            <p>{selectedMovie.year}</p>
+            <p style={{ color: "white" }}>{selectedMovie.year}</p>
           </div>
           <div className={classes.genre}>
             <h2>Genres</h2>
-            <p>{selectedMovie.genre}</p>
+            {selectedMovie.genres &&
+              selectedMovie.genres.map((genre) => (
+                <p key={selectedMovie.id} style={{ color: "white" }}>
+                  {genre}
+                </p>
+              ))}
           </div>
         </div>
       </div>

@@ -10,6 +10,10 @@ const initialState = {
     rank: "",
     poster: "",
     type: "",
+    photos: [],
+    rating: "",
+    genres: [],
+    description: "",
   },
 };
 
@@ -22,6 +26,14 @@ const movieSlice = createSlice({
     },
     addPhotos(state, action) {
       state.movie = { ...state.movie, photos: action.payload };
+    },
+    addRatingGenresPlot(state, action) {
+      state.movie = {
+        ...state.movie,
+        rating: action.payload.rating,
+        genres: action.payload.genres,
+        description: action.payload.description,
+      };
     },
   },
 });
@@ -63,6 +75,7 @@ export const getSelectedMovieDetails = (movieIdFromParams) => {
         type,
       };
       dispatch(movieSlice.actions.select(movie));
+      dispatch(getSelectedMovieRatingGenrePlot(movieIdFromParams));
       dispatch(getSelectedMoviePhotos(movieIdFromParams));
       // });
     } catch (err) {
@@ -88,12 +101,44 @@ export const getSelectedMoviePhotos = (movieIdFromParams) => {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data.images);
       const imagesList = response.data.images;
       let images = [];
       imagesList.map((image) => images.push(image.url));
-      console.log(images);
+      // console.log(images);
       dispatch(movieSlice.actions.addPhotos(images));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const getSelectedMovieRatingGenrePlot = (movieIdFromParams) => {
+  return async (dispatch) => {
+    const options = {
+      method: "GET",
+      url: "https://imdb8.p.rapidapi.com/title/get-overview-details",
+      params: {
+        tconst: movieIdFromParams,
+        currentCountry: "US",
+      },
+      headers: {
+        "X-RapidAPI-Key": apiInfo["X-RapidAPI-Key"],
+        "X-RapidAPI-Host": apiInfo["X-RapidAPI-Host"],
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      const rating = response.data.ratings.rating;
+      const genres = response.data.genres;
+      const description = response.data.plotSummary.text;
+      console.log(rating);
+      console.log(genres);
+      console.log(description);
+      dispatch(
+        movieSlice.actions.addRatingGenresPlot({ rating, genres, description })
+      );
     } catch (error) {
       console.error(error);
     }
