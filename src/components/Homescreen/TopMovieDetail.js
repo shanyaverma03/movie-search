@@ -1,12 +1,12 @@
 import classes from "./TopMovieDetail.module.css";
-import Button from "./UI/Button";
+import Button from "../UI/Button";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { addToMyListAction } from "../store/myListSlice";
+import { addToMyListAction } from "../../store/myListSlice";
 import { useDispatch } from "react-redux";
-import { ReactComponent as Star } from "../logos/star.svg";
-import { ReactComponent as Info } from "../logos/info.svg";
+import { ReactComponent as Star } from "../../logos/star.svg";
+import { ReactComponent as Info } from "../../logos/info.svg";
 
 const TopMovieDetail = (props) => {
   const [movieAlreadyInList, setAlreadyMovieInList] = useState(false);

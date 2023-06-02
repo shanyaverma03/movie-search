@@ -1,5 +1,5 @@
 import * as React from "react";
-import Button from "./UI/Button";
+import Button from "../UI/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -9,21 +9,19 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import classes from "./Homescreen.module.css";
 import { useEffect } from "react";
-import { getTopMovies } from "../store/topMoviesSlice";
+import { getTopMovies } from "../../store/topMoviesSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import TopMovieDetail from "./TopMovieDetail";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import MyMovieDetail from "./MyMovieDetail";
-import { ReactComponent as VerticalLine } from "../logos/verticalLine.svg";
-import { ReactComponent as RightArrow } from "../logos/rightArrow.svg";
-import { ReactComponent as LeftScroll } from "../logos/leftScroll.svg";
-import { ReactComponent as RightScroll } from "../logos/rightScroll.svg";
+import MyMovieDetail from "../MyMovieDetail";
+import TopMoviesSection from "./TopMoviesSection";
+
+import { ReactComponent as LeftScroll } from "../../logos/leftScroll.svg";
+import { ReactComponent as RightScroll } from "../../logos/rightScroll.svg";
 
 const Homescreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const topMoviesList = useSelector((state) => state.topMovies.topList);
   const isAuthenticated = useSelector(
     (state) => state.isAuthenticated.isAuthenticated
   );
@@ -37,15 +35,6 @@ const Homescreen = () => {
     dispatch(getTopMovies());
   }, []);
 
-  const sliderLeftTopMovies = () => {
-    const slider = document.getElementById("sliderTopMovie");
-    slider.scrollLeft = slider.scrollLeft - 500;
-  };
-
-  const sliderRightTopMovies = () => {
-    const slider = document.getElementById("sliderTopMovie");
-    slider.scrollLeft = slider.scrollLeft + 500;
-  };
   const sliderLeftMyList = () => {
     const slider = document.getElementById("sliderMyList");
     slider.scrollLeft = slider.scrollLeft - 500;
@@ -98,48 +87,7 @@ const Homescreen = () => {
           <div className={classes.whatToWatch}>
             <h2>What to watch</h2>
           </div>
-          <div className={classes.topMovies}>
-            <div className={classes.topMoviesHeader}>
-              <VerticalLine className={classes.verticalSvg} />
-              <h3>Top Movies</h3>
-              <RightArrow className={classes.arrowSvg} />
-            </div>
-
-            <div className="relative flex items-center">
-              <LeftScroll
-                fontSize={40}
-                onClick={sliderLeftTopMovies}
-                className={classes.LeftScroll}
-                fill="white"
-              />
-              <div
-                id="sliderTopMovie"
-                className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
-              >
-                {topMoviesList.map((topMovie) => (
-                  <TopMovieDetail
-                    key={topMovie.imdbid}
-                    imdbid={topMovie.imdbid}
-                    description={topMovie.description}
-                    genre={topMovie.genre}
-                    rank={topMovie.rank}
-                    rating={topMovie.rating}
-                    thumbnail={topMovie.thumbnail}
-                    title={topMovie.title}
-                    trailer={topMovie.trailer}
-                    year={topMovie.year}
-                    image={topMovie.image}
-                  />
-                ))}
-              </div>
-              <RightScroll
-                fontSize={40}
-                onClick={sliderRightTopMovies}
-                className="opacity-50 cursor-pointer hover:opacity-100"
-                fill="white"
-              />
-            </div>
-          </div>
+          <TopMoviesSection />
           <div className={classes.fromYourList}>
             <h3>From your List</h3>
             {isAuthenticated ? (
