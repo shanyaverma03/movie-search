@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { deleteDoc } from "firebase/firestore";
+import { isLoadingActions } from "./index";
 
 const initialState = { mylist: [] };
 
@@ -58,6 +59,8 @@ export const addToMyListAction = (movie, userId, selectedMovieId) => {
       console.log("Document written with ID: ", docRef.id);
       const addedMovieWithDocId = { ...addedMovie, docId: docRef.id };
       dispatch(myListSlice.actions.add(addedMovieWithDocId));
+      //set is loading back to false
+      dispatch(isLoadingActions.setNotLoading());
     }
   };
 };

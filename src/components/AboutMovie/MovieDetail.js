@@ -104,18 +104,24 @@ const MovieDetail = (props) => {
         title={modalDetails.modalTitle}
         closeModal={closeModal}
       />
-      <div className={classes.card}>
+      <div className={classes.aboutMovie}>
         <img src={selectedMovie.poster} alt="poster of the movie" />
-        <div className={classes.insideCard}>
-          <h3>{selectedMovie.title}</h3>
-          <p>{selectedMovie.rank}</p>
-          {movieAlreadyInList ? (
-            <Button onClick={goToListHandler}>Go to 'My List'</Button>
-          ) : (
-            <Button onClick={addToMyListHandler}>Add to 'My List'</Button>
-          )}
+        <div className={classes.description}>
+          <h2>ABOUT</h2>
+          <p>{selectedMovie.description}</p>
+        </div>
+        <div className={classes.moreDetails}>
+          <div className={classes.releaseInfo}>
+            <h2>Released In</h2>
+            <p>{selectedMovie.year}</p>
+          </div>
+          <div className={classes.genre}>
+            <h2>Genres</h2>
+            <p>{selectedMovie.genre}</p>
+          </div>
         </div>
       </div>
+
       <div className={classes.trailerImages}>
         <ReactPlayer url={videoURL} controls={true} />
         <div className={classes.imagesVideos}>

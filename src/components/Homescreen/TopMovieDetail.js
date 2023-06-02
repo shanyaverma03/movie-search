@@ -7,6 +7,8 @@ import { addToMyListAction } from "../../store/myListSlice";
 import { useDispatch } from "react-redux";
 import { ReactComponent as Star } from "../../logos/star.svg";
 import { ReactComponent as Info } from "../../logos/info.svg";
+import { isLoadingActions } from "../../store";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const TopMovieDetail = (props) => {
   const [movieAlreadyInList, setAlreadyMovieInList] = useState(false);
@@ -15,13 +17,16 @@ const TopMovieDetail = (props) => {
   );
   const userId = useSelector((state) => state.isAuthenticated.userId);
   const myList = useSelector((state) => state.mylist.mylist);
+  const isLoading = useSelector((state) => state.isLoading.isLoading);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const addToListHandler = () => {
     if (isAuthenticated) {
       //add to list
-
+      //turn the isLoading state to true
+      dispatch(isLoadingActions.setIsLoading());
       const movieToBeAdded = {
         id: props.imdbid,
         poster: props.image,
@@ -72,11 +77,17 @@ const TopMovieDetail = (props) => {
           </div>
           <p className={classes.title}>{props.title}</p>
           <div className={classes.actionAndLearn}>
-            {movieAlreadyInList ? (
+            {isLoading && (
+              <button>
+                <CircularProgress />
+              </button>
+            )}
+            {!isLoading && movieAlreadyInList ? (
               <button onClick={goToListHandler}>Go to list</button>
             ) : (
               <button onClick={addToListHandler}>Add to list</button>
             )}
+            {isLoading && <CircularProgress />}
             <Info className={classes.info} onClick={moreInfoIconHandler} />
           </div>
         </div>

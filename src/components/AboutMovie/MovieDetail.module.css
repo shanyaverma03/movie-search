@@ -1,41 +1,43 @@
-.container {
+.aboutMovie {
+  display: flex;
   width: 100%;
-  margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
+
+.aboutMovie img {
   width: 30%;
-  text-align: center;
+}
+
+.description {
   display: flex;
   flex-direction: column;
-  margin-top: 1.5rem;
 }
 
-.card img {
-  height: 500px;
-  width: auto;
+.description h2 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: #f5c518;
 }
 
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+.releaseInfo h2,
+.genre h2 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: #f5c518;
 }
 
-/* Add some padding inside the card container */
-.insideCard {
-  padding: 2px 16px;
+.moreDetails {
+  display: flex;
+  flex-direction: column;
 }
-
-.insideCard button {
-  margin: 1rem;
-}
-
 .trailerImages {
   padding-top: 3em;
   display: flex;
