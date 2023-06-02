@@ -75,12 +75,12 @@
 .actionAndLearn button {
   color: white;
   font-weight: 600;
-  background-color: transparent;
+  background-color: #d5c8c822;
   padding: 0.5em 0 0.5em 0;
 }
 
 .trailerAndLogo button:hover {
-  background-color: #d5c8c822;
+  background-color: #ada9a922;
 }
 
 .info {

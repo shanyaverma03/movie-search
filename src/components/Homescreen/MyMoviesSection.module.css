@@ -1,0 +1,38 @@
+.fromYourList {
+  padding-top: 1rem;
+}
+.fromYourList h3 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: white;
+}
+
+.signInFirst {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.signInFirst h4 {
+  font-weight: 700;
+  color: #f5c518;
+}
+
+.signInFirst p {
+  color: white;
+}
+
+.verticalSvg {
+  height: 2.5em;
+  width: 1.5em;
+}
+
+.myMoviesHeader {
+  display: flex;
+  height: 1%;
+}

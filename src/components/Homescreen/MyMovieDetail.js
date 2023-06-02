@@ -1,6 +1,6 @@
 import classes from "./MyMovieDetail.module.css";
 import { useNavigate } from "react-router";
-import { removeMovieAction } from "../store/myListSlice";
+import { removeMovieAction } from "../../store/myListSlice";
 import { useDispatch } from "react-redux";
 
 const MyMovieDetail = (props) => {
@@ -19,7 +19,6 @@ const MyMovieDetail = (props) => {
       <div className={classes.card}>
         <img src={props.image} alt="thumbnail" />
         <div className={classes.container}>
-          <p>{props.rating}</p>
           <p>{props.title}</p>
 
           <button onClick={goToListHandler}>Go to list</button>
