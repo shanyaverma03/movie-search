@@ -17,6 +17,8 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import MyMovieDetail from "./MyMovieDetail";
 import { ReactComponent as VerticalLine } from "../logos/verticalLine.svg";
 import { ReactComponent as RightArrow } from "../logos/rightArrow.svg";
+import { ReactComponent as LeftScroll } from "../logos/leftScroll.svg";
+import { ReactComponent as RightScroll } from "../logos/rightScroll.svg";
 
 const Homescreen = () => {
   const navigate = useNavigate();
@@ -104,10 +106,11 @@ const Homescreen = () => {
             </div>
 
             <div className="relative flex items-center">
-              <MdChevronLeft
-                size={40}
+              <LeftScroll
+                fontSize={40}
                 onClick={sliderLeftTopMovies}
-                className="opacity-50 cursor-pointer hover:opacity-100"
+                className={classes.LeftScroll}
+                fill="white"
               />
               <div
                 id="sliderTopMovie"
@@ -129,10 +132,11 @@ const Homescreen = () => {
                   />
                 ))}
               </div>
-              <MdChevronRight
-                size={40}
+              <RightScroll
+                fontSize={40}
                 onClick={sliderRightTopMovies}
                 className="opacity-50 cursor-pointer hover:opacity-100"
+                fill="white"
               />
             </div>
           </div>
@@ -140,10 +144,11 @@ const Homescreen = () => {
             <h3>From your List</h3>
             {isAuthenticated ? (
               <div className="relative flex items-center">
-                <MdChevronLeft
-                  size={40}
+                <LeftScroll
+                  fontSize={40}
                   onClick={sliderLeftMyList}
-                  className="opacity-50 cursor-pointer hover:opacity-100"
+                  className={classes.LeftScroll}
+                  fill="white"
                 />
                 <div
                   id="sliderMyList"
@@ -161,10 +166,11 @@ const Homescreen = () => {
                     />
                   ))}
                 </div>
-                <MdChevronRight
-                  size={40}
+                <RightScroll
+                  fontSize={40}
                   onClick={sliderRightMyList}
                   className="opacity-50 cursor-pointer hover:opacity-100"
+                  fill="white"
                 />
               </div>
             ) : (
