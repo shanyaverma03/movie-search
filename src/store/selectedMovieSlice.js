@@ -44,27 +44,27 @@ export const getSelectedMovieDetails = (movieIdFromParams) => {
     try {
       console.log(movieIdFromParams);
       const response = await axios.request(options);
-      const list = response.data.d;
+      const list = response.data.d[0];
       console.log(list);
 
-      list.map((item) => {
-        const id = item.id;
-        const title = item.l;
-        const year = item.y;
-        const rank = item.rank;
-        const poster = item.i.imageUrl;
-        const type = item.qid;
-        const movie = {
-          id,
-          title,
-          year,
-          rank,
-          poster,
-          type,
-        };
-        dispatch(movieSlice.actions.select(movie));
-        dispatch(getSelectedMoviePhotos(movieIdFromParams));
-      });
+      //list.map((item) => {
+      const id = list.id;
+      const title = list.l;
+      const year = list.y;
+      const rank = list.rank;
+      const poster = list.i.imageUrl;
+      const type = list.qid;
+      const movie = {
+        id,
+        title,
+        year,
+        rank,
+        poster,
+        type,
+      };
+      dispatch(movieSlice.actions.select(movie));
+      dispatch(getSelectedMoviePhotos(movieIdFromParams));
+      // });
     } catch (err) {
       console.log(err);
     }

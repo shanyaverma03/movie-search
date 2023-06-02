@@ -54,7 +54,7 @@ const MovieDetail = (props) => {
       });
     }
     handleSearch();
-  }, [myList, dispatch, paramsMovieId, video]);
+  }, [video]);
 
   const addToMyListHandler = async () => {
     if (isAuthenticated) {
