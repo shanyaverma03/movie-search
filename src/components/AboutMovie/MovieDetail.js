@@ -145,10 +145,17 @@ const MovieDetail = (props) => {
               <p>{selectedMovie.type}</p>
             </div>
             <div className={classes.list}>
-              <button>
-                <Plus style={{ width: "1.5em" }} />
-                Add to List
-              </button>
+              {movieAlreadyInList ? (
+                <button>
+                  <Tick style={{ width: "1.8em" }} />
+                  Movie in your List
+                </button>
+              ) : (
+                <button>
+                  <Plus style={{ width: "1.5em" }} />
+                  Add to List
+                </button>
+              )}
             </div>
           </div>
           <button className={classes.images} onClick={seeImagesHandler}>
