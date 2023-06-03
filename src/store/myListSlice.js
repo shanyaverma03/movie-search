@@ -41,7 +41,9 @@ export const addToMyListAction = (
   setIsLoading
 ) => {
   //check if the movie already exists or not in firestore, add only if it doesn't exist
-  setIsLoading(true);
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
   return async (dispatch) => {
     const q = query(
       collection(db, "mylist"),
@@ -65,7 +67,9 @@ export const addToMyListAction = (
       const addedMovieWithDocId = { ...addedMovie, docId: docRef.id };
       dispatch(myListSlice.actions.add(addedMovieWithDocId));
       //set is loading back to false
-      setIsLoading && setIsLoading(false);
+      if (setIsLoading) {
+        setIsLoading(false);
+      }
     }
   };
 };
@@ -83,9 +87,17 @@ export const getMovieListAction = (uid) => {
   };
 };
 
-export const removeMovieAction = (docId) => {
+export const removeMovieAction = (docId, setIsLoading) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+    console.log("set is loading set to true");
+  }
   return async (dispatch) => {
     await deleteDoc(doc(db, "mylist", docId));
     dispatch(myListSlice.actions.remove(docId));
+    if (setIsLoading) {
+      setIsLoading(false);
+      console.log("set is loading set to false");
+    }
   };
 };
