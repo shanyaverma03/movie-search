@@ -68,6 +68,17 @@ const TopMovieDetail = (props) => {
     }
   }, [myList, props.title]);
 
+  let buttonContent;
+
+  if (isLoading) {
+    buttonContent = <CircularProgress />;
+  } else {
+    if (movieAlreadyInList) {
+      buttonContent = "Go to List";
+    } else {
+      buttonContent = "Add to List";
+    }
+  }
   return (
     <div className={classes.topMovies}>
       <div className={classes.card}>
@@ -85,20 +96,10 @@ const TopMovieDetail = (props) => {
           </div>
           <p className={classes.title}>{props.title}</p>
           <div className={classes.actionAndLearn}>
-            {isLoading && (
-              <button>
-                <CircularProgress />
-              </button>
-            )}
-            {!isLoading && movieAlreadyInList ? (
-              <button onClick={goToListHandler}>Go to list</button>
+            {buttonContent === "Go to List" ? (
+              <button onClick={goToListHandler}>{buttonContent}</button>
             ) : (
-              <button onClick={addToListHandler}>Add to list</button>
-            )}
-            {isLoading && (
-              <button>
-                <CircularProgress />
-              </button>
+              <button onClick={addToListHandler}>{buttonContent}</button>
             )}
             <Info className={classes.info} onClick={moreInfoIconHandler} />
           </div>
