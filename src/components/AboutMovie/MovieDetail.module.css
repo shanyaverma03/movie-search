@@ -36,7 +36,9 @@
 }
 
 .releaseInfo h2,
-.genre h2 {
+.genre h2,
+.rating h2,
+.type h2 {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
@@ -55,30 +57,80 @@
   padding-top: 3em;
   display: flex;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
 }
 
-.imagesVideos {
+.imagesAndInfo {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 30%;
 }
 
+.ratingTypeList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50%;
+}
+
+.rating,
+.type {
+  display: flex;
+  justify-content: space-between;
+}
+
+.starAndRating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.starAndRating p {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+.type p {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+
+.list button {
+  background-color: #d5c8c822;
+  color: white;
+
+  border-radius: 10px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .images {
   background-color: #d5c8c822;
   color: white;
-  padding: 4em;
-  height: 160px;
+
+  height: 40%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
 }
 
-.videos {
-  background-color: #d5c8c822;
-  color: white;
-  padding: 4em;
-  height: 160px;
+.images:hover {
+  background-color: #9b949422;
 }
 
-.images,
-.videos:hover {
+.list button:hover {
   background-color: #9b949422;
 }

@@ -10,6 +10,9 @@ import movieTrailer from "movie-trailer";
 import { useState } from "react";
 import { getSelectedMovieDetails } from "../../store/selectedMovieSlice";
 import { useEffect } from "react";
+import { ReactComponent as Images } from "../../logos/images.svg";
+import { ReactComponent as Plus } from "../../logos/plus.svg";
+import { ReactComponent as Tick } from "../../logos/tick.svg";
 
 const MovieDetail = (props) => {
   const params = useParams();
@@ -129,11 +132,29 @@ const MovieDetail = (props) => {
 
       <div className={classes.trailerImages}>
         <ReactPlayer url={videoURL} controls={true} />
-        <div className={classes.imagesVideos}>
+        <div className={classes.imagesAndInfo}>
+          <div className={classes.ratingTypeList}>
+            <div className={classes.rating}>
+              <h2>Rating</h2>
+              <div className={classes.starAndRating}>
+                <p>{selectedMovie.rating}/10</p>
+              </div>
+            </div>
+            <div className={classes.type}>
+              <h2>Type</h2>
+              <p>{selectedMovie.type}</p>
+            </div>
+            <div className={classes.list}>
+              <button>
+                <Plus style={{ width: "1.5em" }} />
+                Add to List
+              </button>
+            </div>
+          </div>
           <button className={classes.images} onClick={seeImagesHandler}>
-            images
+            <Images style={{ width: "1.5em" }} />
+            Images
           </button>
-          <button className={classes.videos}>videos</button>
         </div>
       </div>
     </div>
