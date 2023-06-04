@@ -1,17 +1,15 @@
-import { Box } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete/Autocomplete";
 import TextField from "@mui/material/TextField/TextField";
 import debounce from "lodash.debounce";
 import axios from "axios";
 import { apiInfo } from "../config/rapidAPI";
 import { useState } from "react";
-import Container from "@mui/material/Container/Container";
 import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
 import classes from "./Browse.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { movieActions } from "../store/index";
-import createStyles from "@mui/material/styles";
+
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
@@ -19,6 +17,7 @@ const Browse = () => {
 
   const searchHandler = async (event) => {
     console.log(event.target.value);
+
     const options = {
       method: "GET",
       url: "https://imdb8.p.rapidapi.com/auto-complete",
@@ -53,6 +52,7 @@ const Browse = () => {
       });
 
       setMovieRecs(moviesList);
+
       console.log(moviesList);
     } catch (error) {
       console.error(error);
@@ -73,6 +73,8 @@ const Browse = () => {
     <div className={classes.searchContainer}>
       <CssBaseline />
       <Autocomplete
+        loading
+        loadingText="Loading..."
         disablePortal
         id="combo-box-demo"
         options={movieRecs}
