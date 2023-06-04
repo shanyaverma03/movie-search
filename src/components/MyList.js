@@ -15,6 +15,7 @@ import { useNavigate } from "react-router";
 import { db } from "../config/firebase";
 import { getMovieListAction } from "../store/myListSlice";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import classes from "./MyList.module.css";
 
 const MyList = () => {
   //const myList = useSelector((state) => state.mylist.mylist);
@@ -35,39 +36,52 @@ const MyList = () => {
   const removeMovieHandler = (docId) => {
     dispatch(removeMovieAction(docId));
   };
+
+  let mainContent;
+  if (myList.length === 0) {
+    mainContent = (
+      <div className={classes.listIsEmpty}>
+        <h2>Your List is currently empty</h2>
+        <p>
+          Add movies and shows that you want to watch by clicking Add to List
+        </p>
+      </div>
+    );
+  } else {
+    mainContent = myList.map((movie) => (
+      <Card key={movie.id} sx={{ maxWidth: 345 }}>
+        <CardMedia
+          component="img"
+          sx={{ height: 500 }}
+          image={movie.poster}
+          title="movie-detail"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {movie.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Rank: {movie.rank}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Something about the movie- to figure out
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={() => removeMovieHandler(movie.docId)}>
+            Remove from list
+          </Button>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
+    ));
+  }
+
   return (
     <>
-      <h1>the list</h1>
-      {myList.map((movie) => (
-        <Card key={movie.id} sx={{ maxWidth: 345 }}>
-          <CardMedia
-            component="img"
-            sx={{ height: 500 }}
-            image={movie.poster}
-            title="movie-detail"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {movie.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Rank: {movie.rank}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Something about the movie- to figure out
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              size="small"
-              onClick={() => removeMovieHandler(movie.docId)}
-            >
-              Remove from list
-            </Button>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-      ))}
+      <h1 className={classes.listHeader}>My List</h1>
+
+      {mainContent}
     </>
   );
 };
