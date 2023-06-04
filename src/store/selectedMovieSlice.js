@@ -81,7 +81,9 @@ export const getSelectedMovieDetails = (movieIdFromParams, setIsLoading) => {
       dispatch(getSelectedMovieRatingGenrePlot(movieIdFromParams));
       dispatch(getSelectedMoviePhotos(movieIdFromParams));
       // });
-      setIsLoading(false);
+      if (setIsLoading) {
+        setIsLoading(false);
+      }
     } catch (err) {
       console.log(err);
     }
