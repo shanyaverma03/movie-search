@@ -82,7 +82,14 @@ function MainNavigation() {
             <Button
               key="browse"
               onClick={browseClickHandler}
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{
+                my: 2,
+                color: "white",
+                display: "block",
+                fontFamily: `"Roboto","Helvetica","Arial",sans-serif`,
+                fontSize: "1rem",
+                fontWeight: "500",
+              }}
             >
               Browse
             </Button>
@@ -90,7 +97,14 @@ function MainNavigation() {
               <Button
                 key="mylist"
                 onClick={mylistClickHandler}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  fontFamily: `"Roboto","Helvetica","Arial",sans-serif`,
+                  fontSize: "1rem",
+                  fontWeight: "500",
+                }}
               >
                 My List
               </Button>
@@ -106,14 +120,29 @@ function MainNavigation() {
               </Link>
               <Link
                 to="register"
-                style={{ textDecoration: "none", color: "white" }}
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontFamily: `"Roboto","Helvetica","Arial",sans-serif`,
+                  fontSize: "1rem",
+                  fontWeight: "500",
+                }}
               >
                 <Button color="inherit">Register</Button>
               </Link>
             </>
           )}
           {isAuthenticated && (
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+                fontFamily: `"Roboto","Helvetica","Arial",sans-serif`,
+                fontSize: "1rem",
+                fontWeight: "500",
+              }}
+            >
               <Button color="inherit" onClick={logoutHandler}>
                 Logout
               </Button>
