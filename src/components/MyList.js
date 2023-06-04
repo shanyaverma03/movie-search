@@ -51,7 +51,13 @@ const MyList = () => {
     );
   } else {
     mainContent = myList.map((movie) => (
-      <MyListCard key={movie.id} image={movie.poster} title={movie.title} />
+      <MyListCard
+        key={movie.id}
+        image={movie.poster}
+        title={movie.title}
+        id={movie.id}
+        docId={movie.docId}
+      />
     ));
   }
 
