@@ -16,6 +16,7 @@ import { db } from "../config/firebase";
 import { getMovieListAction } from "../store/myListSlice";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import classes from "./MyList.module.css";
+import MyListCard from "./MyListCard";
 
 const MyList = () => {
   //const myList = useSelector((state) => state.mylist.mylist);
@@ -25,11 +26,12 @@ const MyList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    //grab the list from firestore
+    dispatch(getMovieListAction(userId));
+    console.log(myList);
     if (userId) {
       console.log(userId);
       console.log(myList);
-    } else {
-      navigate("/");
     }
   }, []);
 
@@ -49,31 +51,7 @@ const MyList = () => {
     );
   } else {
     mainContent = myList.map((movie) => (
-      <Card key={movie.id} sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          sx={{ height: 500 }}
-          image={movie.poster}
-          title="movie-detail"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {movie.title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Rank: {movie.rank}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Something about the movie- to figure out
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" onClick={() => removeMovieHandler(movie.docId)}>
-            Remove from list
-          </Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
+      <MyListCard key={movie.id} image={movie.poster} title={movie.title} />
     ));
   }
 

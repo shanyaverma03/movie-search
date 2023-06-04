@@ -1,0 +1,71 @@
+.myListMovies {
+  display: inline-block;
+  width: 20%;
+  margin: 1rem;
+}
+
+.card {
+  display: inline-flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  height: 300px;
+}
+.container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container p {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: ivory;
+}
+
+.starSvg {
+  height: 1.3em;
+  width: 2.5em;
+}
+
+.title {
+  padding: 1em;
+  line-height: 2em;
+  font-weight: 600;
+}
+
+.actionAndLearn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.actionAndLearn button {
+  color: white;
+  font-weight: 600;
+  background-color: #d5c8c822;
+  padding: 0.5em 0 0.5em 0;
+}
+
+.trailerAndLogo button:hover {
+  background-color: #ada9a922;
+}
+
+.info {
+  height: 2em;
+}
+
+.info:hover {
+  background-color: #d5c8c822;
+}
