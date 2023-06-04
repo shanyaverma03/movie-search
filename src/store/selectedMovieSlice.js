@@ -41,7 +41,10 @@ const movieSlice = createSlice({
 //const store = createStore(movieSlice.reducer);
 export default movieSlice;
 
-export const getSelectedMovieDetails = (movieIdFromParams) => {
+export const getSelectedMovieDetails = (movieIdFromParams, setIsLoading) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
   return async (dispatch) => {
     const options = {
       method: "GET",
@@ -78,6 +81,7 @@ export const getSelectedMovieDetails = (movieIdFromParams) => {
       dispatch(getSelectedMovieRatingGenrePlot(movieIdFromParams));
       dispatch(getSelectedMoviePhotos(movieIdFromParams));
       // });
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }

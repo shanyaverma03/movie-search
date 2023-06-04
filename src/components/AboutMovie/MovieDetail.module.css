@@ -4,6 +4,24 @@
   justify-content: space-between;
 }
 
+.loading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.loading h1 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: white;
+}
+
 .aboutMovie img {
   width: 30%;
 }

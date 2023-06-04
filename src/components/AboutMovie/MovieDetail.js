@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { ReactComponent as Images } from "../../logos/images.svg";
 import { ReactComponent as Plus } from "../../logos/plus.svg";
 import { ReactComponent as Tick } from "../../logos/tick.svg";
+import { CircularProgress } from "@mui/material";
 
 const MovieDetail = (props) => {
   const params = useParams();
@@ -30,6 +31,7 @@ const MovieDetail = (props) => {
     modalMessage: "",
     modalTitle: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const video = selectedMovie.title;
   const [videoURL, setVideoURL] = useState("");
@@ -49,7 +51,7 @@ const MovieDetail = (props) => {
       setMovieAlreadyInList(true);
     }
     console.log("in use effect" + paramsMovieId.id);
-    dispatch(getSelectedMovieDetails(paramsMovieId.id));
+    dispatch(getSelectedMovieDetails(paramsMovieId.id, setIsLoading));
 
     function handleSearch() {
       movieTrailer(video).then((res) => {
@@ -94,73 +96,87 @@ const MovieDetail = (props) => {
     navigate("photos");
   };
 
-  return (
-    <div className={classes.container}>
-      <LoginFirstModal
-        open={modalDetails.showModal}
-        message={modalDetails.modalMessage}
-        title={modalDetails.modalTitle}
-        closeModal={closeModal}
-      />
-      <div className={classes.aboutMovie}>
-        <img src={selectedMovie.poster} alt="poster of the movie" />
-        <div className={classes.description}>
-          <h2>ABOUT</h2>
-          <p style={{ color: "white" }}>{selectedMovie.description}</p>
-        </div>
-        <div className={classes.moreDetails}>
-          <div className={classes.releaseInfo}>
-            <h2>Released In</h2>
-            <p style={{ color: "white" }}>{selectedMovie.year}</p>
-          </div>
-          <div className={classes.genre}>
-            <h2>Genres</h2>
-            {selectedMovie.genres &&
-              selectedMovie.genres.map((genre) => (
-                <p key={selectedMovie.id} style={{ color: "white" }}>
-                  {genre}
-                </p>
-              ))}
-          </div>
-        </div>
-      </div>
+  let content;
 
-      <div className={classes.trailerImages}>
-        <ReactPlayer url={videoURL} controls={true} />
-        <div className={classes.imagesAndInfo}>
-          <div className={classes.ratingTypeList}>
-            <div className={classes.rating}>
-              <h2>Rating</h2>
-              <div className={classes.starAndRating}>
-                <p>{selectedMovie.rating}/10</p>
+  if (isLoading) {
+    content = (
+      <div className={classes.loading}>
+        {" "}
+        <h1>Loading...</h1>
+        <CircularProgress />;
+      </div>
+    );
+  } else {
+    content = (
+      <div className={classes.container}>
+        <LoginFirstModal
+          open={modalDetails.showModal}
+          message={modalDetails.modalMessage}
+          title={modalDetails.modalTitle}
+          closeModal={closeModal}
+        />
+        <div className={classes.aboutMovie}>
+          <img src={selectedMovie.poster} alt="poster of the movie" />
+          <div className={classes.description}>
+            <h2>ABOUT</h2>
+            <p style={{ color: "white" }}>{selectedMovie.description}</p>
+          </div>
+          <div className={classes.moreDetails}>
+            <div className={classes.releaseInfo}>
+              <h2>Released In</h2>
+              <p style={{ color: "white" }}>{selectedMovie.year}</p>
+            </div>
+            <div className={classes.genre}>
+              <h2>Genres</h2>
+              {selectedMovie.genres &&
+                selectedMovie.genres.map((genre) => (
+                  <p key={selectedMovie.id} style={{ color: "white" }}>
+                    {genre}
+                  </p>
+                ))}
+            </div>
+          </div>
+        </div>
+
+        <div className={classes.trailerImages}>
+          <ReactPlayer url={videoURL} controls={true} />
+          <div className={classes.imagesAndInfo}>
+            <div className={classes.ratingTypeList}>
+              <div className={classes.rating}>
+                <h2>Rating</h2>
+                <div className={classes.starAndRating}>
+                  <p>{selectedMovie.rating}/10</p>
+                </div>
+              </div>
+              <div className={classes.type}>
+                <h2>Type</h2>
+                <p>{selectedMovie.type}</p>
+              </div>
+              <div className={classes.list}>
+                {movieAlreadyInList ? (
+                  <button>
+                    <Tick style={{ width: "1.8em" }} />
+                    Movie in your List
+                  </button>
+                ) : (
+                  <button onClick={addToMyListHandler}>
+                    <Plus style={{ width: "1.5em" }} />
+                    Add to List
+                  </button>
+                )}
               </div>
             </div>
-            <div className={classes.type}>
-              <h2>Type</h2>
-              <p>{selectedMovie.type}</p>
-            </div>
-            <div className={classes.list}>
-              {movieAlreadyInList ? (
-                <button>
-                  <Tick style={{ width: "1.8em" }} />
-                  Movie in your List
-                </button>
-              ) : (
-                <button onClick={addToMyListHandler}>
-                  <Plus style={{ width: "1.5em" }} />
-                  Add to List
-                </button>
-              )}
-            </div>
+            <button className={classes.images} onClick={seeImagesHandler}>
+              <Images style={{ width: "1.5em" }} />
+              Images
+            </button>
           </div>
-          <button className={classes.images} onClick={seeImagesHandler}>
-            <Images style={{ width: "1.5em" }} />
-            Images
-          </button>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return content;
 };
 
 export default MovieDetail;
