@@ -142,7 +142,7 @@ const Register = () => {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color="common.white">
             Sign up
           </Typography>
           <Box
@@ -166,6 +166,16 @@ const Register = () => {
                   onChange={firstNameChangeHandler}
                   onBlur={firstNameBlurHandler}
                   value={firstName}
+                  sx={{ input: { color: "white" } }}
+                  InputLabelProps={{
+                    style: {
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      width: "100%",
+                      color: "white",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -181,6 +191,16 @@ const Register = () => {
                   onChange={lastNameChangeHandler}
                   onBlur={lastNameBlurHandler}
                   value={lastName}
+                  sx={{ input: { color: "white" } }}
+                  InputLabelProps={{
+                    style: {
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      width: "100%",
+                      color: "white",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -196,6 +216,16 @@ const Register = () => {
                   onChange={emailChangeHandler}
                   onBlur={emailBlurHandler}
                   value={email}
+                  sx={{ input: { color: "white" } }}
+                  InputLabelProps={{
+                    style: {
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      width: "100%",
+                      color: "white",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -212,6 +242,16 @@ const Register = () => {
                   onChange={passwordChangeHandler}
                   onBlur={passwordBlurHandler}
                   value={password}
+                  sx={{ input: { color: "white" } }}
+                  InputLabelProps={{
+                    style: {
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      width: "100%",
+                      color: "white",
+                    },
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -230,14 +270,16 @@ const Register = () => {
                   onChange={confirmPasswordChangeHandler}
                   onBlur={confirmPasswordBlurHandler}
                   value={confirmPassword}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  sx={{ input: { color: "white" } }}
+                  InputLabelProps={{
+                    style: {
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      width: "100%",
+                      color: "white",
+                    },
+                  }}
                 />
               </Grid>
             </Grid>
@@ -259,7 +301,7 @@ const Register = () => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 5, color: "white" }} />
       </Container>
     </ThemeProvider>
   );
