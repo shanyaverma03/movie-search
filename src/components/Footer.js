@@ -8,8 +8,8 @@ const Footer = () => {
         <li>About</li>
         <li>Terms</li>
         <li>Privacy Policy</li>
-        <p className={classes.copyright}>Company Name © 2018</p>
       </ul>
+      <p className={classes.copyright}>Movie Search © 2023</p>
     </footer>
   );
 };

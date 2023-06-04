@@ -28,7 +28,7 @@ const Homescreen = () => {
 
   useEffect(() => {
     console.log(myList);
-    dispatch(getTopMovies());
+    //dispatch(getTopMovies());
   }, []);
 
   return (

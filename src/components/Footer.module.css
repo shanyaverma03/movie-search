@@ -1,9 +1,22 @@
 .footer_basic {
   flex: 0 1 40px;
-}
-
-.list {
+  background-color: rgb(54, 69, 79);
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.footer_basic p {
+  padding: 2rem;
+  color: rgb(202, 196, 196);
+}
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list li {
+  padding: 0 2em 0 2em;
+  color: white;
 }
