@@ -34,7 +34,7 @@ const TopMoviesSection = () => {
           {topMoviesList.map((topMovie) => (
             <TopMovieDetail
               key={topMovie.imdbid}
-              imdbid={topMovie.imdbid}
+              imdbid={topMovie.imdbid} 
               description={topMovie.description}
               genre={topMovie.genre}
               rank={topMovie.rank}

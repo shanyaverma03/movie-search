@@ -11,20 +11,35 @@
   color: white;
 }
 
-.signInFirst {
+.messageUnderMyList {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
 }
 
-.signInFirst h4 {
+.messageUnderMyList h4 {
   font-weight: 700;
   color: #f5c518;
 }
 
-.signInFirst p {
+.messageUnderMyList p {
   color: white;
+}
+
+.messageUnderMyList button {
+  color: white;
+  font-weight: 600;
+  background-color: #d5c8c822;
+  padding: 0.5em 0 0.5em 0;
+  width: 20%;
+  margin: 0.5em;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
+.messageUnderMyList button:hover {
+  background-color: #ada9a922;
 }
 
 .verticalSvg {

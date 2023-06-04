@@ -57,7 +57,7 @@ const MovieDetail = (props) => {
       });
     }
     handleSearch();
-  }, [video]);
+  }, [video, myList]);
 
   const addToMyListHandler = async () => {
     if (isAuthenticated) {
@@ -73,7 +73,6 @@ const MovieDetail = (props) => {
       console.log("added movie");
       console.log(addedMovie);
       dispatch(addToMyListAction(addedMovie, userId, selectedMovie.id));
-      navigate("/mylist");
     } else {
       setModalDetails({
         showModal: true,
@@ -81,10 +80,6 @@ const MovieDetail = (props) => {
         modalTitle: "Want to add the movie to your list?",
       });
     }
-  };
-
-  const goToListHandler = () => {
-    navigate("/mylist");
   };
 
   const closeModal = () => {
@@ -151,7 +146,7 @@ const MovieDetail = (props) => {
                   Movie in your List
                 </button>
               ) : (
-                <button>
+                <button onClick={addToMyListHandler}>
                   <Plus style={{ width: "1.5em" }} />
                   Add to List
                 </button>

@@ -9,8 +9,8 @@ const RootLayout = () => {
 
       <main className={classes.wrapper}>
         <Outlet />
-        <Footer />
       </main>
+      <Footer />
     </div>
   );
 };

@@ -129,7 +129,7 @@ export const getSelectedMovieRatingGenrePlot = (movieIdFromParams) => {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data);
+
       const rating = response.data.ratings.rating;
       const genres = response.data.genres;
       const description = response.data.plotSummary.text;
