@@ -16,12 +16,15 @@ import TopMovieDetail from "./TopMovieDetail";
 import MyMovieDetail from "./MyMovieDetail";
 import TopMoviesSection from "./TopMoviesSection";
 import MyMoviesSection from "./MyMoviesSection.js";
+import { getGenreList } from "../../store/genreListSlice";
+import BrowseByGenreSection from "./BrowseByGenreSection";
 
 const Homescreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const myList = useSelector((state) => state.mylist.mylist);
+
   const browseMovieHandler = () => {
     navigate("/browse");
   };
@@ -29,6 +32,7 @@ const Homescreen = () => {
   useEffect(() => {
     console.log(myList);
     //dispatch(getTopMovies());
+    dispatch(getGenreList());
   }, []);
 
   return (
@@ -76,6 +80,7 @@ const Homescreen = () => {
           </div>
           <TopMoviesSection />
           <MyMoviesSection />
+          <BrowseByGenreSection />
         </div>
       </Box>
     </div>

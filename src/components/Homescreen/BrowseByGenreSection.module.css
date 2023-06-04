@@ -1,0 +1,38 @@
+.genreList {
+  padding-top: 3rem;
+}
+
+.genreListHeader h3 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: white;
+}
+
+.genreListHeader {
+  display: flex;
+  height: 1%;
+}
+
+.verticalSvg {
+  height: 2.5em;
+  width: 1.5em;
+}
+
+.genreButton {
+  color: white;
+  height: 30%;
+  width: 20%;
+  background-color: #d5c8c822;
+  padding: 3em;
+  margin: 1em;
+  display: inline-block;
+  text-align: center;
+}
+
+.genreButton:hover {
+  background-color: #ada9a922;
+}
