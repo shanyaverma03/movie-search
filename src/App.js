@@ -13,6 +13,7 @@ import { isAuthenticatedActions } from "./store/index";
 import { onAuthStateChanged } from "firebase/auth";
 import { getMovieListAction } from "./store/myListSlice";
 import PhotosPage from "./Pages/PhotosPage";
+import GenreDetailPage from "./Pages/GenreDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,15 @@ const router = createBrowserRouter([
               {
                 path: "photos",
                 element: <PhotosPage />,
+              },
+            ],
+          },
+          {
+            path: "genres/:genre",
+            children: [
+              {
+                index: true,
+                element: <GenreDetailPage />,
               },
             ],
           },

@@ -3,8 +3,10 @@ import { ReactComponent as RightScroll } from "../../logos/rightScroll.svg";
 import { useSelector } from "react-redux";
 import classes from "./BrowseByGenreSection.module.css";
 import { ReactComponent as VerticalLine } from "../../logos/verticalLine.svg";
+import { useNavigate } from "react-router";
 
 const BrowseByGenreSection = () => {
+  const navigate = useNavigate();
   const sliderLeftGenre = () => {
     const slider = document.getElementById("sliderMyList");
     slider.scrollLeft = slider.scrollLeft - 500;
@@ -33,7 +35,14 @@ const BrowseByGenreSection = () => {
           className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
         >
           {genreList.map((genre) => (
-            <div className={classes.genreButton}>{genre}</div>
+            <div
+              onClick={() => {
+                navigate(`/browse/genres/${genre}`);
+              }}
+              className={classes.genreButton}
+            >
+              {genre}
+            </div>
           ))}
         </div>
 
