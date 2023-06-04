@@ -103,7 +103,7 @@ const Login = () => {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" color="common.white">
             Sign in
           </Typography>
           <Box
@@ -126,6 +126,16 @@ const Login = () => {
               onChange={emailChangeHandler}
               onBlur={emailBlurHandler}
               value={email}
+              sx={{ input: { color: "white" } }}
+              InputLabelProps={{
+                style: {
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  width: "100%",
+                  color: "white",
+                },
+              }}
             />
             <TextField
               margin="normal"
@@ -141,26 +151,30 @@ const Login = () => {
               onChange={passwordChangeHandler}
               onBlur={passwordBlurHandler}
               value={password}
+              sx={{ input: { color: "white" } }}
+              InputLabelProps={{
+                style: {
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  width: "100%",
+                  color: "white",
+                },
+              }}
+              className={classes.text}
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, input: { color: "white" } }}
               disabled={!formIsValid}
             >
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Grid item xs></Grid>
               <Grid item>
                 <Link href="register" variant="body2">
                   {"Don't have an account? Sign Up"}
@@ -169,7 +183,7 @@ const Login = () => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright sx={{ mt: 8, mb: 4, color: "white" }} />
       </Container>
     </div>
   );
