@@ -1,0 +1,10 @@
+.genreHeader h1 {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: #f5c518;
+  padding-bottom: 3rem;
+}

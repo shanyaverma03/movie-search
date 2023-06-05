@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getMovieListForGenre } from "../../store/genreListSlice";
 import { useSelector } from "react-redux";
 import TopMovieDetail from "./TopMovieDetail";
+import classes from "./GenreDetail.module.css";
 
 const GenreDetail = () => {
   const params = useParams();
@@ -19,8 +20,8 @@ const GenreDetail = () => {
   }, []);
 
   return (
-    <>
-      <h1>genre detail</h1>
+    <div className={classes.genreHeader}>
+      <h1>{params.genre}</h1>
       {genreList &&
         genreList.map((topMovie) => (
           <TopMovieDetail
@@ -37,7 +38,7 @@ const GenreDetail = () => {
             image={topMovie.image}
           />
         ))}
-    </>
+    </div>
   );
 };
 
