@@ -84,7 +84,7 @@ export const fetTopMovies = () => {
       let topList = [];
       const responseList = response.data;
       responseList.map((movie) => {
-        if (count < 20) {
+        if (count < 30) {
           const imdbid = movie.imdbid;
           const description = movie.description;
           const genre = movie.genre;

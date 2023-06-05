@@ -7,35 +7,36 @@ import { useNavigate } from "react-router";
 
 const BrowseByGenreSection = () => {
   const navigate = useNavigate();
+  const genreList = useSelector((state) => state.genreList.genreList);
+
   const sliderLeftGenre = () => {
-    const slider = document.getElementById("sliderMyList");
+    const slider = document.getElementById("sliderGenreList");
+
     slider.scrollLeft = slider.scrollLeft - 500;
   };
 
   const sliderRightGenre = () => {
-    const slider = document.getElementById("sliderMyList");
+    const slider = document.getElementById("sliderGenreList");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
 
-  const genreList = useSelector((state) => state.genreList.genreList);
-
   return (
-    <div>
-      <div className={classes.genreList}>
-        <div className={classes.genreListHeader}>
-          <VerticalLine className={classes.verticalSvg} />
-          <h3>Browse by Genre</h3>
-        </div>
+    <div className={classes.genreList}>
+      <div className={classes.genreListHeader}>
+        <VerticalLine className={classes.verticalSvg} />
+        <h3>Browse by Genre</h3>
       </div>
+
       <div className="relative flex items-center">
         <LeftScroll fontSize={40} onClick={sliderLeftGenre} fill="white" />
 
         <div
-          id="sliderMyList"
+          id="sliderGenreList"
           className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
         >
           {genreList.map((genre) => (
             <div
+              key={genre}
               onClick={() => {
                 navigate(`/browse/genres/${genre}`);
               }}
