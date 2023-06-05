@@ -16,7 +16,7 @@ const topMoviesSlice = createSlice({
 
 export default topMoviesSlice;
 
-export const getTopMovies = () => {
+export const getTopMoviesAndAdd = () => {
   return async (dispatch) => {
     const options = {
       method: "GET",
@@ -58,6 +58,7 @@ export const getTopMovies = () => {
           };
 
           dispatch(topMoviesSlice.actions.add(addedMovie));
+          console.log(addedMovie);
           count++;
         }
       });

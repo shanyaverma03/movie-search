@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiInfo } from "../config/rapidAPI";
+import { imdbApiInfo } from "../config/rapidAPI";
 
 const initialState = { genreList: [], movieListForEachGenre: [] };
 
@@ -10,6 +11,11 @@ const genreListSlice = createSlice({
   reducers: {
     setGenreList(state, action) {
       state.genreList = action.payload;
+    },
+    setMovieListForGenre(state, action) {
+      state.movieListForEachGenre = state.movieListForEachGenre.concat(
+        action.payload
+      );
     },
   },
 });
@@ -41,37 +47,59 @@ export const getGenreList = () => {
 };
 
 export const getMovieListForGenre = (genre) => {
-  return async () => {
+  return async (dispatch) => {
     const options = {
       method: "GET",
-      url: "https://online-movie-database.p.rapidapi.com/title/v2/get-popular-movies-by-genre",
-      params: {
-        genre: genre,
-        limit: "5",
-      },
+      url: "https://imdb-top-100-movies.p.rapidapi.com/",
       headers: {
-        "X-RapidAPI-Key": apiInfo["X-RapidAPI-Key"],
-        "X-RapidAPI-Host": apiInfo["X-RapidAPI-Host"],
+        "X-RapidAPI-Key": imdbApiInfo["X-RapidAPI-Key"],
+        "X-RapidAPI-Host": imdbApiInfo["X-RapidAPI-Host"],
       },
     };
-
+    let count = 1;
     try {
       const response = await axios.request(options);
-      console.log(response.data);
-      //above data is in the form- /title/tt5433140/
+      let topList = [];
+      const responseList = response.data;
+      responseList.map((movie) => {
+        if (count < 20) {
+          const imdbid = movie.imdbid;
+          const description = movie.description;
+          const genre = movie.genre;
+          const rank = movie.rank;
+          const rating = movie.rating;
+          const thumbnail = movie.thumbnail;
+          const title = movie.title;
+          const trailer = movie.trailer;
+          const year = movie.year;
+          const image = movie.image;
 
-      let movieIdsList = [];
-      response.data.map((movieStr) => {
-        movieIdsList.push(
-          movieStr
-            .substring(
-              movieStr.indexOf("/title/") + 1,
-              movieStr.lastIndexOf("/")
-            )
-            .substring(6)
-        );
+          const addedMovie = {
+            imdbid,
+            description,
+            genre,
+            rank,
+            rating,
+            thumbnail,
+            title,
+            trailer,
+            year,
+            image,
+          };
+
+          topList.push(addedMovie);
+
+          count++;
+        }
       });
-      console.log(movieIdsList);
+      console.log(topList);
+      let genreList = [];
+      topList.map((movie) => {
+        if (movie.genre.includes(genre)) {
+          genreList.push(movie.title);
+        }
+      });
+      console.log(genreList);
     } catch (error) {
       console.error(error);
     }

@@ -9,7 +9,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import classes from "./Homescreen.module.css";
 import { useEffect } from "react";
-import { getTopMovies } from "../../store/topMoviesSlice";
+import { getTopMoviesAndAdd } from "../../store/topMoviesSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import TopMovieDetail from "./TopMovieDetail";
@@ -31,7 +31,8 @@ const Homescreen = () => {
 
   useEffect(() => {
     console.log(myList);
-    //dispatch(getTopMovies());
+    dispatch(getTopMoviesAndAdd());
+
     dispatch(getGenreList());
   }, []);
 
