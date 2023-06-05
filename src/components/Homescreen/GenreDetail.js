@@ -19,25 +19,39 @@ const GenreDetail = () => {
     dispatch(getMovieListForGenre(params.genre, topMoviesList));
   }, []);
 
+  let content;
+  if (genreList && genreList.length === 0) {
+    content = (
+      <div className={classes.movieNotFound}>
+        {" "}
+        <h3>Oops! No {params.genre} movie found!</h3>
+        <p>Please try again later...</p>
+      </div>
+    );
+  }
+
+  if (genreList && genreList.length > 0) {
+    content = genreList.map((topMovie) => (
+      <TopMovieDetail
+        key={topMovie.imdbid}
+        imdbid={topMovie.imdbid}
+        description={topMovie.description}
+        genre={topMovie.genre}
+        rank={topMovie.rank}
+        rating={topMovie.rating}
+        thumbnail={topMovie.thumbnail}
+        title={topMovie.title}
+        trailer={topMovie.trailer}
+        year={topMovie.year}
+        image={topMovie.image}
+      />
+    ));
+  }
+
   return (
     <div className={classes.genreHeader}>
       <h1>{params.genre}</h1>
-      {genreList &&
-        genreList.map((topMovie) => (
-          <TopMovieDetail
-            key={topMovie.imdbid}
-            imdbid={topMovie.imdbid}
-            description={topMovie.description}
-            genre={topMovie.genre}
-            rank={topMovie.rank}
-            rating={topMovie.rating}
-            thumbnail={topMovie.thumbnail}
-            title={topMovie.title}
-            trailer={topMovie.trailer}
-            year={topMovie.year}
-            image={topMovie.image}
-          />
-        ))}
+      {content}
     </div>
   );
 };
