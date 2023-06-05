@@ -20,7 +20,10 @@ const genreListSlice = createSlice({
 
 export default genreListSlice;
 
-export const getGenreList = () => {
+export const getGenreList = (setIsLoading) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
   return async (dispatch) => {
     const options = {
       method: "GET",
@@ -40,6 +43,10 @@ export const getGenreList = () => {
       dispatch(genreListSlice.actions.setGenreList(genreList));
     } catch (error) {
       console.error(error);
+    }
+
+    if (setIsLoading) {
+      setIsLoading(false);
     }
   };
 };

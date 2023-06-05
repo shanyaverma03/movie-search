@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import classes from "./BrowseByGenreSection.module.css";
 import { ReactComponent as VerticalLine } from "../../logos/verticalLine.svg";
 import { useNavigate } from "react-router";
+import { LinearProgress } from "@mui/material";
 
-const BrowseByGenreSection = () => {
+const BrowseByGenreSection = (props) => {
   const navigate = useNavigate();
   const genreList = useSelector((state) => state.genreList.genreList);
 
@@ -20,6 +21,23 @@ const BrowseByGenreSection = () => {
     slider.scrollLeft = slider.scrollLeft + 500;
   };
 
+  let content;
+
+  if (props.isLoading) {
+    content = <LinearProgress color="inherit" />;
+  } else {
+    content = genreList.map((genre) => (
+      <div
+        key={genre}
+        onClick={() => {
+          navigate(`/browse/genres/${genre}`);
+        }}
+        className={classes.genreButton}
+      >
+        {genre}
+      </div>
+    ));
+  }
   return (
     <div className={classes.genreList}>
       <div className={classes.genreListHeader}>
@@ -34,17 +52,7 @@ const BrowseByGenreSection = () => {
           id="sliderGenreList"
           className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
         >
-          {genreList.map((genre) => (
-            <div
-              key={genre}
-              onClick={() => {
-                navigate(`/browse/genres/${genre}`);
-              }}
-              className={classes.genreButton}
-            >
-              {genre}
-            </div>
-          ))}
+          {content}
         </div>
 
         <RightScroll

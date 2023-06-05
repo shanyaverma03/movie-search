@@ -1,23 +1,19 @@
 import * as React from "react";
 import Button from "../UI/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router";
 import classes from "./Homescreen.module.css";
 import { useEffect } from "react";
-import { getTopMoviesAndAdd } from "../../store/topMoviesSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import TopMovieDetail from "./TopMovieDetail";
-import MyMovieDetail from "./MyMovieDetail";
 import TopMoviesSection from "./TopMoviesSection";
 import MyMoviesSection from "./MyMoviesSection.js";
 import { getGenreList } from "../../store/genreListSlice";
 import BrowseByGenreSection from "./BrowseByGenreSection";
+import { useState } from "react";
 
 const Homescreen = () => {
   const navigate = useNavigate();
@@ -29,11 +25,13 @@ const Homescreen = () => {
     navigate("/browse");
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     console.log(myList);
     //dispatch(getTopMoviesAndAdd());
 
-    dispatch(getGenreList());
+    dispatch(getGenreList(setIsLoading));
   }, []);
 
   return (
@@ -81,7 +79,7 @@ const Homescreen = () => {
           </div>
           <TopMoviesSection />
           <MyMoviesSection />
-          <BrowseByGenreSection />
+          <BrowseByGenreSection isLoading={isLoading} />
         </div>
       </Box>
     </div>
