@@ -43,6 +43,7 @@
   color: white;
   display: inline-block;
   margin: 1em;
+  padding-top: 1em;
 }
 
 .container img {
