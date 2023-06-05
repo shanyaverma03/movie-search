@@ -28,13 +28,14 @@ const BrowseByGenreSection = (props) => {
   } else {
     content = genreList.map((genre) => (
       <div
+        className={classes.container}
         key={genre}
         onClick={() => {
-          navigate(`/browse/genres/${genre}`);
+          navigate(`/browse/genres/${genre.genre}`);
         }}
-        className={classes.genreButton}
       >
-        {genre}
+        <img src={genre.image} alt="category reference" />
+        <div className={classes.bottomLeft}>{genre.genre}</div>
       </div>
     ));
   }

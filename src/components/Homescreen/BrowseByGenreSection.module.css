@@ -36,3 +36,28 @@
 .genreButton:hover {
   background-color: #ada9a922;
 }
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+  display: inline-block;
+  margin: 1em;
+}
+
+.container img {
+  height: 200px;
+  width: 200px;
+}
+.bottomLeft {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: 0.00735em;
+  text-transform: none;
+  color: white;
+}
