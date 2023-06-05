@@ -13,9 +13,7 @@ const genreListSlice = createSlice({
       state.genreList = action.payload;
     },
     setMovieListForGenre(state, action) {
-      state.movieListForEachGenre = state.movieListForEachGenre.concat(
-        action.payload
-      );
+      state.movieListForEachGenre = action.payload;
     },
   },
 });
@@ -96,10 +94,35 @@ export const getMovieListForGenre = (genre) => {
       let genreList = [];
       topList.map((movie) => {
         if (movie.genre.includes(genre)) {
-          genreList.push(movie.title);
+          const imdbid = movie.imdbid;
+          const description = movie.description;
+          const genre = movie.genre;
+          const rank = movie.rank;
+          const rating = movie.rating;
+          const thumbnail = movie.thumbnail;
+          const title = movie.title;
+          const trailer = movie.trailer;
+          const year = movie.year;
+          const image = movie.image;
+
+          const addedMovie = {
+            imdbid,
+            description,
+            genre,
+            rank,
+            rating,
+            thumbnail,
+            title,
+            trailer,
+            year,
+            image,
+          };
+
+          genreList.push(addedMovie);
         }
       });
       console.log(genreList);
+      dispatch(genreListSlice.actions.setMovieListForGenre(genreList));
     } catch (error) {
       console.error(error);
     }

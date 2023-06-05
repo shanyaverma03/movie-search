@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getMovieListForGenre } from "../../store/genreListSlice";
 import { useSelector } from "react-redux";
+import TopMovieDetail from "./TopMovieDetail";
 
 const GenreDetail = () => {
   const params = useParams();
@@ -20,11 +21,22 @@ const GenreDetail = () => {
   return (
     <>
       <h1>genre detail</h1>
-      {/* {genreList.length === 0 ? (
-        <p>zero</p>
-      ) : (
-        genreList.map((list) => <p key={list.id}>{list.title}</p>)
-      )} */}
+      {genreList &&
+        genreList.map((topMovie) => (
+          <TopMovieDetail
+            key={topMovie.imdbid}
+            imdbid={topMovie.imdbid}
+            description={topMovie.description}
+            genre={topMovie.genre}
+            rank={topMovie.rank}
+            rating={topMovie.rating}
+            thumbnail={topMovie.thumbnail}
+            title={topMovie.title}
+            trailer={topMovie.trailer}
+            year={topMovie.year}
+            image={topMovie.image}
+          />
+        ))}
     </>
   );
 };
