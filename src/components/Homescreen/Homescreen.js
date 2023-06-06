@@ -14,6 +14,7 @@ import MyMoviesSection from "./MyMoviesSection.js";
 import { getGenreList } from "../../store/genreListSlice";
 import BrowseByGenreSection from "./BrowseByGenreSection";
 import { useState } from "react";
+import { getTopMoviesAndAdd } from "../../store/topMoviesSlice";
 
 const Homescreen = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Homescreen = () => {
 
   useEffect(() => {
     console.log(myList);
-    //dispatch(getTopMoviesAndAdd());
+    dispatch(getTopMoviesAndAdd());
 
     dispatch(getGenreList(setIsLoading));
   }, []);
