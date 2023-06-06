@@ -167,7 +167,10 @@ export const getGenreList = (setIsLoading) => {
   };
 };
 
-export const getMovieListForGenre = (genre) => {
+export const getMovieListForGenre = (genre, setIsLoading) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
   return async (dispatch) => {
     const options = {
       method: "GET",
@@ -248,6 +251,9 @@ export const getMovieListForGenre = (genre) => {
       dispatch(genreListSlice.actions.setMovieListForGenre(genreList));
     } catch (error) {
       console.error(error);
+    }
+    if (setIsLoading) {
+      setIsLoading(false);
     }
   };
 };
