@@ -16,7 +16,10 @@ const topMoviesSlice = createSlice({
 
 export default topMoviesSlice;
 
-export const getTopMoviesAndAdd = () => {
+export const getTopMoviesAndAdd = (setIsLoading) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
   return async (dispatch) => {
     const options = {
       method: "GET",
@@ -64,6 +67,9 @@ export const getTopMoviesAndAdd = () => {
       });
     } catch (error) {
       console.error(error);
+    }
+    if (setIsLoading) {
+      setIsLoading(false);
     }
   };
 };

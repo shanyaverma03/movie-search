@@ -26,13 +26,14 @@ const Homescreen = () => {
     navigate("/browse");
   };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [genreIsLoading, setGenreIsLoading] = useState(false);
+  const [topMovieIsLoading, setTopMovieIsLoading] = useState(false);
 
   useEffect(() => {
     console.log(myList);
-    dispatch(getTopMoviesAndAdd());
+    dispatch(getTopMoviesAndAdd(setTopMovieIsLoading));
 
-    dispatch(getGenreList(setIsLoading));
+    dispatch(getGenreList(setGenreIsLoading));
   }, []);
 
   return (
@@ -78,9 +79,9 @@ const Homescreen = () => {
           <div className={classes.whatToWatch}>
             <h2>What to watch</h2>
           </div>
-          <TopMoviesSection />
+          <TopMoviesSection isLoading={topMovieIsLoading} />
           <MyMoviesSection />
-          <BrowseByGenreSection isLoading={isLoading} />
+          <BrowseByGenreSection isLoading={genreIsLoading} />
         </div>
       </Box>
     </div>
