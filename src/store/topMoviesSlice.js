@@ -61,7 +61,7 @@ export const getTopMoviesAndAdd = (setIsLoading) => {
           };
 
           dispatch(topMoviesSlice.actions.add(addedMovie));
-          console.log(addedMovie);
+
           count++;
         }
       });

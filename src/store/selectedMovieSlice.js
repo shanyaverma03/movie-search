@@ -46,6 +46,7 @@ export const getSelectedMovieDetails = (movieIdFromParams, setIsLoading) => {
     setIsLoading(true);
   }
   return async (dispatch) => {
+    console.log("inside get selected movie details");
     const options = {
       method: "GET",
       url: "https://imdb8.p.rapidapi.com/auto-complete",
@@ -139,9 +140,6 @@ export const getSelectedMovieRatingGenrePlot = (movieIdFromParams) => {
       const rating = response.data.ratings.rating;
       const genres = response.data.genres;
       const description = response.data.plotSummary.text;
-      console.log(rating);
-      console.log(genres);
-      console.log(description);
       dispatch(
         movieSlice.actions.addRatingGenresPlot({ rating, genres, description })
       );

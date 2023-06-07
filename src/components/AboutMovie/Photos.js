@@ -13,9 +13,9 @@ const Photos = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(params.id);
+    console.log("inside photos use effect");
+
     dispatch(getSelectedMovieDetails(params.id, setIsLoading));
-    console.log(selectedMovie);
   }, []);
 
   let content;

@@ -154,7 +154,6 @@ export const getGenreList = (setIsLoading) => {
           genreList.push(addedGenre);
         }
       });
-      console.log(genreList);
 
       dispatch(genreListSlice.actions.setGenreList(genreList));
     } catch (error) {

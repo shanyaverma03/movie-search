@@ -15,7 +15,7 @@ import { ReactComponent as Plus } from "../../logos/plus.svg";
 import { ReactComponent as Tick } from "../../logos/tick.svg";
 import { CircularProgress } from "@mui/material";
 
-const MovieDetail = (props) => {
+const MovieDetail = () => {
   const params = useParams();
   const selectedMovie = useSelector((state) => state.selectedMovie.movie);
   const myList = useSelector((state) => state.mylist.mylist);
@@ -59,7 +59,7 @@ const MovieDetail = (props) => {
       });
     }
     handleSearch();
-  }, [video, myList]);
+  }, []);
 
   const addToMyListHandler = async () => {
     if (isAuthenticated) {

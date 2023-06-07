@@ -38,7 +38,13 @@ const Browse = () => {
         const title = item.l;
         const year = item.y;
         const rank = item.rank;
-        const poster = item.i.imageUrl;
+        let poster;
+        if (item.i) {
+          poster = item.i.imageUrl;
+        } else {
+          poster = null;
+        }
+
         const type = item.qid;
         const movie = {
           id,

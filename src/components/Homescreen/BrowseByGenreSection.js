@@ -26,10 +26,10 @@ const BrowseByGenreSection = (props) => {
   if (props.isLoading) {
     content = <LinearProgress color="inherit" />;
   } else {
-    content = genreList.map((genre) => (
+    content = genreList.map((genre, index) => (
       <div
         className={classes.container}
-        key={genre}
+        key={index.toString()}
         onClick={() => {
           navigate(`/browse/genres/${genre.genre}`);
         }}
