@@ -61,9 +61,10 @@ const MyMoviesSection = () => {
             id="sliderMyList"
             className="w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
           >
-            {myList.map((topMovie) => (
+            {myList.map((topMovie, index) => (
               <MyMovieDetail
-                key={topMovie.id}
+                key={index.toString()}
+                id={topMovie.id}
                 image={topMovie.poster}
                 title={topMovie.title}
                 rank={topMovie.rank}

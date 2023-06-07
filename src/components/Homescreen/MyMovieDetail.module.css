@@ -24,8 +24,9 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  overflow: hidden;
 }
 
 .container button {
@@ -55,4 +56,16 @@
   font-size: 0.8em;
   font-weight: 600;
   color: ivory;
+}
+
+.title {
+  padding: 1em;
+  line-height: 2em;
+  font-weight: 600;
+  font-size: 0.8em;
+  color: white;
+}
+
+.title:hover {
+  text-decoration: underline;
 }
