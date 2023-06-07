@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { ReactComponent as Star } from "../../logos/star.svg";
 import { ReactComponent as Info } from "../../logos/info.svg";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Link } from "react-router-dom";
 
 const TopMovieDetail = (props) => {
   const [movieAlreadyInList, setAlreadyMovieInList] = useState(false);
@@ -94,7 +95,10 @@ const TopMovieDetail = (props) => {
             <Star className={classes.starSvg} />
             <p style={{ color: "#FFFFFFB3", height: "1em" }}>{props.rating}</p>
           </div>
-          <p className={classes.title}>{props.title}</p>
+          <Link to={`/browse/${props.imdbid}`} className={classes.title}>
+            {props.title}
+          </Link>
+
           <div className={classes.actionAndLearn}>
             {buttonContent === "Go to List" ? (
               <button onClick={goToListHandler}>{buttonContent}</button>
