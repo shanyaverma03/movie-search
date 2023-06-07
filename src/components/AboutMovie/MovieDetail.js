@@ -75,6 +75,7 @@ const MovieDetail = () => {
       console.log("added movie");
       console.log(addedMovie);
       dispatch(addToMyListAction(addedMovie, userId, selectedMovie.id));
+      setMovieAlreadyInList(true);
     } else {
       setModalDetails({
         showModal: true,
@@ -129,8 +130,8 @@ const MovieDetail = () => {
             <div className={classes.genre}>
               <h2>Genres</h2>
               {selectedMovie.genres &&
-                selectedMovie.genres.map((genre) => (
-                  <p key={selectedMovie.id} style={{ color: "white" }}>
+                selectedMovie.genres.map((genre, index) => (
+                  <p key={index.toString()} style={{ color: "white" }}>
                     {genre}
                   </p>
                 ))}
