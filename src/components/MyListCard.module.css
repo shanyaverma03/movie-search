@@ -1,18 +1,12 @@
-.myListMovies {
-  display: inline-block;
-  width: 20%;
-  margin: 1rem;
-  padding-top: 3em;
-  padding-bottom: 3em;
-}
-
 .card {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 100%;
-  overflow-y: auto;
+  width: 20%;
+  margin-right: 3em;
+  height: 30%;
+  margin-bottom: 3em;
 }
 
 .card:hover {

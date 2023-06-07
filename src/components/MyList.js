@@ -50,9 +50,9 @@ const MyList = () => {
       </div>
     );
   } else {
-    mainContent = myList.map((movie) => (
+    mainContent = myList.map((movie, index) => (
       <MyListCard
-        key={movie.id}
+        key={index.toString()}
         image={movie.poster}
         title={movie.title}
         id={movie.id}
@@ -65,7 +65,7 @@ const MyList = () => {
     <>
       <h1 className={classes.listHeader}>My List</h1>
 
-      {mainContent}
+      <div className={classes.mainContent}>{mainContent}</div>
     </>
   );
 };

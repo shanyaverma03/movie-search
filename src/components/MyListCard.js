@@ -18,23 +18,14 @@ const MyListCard = (props) => {
   };
 
   return (
-    <div className={classes.myListMovies}>
-      <div className={classes.card}>
-        <img src={props.image} alt="thumbnail" />
-        <div className={classes.container}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          ></div>
-          <p className={classes.title}>{props.title}</p>
-          <div className={classes.actionAndLearn}>
-            <button onClick={removeMovieHandler}>Remove</button>
+    <div className={classes.card}>
+      <img src={props.image} alt="thumbnail" />
+      <div className={classes.container}>
+        <p className={classes.title}>{props.title}</p>
+        <div className={classes.actionAndLearn}>
+          <button onClick={removeMovieHandler}>Remove</button>
 
-            <Info onClick={moreInfoIconHandler} className={classes.info} />
-          </div>
+          <Info onClick={moreInfoIconHandler} className={classes.info} />
         </div>
       </div>
     </div>

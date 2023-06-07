@@ -34,3 +34,11 @@
   text-transform: none;
   color: white;
 }
+
+.mainContent {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3em;
+  align-items: center;
+  justify-content: center;
+}
