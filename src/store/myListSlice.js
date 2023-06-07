@@ -93,6 +93,7 @@ export const removeMovieAction = (docId, setIsLoading) => {
     console.log("set is loading set to true");
   }
   return async (dispatch) => {
+    console.log("inside remove movie action");
     await deleteDoc(doc(db, "mylist", docId));
     dispatch(myListSlice.actions.remove(docId));
     if (setIsLoading) {

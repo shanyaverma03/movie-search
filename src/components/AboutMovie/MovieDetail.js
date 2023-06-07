@@ -14,6 +14,7 @@ import { ReactComponent as Images } from "../../logos/images.svg";
 import { ReactComponent as Plus } from "../../logos/plus.svg";
 import { ReactComponent as Tick } from "../../logos/tick.svg";
 import { CircularProgress } from "@mui/material";
+import { removeMovieAction } from "../../store/myListSlice";
 
 const MovieDetail = () => {
   const params = useParams();
@@ -97,6 +98,17 @@ const MovieDetail = () => {
     navigate("photos");
   };
 
+  const removeMovieFromListHAndler = () => {
+    //we need the doc Id of the movie from myList
+    const movieToBeRemoved = myList.find(
+      (movie) => movie.id === paramsMovieId.id
+    );
+    const docId = movieToBeRemoved.docId;
+    console.log(docId);
+    dispatch(removeMovieAction(docId));
+    setMovieAlreadyInList(false);
+  };
+
   let content;
 
   if (isLoading) {
@@ -155,7 +167,7 @@ const MovieDetail = () => {
               </div>
               <div className={classes.list}>
                 {movieAlreadyInList ? (
-                  <button>
+                  <button onClick={removeMovieFromListHAndler}>
                     <Tick style={{ width: "1.8em" }} />
                     Movie in your List
                   </button>
