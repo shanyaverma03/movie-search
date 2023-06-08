@@ -144,7 +144,11 @@ const MovieDetail = () => {
           )}
           <div className={classes.description}>
             <h2>ABOUT</h2>
-            <p style={{ color: "white" }}>{selectedMovie.description}</p>
+            {selectedMovie.description ? (
+              <p style={{ color: "white" }}>{selectedMovie.description}</p>
+            ) : (
+              <CircularProgress />
+            )}
           </div>
           <div className={classes.moreDetails}>
             <div className={classes.releaseInfo}>
@@ -153,12 +157,15 @@ const MovieDetail = () => {
             </div>
             <div className={classes.genre}>
               <h2>Genres</h2>
-              {selectedMovie.genres &&
+              {selectedMovie.genres ? (
                 selectedMovie.genres.map((genre, index) => (
                   <p key={index.toString()} style={{ color: "white" }}>
                     {genre}
                   </p>
-                ))}
+                ))
+              ) : (
+                <CircularProgress />
+              )}
             </div>
           </div>
         </div>
@@ -179,7 +186,11 @@ const MovieDetail = () => {
               <div className={classes.rating}>
                 <h2>Rating</h2>
                 <div className={classes.starAndRating}>
-                  <p>{selectedMovie.rating}/10</p>
+                  {selectedMovie.rating ? (
+                    <p>{selectedMovie.rating}/10</p>
+                  ) : (
+                    <CircularProgress />
+                  )}
                 </div>
               </div>
               <div className={classes.type}>
