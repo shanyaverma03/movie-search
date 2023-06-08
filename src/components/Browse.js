@@ -72,6 +72,7 @@ const Browse = () => {
     // setSelectedValue(value.toString());
     console.log("in selection handler ");
     console.log(value);
+    localStorage.setItem("movie", value.title);
     setSelectedValue(value);
     dispatch(movieActions.select(value));
     navigate(`${value.id}`);
