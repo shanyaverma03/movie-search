@@ -9,19 +9,13 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { movieActions } from "../store/index";
 import { ReactComponent as VerticalLine } from "../logos/verticalLine.svg";
+import TopMovieDetail from "./Homescreen/TopMovieDetail";
 
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    //fetch the movie name from the local storage and get it's details and display
-
-    const prevMovieTitle = localStorage.getItem("movie");
-    console.log(prevMovieTitle);
-  }, []);
 
   const searchHandler = async (event) => {
     console.log(event.target.value);
@@ -107,6 +101,12 @@ const Browse = () => {
       <div className={classes.recentMovieHeader}>
         <VerticalLine className={classes.verticalSvg} />
         <h2>Recently searched</h2>
+        <TopMovieDetail
+          title={localStorage.getItem("title")}
+          image={localStorage.getItem("poster")}
+          rating={localStorage.getItem("rating")}
+          imdbid={localStorage.getItem("id")}
+        />
       </div>
     </div>
   );

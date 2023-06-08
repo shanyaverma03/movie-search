@@ -63,6 +63,7 @@ const MovieDetail = () => {
     localStorage.setItem("title", selectedMovie.title);
     localStorage.setItem("poster", selectedMovie.poster);
     localStorage.setItem("rating", selectedMovie.rating);
+    localStorage.setItem("id", selectedMovie.id);
   }, []);
 
   const addToMyListHandler = async () => {

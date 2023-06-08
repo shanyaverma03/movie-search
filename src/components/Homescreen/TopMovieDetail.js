@@ -60,12 +60,16 @@ const TopMovieDetail = (props) => {
   };
 
   useEffect(() => {
+    console.log(props.title);
+    console.log(props.image);
     const indexOfMovie = myList.some((movie) => movie.title === props.title);
     if (indexOfMovie) {
       //movie already in the list
       setAlreadyMovieInList(true);
+      console.log("movie in list");
     } else {
       setAlreadyMovieInList(false);
+      console.log("movie not in list");
     }
   }, [myList, props.title]);
 
