@@ -98,9 +98,11 @@ const Browse = () => {
           )}
         />
       </div>
-      <div className={classes.recentMovieHeader}>
-        <VerticalLine className={classes.verticalSvg} />
-        <h2>Recently searched</h2>
+      <div className={classes.recentlySearched}>
+        <div className={classes.recentMovieHeader}>
+          <VerticalLine className={classes.verticalSvg} />
+          <h2>Recently searched</h2>
+        </div>
         <TopMovieDetail
           title={localStorage.getItem("title")}
           image={localStorage.getItem("poster")}

@@ -38,3 +38,8 @@
   color: white;
   padding-bottom: 1rem;
 }
+
+.recentlySearched {
+  display: flex;
+  flex-direction: column;
+}
