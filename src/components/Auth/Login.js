@@ -86,9 +86,15 @@ const Login = () => {
       passwordReset();
       return navigate(-1);
     } catch (err) {
-      console.error(err);
-      setPasswordNotMatch(true);
-      return;
+      //console.error(err);
+      console.log(err.code);
+      if (err.code === "auth/wrong-password") {
+        setPasswordNotMatch(true);
+        return;
+      }
+      if (err.code === "auth/user-not-found") {
+        navigate("/register");
+      }
     }
   };
 
