@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { isAuthenticatedActions } from "../../store";
 import useValidate from "../../hooks/use-validate";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -102,6 +103,8 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [emailInUse, setEmailInUse] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     //const data = new FormData(event.currentTarget);
@@ -124,6 +127,10 @@ const Register = () => {
       return navigate(-1);
     } catch (err) {
       console.error(err);
+      if (err.code === "auth/email-already-in-use") {
+        setEmailInUse(true);
+        return;
+      }
     }
   };
 
@@ -206,8 +213,14 @@ const Register = () => {
                 <TextField
                   required
                   fullWidth
-                  error={emailIsInvalid}
-                  helperText={emailIsInvalid ? "Invalid email!" : " "}
+                  error={emailIsInvalid || emailInUse}
+                  helperText={
+                    emailIsInvalid
+                      ? "Invalid email!"
+                      : " " || emailInUse
+                      ? "Email already exists!"
+                      : " "
+                  }
                   id="email"
                   label="Email Address"
                   name="email"
