@@ -98,18 +98,20 @@ const Browse = () => {
           )}
         />
       </div>
-      <div className={classes.recentlySearched}>
-        <div className={classes.recentMovieHeader}>
-          <VerticalLine className={classes.verticalSvg} />
-          <h2>Recently searched</h2>
+      {localStorage.getItem("title") && (
+        <div className={classes.recentlySearched}>
+          <div className={classes.recentMovieHeader}>
+            <VerticalLine className={classes.verticalSvg} />
+            <h2>Recently searched</h2>
+          </div>
+          <TopMovieDetail
+            title={localStorage.getItem("title")}
+            image={localStorage.getItem("poster")}
+            rating={localStorage.getItem("rating")}
+            imdbid={localStorage.getItem("id")}
+          />
         </div>
-        <TopMovieDetail
-          title={localStorage.getItem("title")}
-          image={localStorage.getItem("poster")}
-          rating={localStorage.getItem("rating")}
-          imdbid={localStorage.getItem("id")}
-        />
-      </div>
+      )}
     </div>
   );
 };
