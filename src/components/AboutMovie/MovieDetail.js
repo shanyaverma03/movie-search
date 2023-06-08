@@ -164,7 +164,16 @@ const MovieDetail = () => {
         </div>
 
         <div className={classes.trailerImages}>
-          <ReactPlayer url={videoURL} controls={true} />
+          {videoURL ? (
+            <ReactPlayer url={videoURL} controls={true} />
+          ) : (
+            <img
+              style={{ width: "60%" }}
+              src="https://img.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg?w=1480&t=st=1686226500~exp=1686227100~hmac=0c49c0ad1782bb20ca591ae66f4bfb1426e83bfa2886637b05e4a084b31c7000"
+              alt="no movie trailer found"
+            />
+          )}
+
           <div className={classes.imagesAndInfo}>
             <div className={classes.ratingTypeList}>
               <div className={classes.rating}>
