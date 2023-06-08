@@ -133,16 +133,19 @@ const Register = () => {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 4,
+            padding: "2rem",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            border: "2px #ddd solid",
+            borderRadius: "8px",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" color="common.white">
+          <Typography component="h1" variant="h5">
             Sign up
           </Typography>
           <Box
@@ -166,14 +169,12 @@ const Register = () => {
                   onChange={firstNameChangeHandler}
                   onBlur={firstNameBlurHandler}
                   value={firstName}
-                  sx={{ input: { color: "white" } }}
                   InputLabelProps={{
                     style: {
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       width: "100%",
-                      color: "white",
                     },
                   }}
                 />
@@ -191,14 +192,12 @@ const Register = () => {
                   onChange={lastNameChangeHandler}
                   onBlur={lastNameBlurHandler}
                   value={lastName}
-                  sx={{ input: { color: "white" } }}
                   InputLabelProps={{
                     style: {
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       width: "100%",
-                      color: "white",
                     },
                   }}
                 />
@@ -216,14 +215,12 @@ const Register = () => {
                   onChange={emailChangeHandler}
                   onBlur={emailBlurHandler}
                   value={email}
-                  sx={{ input: { color: "white" } }}
                   InputLabelProps={{
                     style: {
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       width: "100%",
-                      color: "white",
                     },
                   }}
                 />
@@ -242,14 +239,12 @@ const Register = () => {
                   onChange={passwordChangeHandler}
                   onBlur={passwordBlurHandler}
                   value={password}
-                  sx={{ input: { color: "white" } }}
                   InputLabelProps={{
                     style: {
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       width: "100%",
-                      color: "white",
                     },
                   }}
                 />
@@ -270,14 +265,12 @@ const Register = () => {
                   onChange={confirmPasswordChangeHandler}
                   onBlur={confirmPasswordBlurHandler}
                   value={confirmPassword}
-                  sx={{ input: { color: "white" } }}
                   InputLabelProps={{
                     style: {
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
                       overflow: "hidden",
                       width: "100%",
-                      color: "white",
                     },
                   }}
                 />
@@ -301,7 +294,7 @@ const Register = () => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5, color: "white" }} />
+        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

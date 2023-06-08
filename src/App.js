@@ -34,10 +34,6 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: "register",
-        element: <RegisterPage />,
-      },
-      {
         path: "browse",
         children: [
           {
@@ -67,6 +63,15 @@ const router = createBrowserRouter([
             ],
           },
         ],
+      },
+    ],
+  },
+  {
+    path: "/register",
+    children: [
+      {
+        index: true,
+        element: <RegisterPage />,
       },
     ],
   },
