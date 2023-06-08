@@ -67,7 +67,7 @@ const Register = () => {
     valueChangeHandler: emailChangeHandler,
     valueBlurHandler: emailBlurHandler,
     reset: emailReset,
-  } = useValidate((value) => value.includes("@") && value.trim() !== "");
+  } = useValidate((value, format) => value.match(format));
 
   const {
     enteredValue: password,
@@ -76,7 +76,7 @@ const Register = () => {
     valueChangeHandler: passwordChangeHandler,
     valueBlurHandler: passwordBlurHandler,
     reset: passwordReset,
-  } = useValidate((value) => value.trim() !== "" && value.length > 5);
+  } = useValidate((value) => value.trim() !== "" && value.length > 6);
 
   const {
     enteredValue: confirmPassword,

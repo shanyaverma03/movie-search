@@ -4,7 +4,8 @@ const useValidate = (validateInput) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [valueWasTouched, setValueWasTouched] = useState(false);
 
-  const valueIsValid = validateInput(enteredValue);
+  const format = /\S+@\S+\.\S+/;
+  const valueIsValid = validateInput(enteredValue, format);
   const valueIsInvalid = !valueIsValid && valueWasTouched;
 
   const valueChangeHandler = (event) => {

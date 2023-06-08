@@ -19,6 +19,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { isAuthenticatedActions } from "../../store";
 import classes from "./Login.module.css";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -50,7 +51,7 @@ const Login = () => {
     valueChangeHandler: emailChangeHandler,
     valueBlurHandler: emailBlurHandler,
     reset: emailReset,
-  } = useValidate((value) => value.trim() !== "" && value.includes("@"));
+  } = useValidate((value, format) => value.match(format));
 
   const {
     enteredValue: password,
@@ -59,7 +60,9 @@ const Login = () => {
     valueChangeHandler: passwordChangeHandler,
     valueBlurHandler: passwordBlurHandler,
     reset: passwordReset,
-  } = useValidate((value) => value.trim() !== "" && value.length > 5);
+  } = useValidate((value) => value.trim() !== "" && value.length > 6);
+
+  const [passwordNotMatch, setPasswordNotMatch] = useState(false);
 
   let formIsValid = false;
   if (emailIsValid && passwordIsValid) {
@@ -84,6 +87,7 @@ const Login = () => {
       return navigate(-1);
     } catch (err) {
       console.error(err);
+      setPasswordNotMatch(true);
       return;
     }
   };
@@ -142,8 +146,12 @@ const Login = () => {
               margin="normal"
               required
               fullWidth
-              error={passwordIsInvalid}
-              helperText={passwordIsInvalid ? "Invalid password!" : " "}
+              error={passwordIsInvalid || passwordNotMatch}
+              helperText={
+                passwordIsInvalid || passwordNotMatch
+                  ? "Invalid password!"
+                  : " "
+              }
               name="password"
               label="Password"
               type="password"
