@@ -62,7 +62,11 @@ const MovieDetail = () => {
     handleSearch();
     localStorage.setItem("title", selectedMovie.title);
     localStorage.setItem("poster", selectedMovie.poster);
-    localStorage.setItem("rating", selectedMovie.rating);
+
+    selectedMovie.rating
+      ? localStorage.setItem("rating", selectedMovie.rating)
+      : localStorage.setItem("rating", "not found");
+
     localStorage.setItem("id", selectedMovie.id);
   }, []);
 
