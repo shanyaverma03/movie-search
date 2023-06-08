@@ -38,6 +38,8 @@ const TopMovieDetail = (props) => {
         type: props.genre,
       };
 
+      console.log(userId);
+
       dispatch(
         addToMyListAction(
           movieToBeAdded,

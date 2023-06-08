@@ -47,8 +47,10 @@ export const addToMyListAction = (
   return async (dispatch) => {
     const q = query(
       collection(db, "mylist"),
+      where("userId", "==", userId),
       where("id", "==", selectedMovieId)
     );
+    console.log(q);
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
       console.log("adding movie to the list");
@@ -67,9 +69,11 @@ export const addToMyListAction = (
       const addedMovieWithDocId = { ...addedMovie, docId: docRef.id };
       dispatch(myListSlice.actions.add(addedMovieWithDocId));
       //set is loading back to false
-      if (setIsLoading) {
-        setIsLoading(false);
-      }
+    } else {
+      console.log("not empty");
+    }
+    if (setIsLoading) {
+      setIsLoading(false);
     }
   };
 };
