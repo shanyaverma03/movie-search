@@ -9,6 +9,7 @@ import classes from "./Browse.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { movieActions } from "../store/index";
+import { ReactComponent as VerticalLine } from "../logos/verticalLine.svg";
 
 const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
@@ -78,22 +79,29 @@ const Browse = () => {
     navigate(`${value.id}`);
   };
   return (
-    <div className={classes.searchContainer}>
-      <CssBaseline />
-      <Autocomplete
-        loading={isLoading}
-        loadingText="Loading..."
-        disablePortal
-        id="combo-box-demo"
-        options={movieRecs}
-        getOptionLabel={(movieRecs) => movieRecs.title || ""}
-        onInputCapture={debounce(searchHandler, 800)}
-        onChange={(event, value) => selectionHandler(value)}
-        sx={{ width: 300, background: "white" }}
-        renderInput={(params) => (
-          <TextField {...params} placeholder="Search..." />
-        )}
-      />
+    <div>
+      <div className={classes.searchContainer}>
+        <h1>Search for any show or movie!</h1>
+
+        <Autocomplete
+          loading={isLoading}
+          loadingText="Loading..."
+          disablePortal
+          id="combo-box-demo"
+          options={movieRecs}
+          getOptionLabel={(movieRecs) => movieRecs.title || ""}
+          onInputCapture={debounce(searchHandler, 800)}
+          onChange={(event, value) => selectionHandler(value)}
+          sx={{ width: 300, background: "white" }}
+          renderInput={(params) => (
+            <TextField {...params} placeholder="Search..." />
+          )}
+        />
+      </div>
+      <div className={classes.recentMovieHeader}>
+        <VerticalLine className={classes.verticalSvg} />
+        <h2>Recently searched</h2>
+      </div>
     </div>
   );
 };
