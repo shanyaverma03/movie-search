@@ -60,6 +60,9 @@ const MovieDetail = () => {
       });
     }
     handleSearch();
+    localStorage.setItem("title", selectedMovie.title);
+    localStorage.setItem("poster", selectedMovie.poster);
+    localStorage.setItem("rating", selectedMovie.rating);
   }, []);
 
   const addToMyListHandler = async () => {

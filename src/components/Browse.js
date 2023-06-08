@@ -3,8 +3,7 @@ import TextField from "@mui/material/TextField/TextField";
 import debounce from "lodash.debounce";
 import axios from "axios";
 import { apiInfo } from "../config/rapidAPI";
-import { useState } from "react";
-import CssBaseline from "@mui/material/CssBaseline/CssBaseline";
+import { useState, useEffect } from "react";
 import classes from "./Browse.module.css";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -16,6 +15,13 @@ const Browse = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    //fetch the movie name from the local storage and get it's details and display
+
+    const prevMovieTitle = localStorage.getItem("movie");
+    console.log(prevMovieTitle);
+  }, []);
 
   const searchHandler = async (event) => {
     console.log(event.target.value);
@@ -73,7 +79,7 @@ const Browse = () => {
     // setSelectedValue(value.toString());
     console.log("in selection handler ");
     console.log(value);
-    localStorage.setItem("movie", value.title);
+
     setSelectedValue(value);
     dispatch(movieActions.select(value));
     navigate(`${value.id}`);
