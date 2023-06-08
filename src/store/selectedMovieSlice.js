@@ -117,7 +117,7 @@ export const getSelectedMoviePhotos = (movieIdFromParams) => {
       const imagesList = response.data.images;
       let images = [];
       imagesList.map((image) => images.push(image.url));
-      // console.log(images);
+      console.log(images);
       dispatch(movieSlice.actions.addPhotos(images));
     } catch (error) {
       console.error(error);
@@ -142,10 +142,17 @@ export const getSelectedMovieRatingGenrePlot = (movieIdFromParams) => {
 
     try {
       const response = await axios.request(options);
-
+      console.log(response);
       const rating = response.data.ratings.rating;
       const genres = response.data.genres;
-      const description = response.data.plotSummary.text;
+      console.log(genres);
+      let description;
+      if (response.data.plotSummary == null) {
+        description = "Not Found...";
+      } else {
+        description = response.data.plotSummary.text;
+      }
+
       dispatch(
         movieSlice.actions.addRatingGenresPlot({ rating, genres, description })
       );
