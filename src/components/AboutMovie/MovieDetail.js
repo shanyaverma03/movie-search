@@ -132,8 +132,16 @@ const MovieDetail = () => {
           title={modalDetails.modalTitle}
           closeModal={closeModal}
         />
+
         <div className={classes.aboutMovie}>
-          <img src={selectedMovie.poster} alt="poster of the movie" />
+          {selectedMovie.poster === "not found" ? (
+            <img
+              src="https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?w=1060&t=st=1686225891~exp=1686226491~hmac=3d38af048498a82acae7c8532b5690954e890dd5c0629d09995f58c24eeb6b11"
+              alt="poster of the movie not found"
+            />
+          ) : (
+            <img src={selectedMovie.poster} alt="poster of the movie" />
+          )}
           <div className={classes.description}>
             <h2>ABOUT</h2>
             <p style={{ color: "white" }}>{selectedMovie.description}</p>

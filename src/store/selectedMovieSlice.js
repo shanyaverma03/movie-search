@@ -68,7 +68,13 @@ export const getSelectedMovieDetails = (movieIdFromParams, setIsLoading) => {
       const title = list.l;
       const year = list.y;
       const rank = list.rank;
-      const poster = list.i.imageUrl;
+      let poster;
+      if (list.i == null) {
+        poster = "not found";
+      } else {
+        poster = list.i.imageUrl;
+      }
+
       const type = list.qid;
       const movie = {
         id,
