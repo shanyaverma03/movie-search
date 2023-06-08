@@ -14,10 +14,11 @@ const Browse = () => {
   const [movieRecs, setMovieRecs] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchHandler = async (event) => {
     console.log(event.target.value);
-
+    setIsLoading(true);
     const options = {
       method: "GET",
       url: "https://imdb8.p.rapidapi.com/auto-complete",
@@ -58,7 +59,7 @@ const Browse = () => {
       });
 
       setMovieRecs(moviesList);
-
+      setIsLoading(false);
       console.log(moviesList);
     } catch (error) {
       console.error(error);
@@ -79,7 +80,7 @@ const Browse = () => {
     <div className={classes.searchContainer}>
       <CssBaseline />
       <Autocomplete
-        loading
+        loading={isLoading}
         loadingText="Loading..."
         disablePortal
         id="combo-box-demo"
@@ -88,7 +89,9 @@ const Browse = () => {
         onInputCapture={debounce(searchHandler, 800)}
         onChange={(event, value) => selectionHandler(value)}
         sx={{ width: 300, background: "white" }}
-        renderInput={(params) => <TextField {...params} label="Search..." />}
+        renderInput={(params) => (
+          <TextField {...params} placeholder="Search..." />
+        )}
       />
     </div>
   );
