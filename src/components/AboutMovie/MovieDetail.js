@@ -8,13 +8,17 @@ import classes from "./MovieDetail.module.css";
 import ReactPlayer from "react-player";
 import movieTrailer from "movie-trailer";
 import { useState } from "react";
-import { getSelectedMovieDetails } from "../../store/selectedMovieSlice";
+import {
+  getSelectedMovieDetails,
+  getSelectedMovieTopCast,
+} from "../../store/selectedMovieSlice";
 import { useEffect } from "react";
 import { ReactComponent as Images } from "../../logos/images.svg";
 import { ReactComponent as Plus } from "../../logos/plus.svg";
 import { ReactComponent as Tick } from "../../logos/tick.svg";
 import { CircularProgress } from "@mui/material";
 import { removeMovieAction } from "../../store/myListSlice";
+import TopCastSection from "./TopCastSection";
 
 const MovieDetail = () => {
   const params = useParams();
@@ -53,6 +57,7 @@ const MovieDetail = () => {
     }
     console.log("in use effect" + paramsMovieId.id);
     dispatch(getSelectedMovieDetails(paramsMovieId.id, setIsLoading));
+    //dispatch(getSelectedMovieTopCast(paramsMovieId.id));
 
     function handleSearch() {
       movieTrailer(video).then((res) => {
@@ -221,6 +226,7 @@ const MovieDetail = () => {
             </button>
           </div>
         </div>
+        <TopCastSection topCast={selectedMovie.topCast} />
       </div>
     );
   }

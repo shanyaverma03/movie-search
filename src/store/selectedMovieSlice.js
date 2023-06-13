@@ -14,6 +14,7 @@ const initialState = {
     rating: "",
     genres: [],
     description: "",
+    topCast: [{}],
   },
 };
 
@@ -34,6 +35,9 @@ const movieSlice = createSlice({
         genres: action.payload.genres,
         description: action.payload.description,
       };
+    },
+    addTopCast(state, action) {
+      state.movie = { ...state.movie, topCast: action.payload };
     },
   },
 });
@@ -87,6 +91,7 @@ export const getSelectedMovieDetails = (movieIdFromParams, setIsLoading) => {
       dispatch(movieSlice.actions.select(movie));
       dispatch(getSelectedMovieRatingGenrePlot(movieIdFromParams));
       dispatch(getSelectedMoviePhotos(movieIdFromParams));
+      dispatch(getSelectedMovieTopCast(movieIdFromParams));
       // });
       if (setIsLoading) {
         setIsLoading(false);
@@ -142,10 +147,10 @@ export const getSelectedMovieRatingGenrePlot = (movieIdFromParams) => {
 
     try {
       const response = await axios.request(options);
-      console.log(response);
+
       const rating = response.data.ratings.rating;
       const genres = response.data.genres;
-      console.log(genres);
+
       let description;
       if (response.data.plotSummary == null) {
         description = "Not Found...";
@@ -156,6 +161,56 @@ export const getSelectedMovieRatingGenrePlot = (movieIdFromParams) => {
       dispatch(
         movieSlice.actions.addRatingGenresPlot({ rating, genres, description })
       );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const getSelectedMovieTopCast = (movieIdFromParams) => {
+  return async (dispatch) => {
+    const options = {
+      method: "GET",
+      url: "https://online-movie-database.p.rapidapi.com/title/get-full-credits",
+      params: {
+        tconst: movieIdFromParams,
+      },
+      headers: {
+        "X-RapidAPI-Key": apiInfo["X-RapidAPI-Key"],
+        "X-RapidAPI-Host": apiInfo["X-RapidAPI-Host"],
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+
+      const castList = response.data.cast;
+      let count = 1;
+      let addedCastList = [];
+      castList.map((cast) => {
+        if (count < 10) {
+          let imageUrl;
+          if (cast.image.url == null) {
+            imageUrl =
+              "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Fuser-icon-human-person-sign-vector-20444565&psig=AOvVaw1sBcO6GCILU9ilTctHQJ9A&ust=1686727886592000&source=images&cd=vfe&ved=0CBEQjRxqGAoTCMiz5ZXdv_8CFQAAAAAdAAAAABCPAQ";
+          } else {
+            imageUrl = cast.image.url;
+          }
+          const name = cast.name;
+          const character = cast.characters[0];
+          count++;
+          console.log(imageUrl);
+          console.log(name);
+          console.log(character);
+          const castDetail = {
+            imageUrl,
+            name,
+            character,
+          };
+          addedCastList.push(castDetail);
+        }
+      });
+      dispatch(movieSlice.actions.addTopCast(addedCastList));
     } catch (error) {
       console.error(error);
     }
