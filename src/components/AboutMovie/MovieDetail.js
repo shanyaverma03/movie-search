@@ -226,7 +226,11 @@ const MovieDetail = () => {
             </button>
           </div>
         </div>
-        <TopCastSection topCast={selectedMovie.topCast} />
+        {selectedMovie.topCast ? (
+          <TopCastSection topCast={selectedMovie.topCast} />
+        ) : (
+          <CircularProgress />
+        )}
       </div>
     );
   }
