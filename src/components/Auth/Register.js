@@ -88,6 +88,8 @@ const Register = () => {
     reset: confirmPasswordReset,
   } = useValidate((value) => value === password);
 
+  const [emailInUse, setEmailInUse] = useState(false);
+
   let formIsValid = false;
   //const doPasswordsMatch= confirmPasswordIsValid && confirmPassword===password
   if (
@@ -102,8 +104,6 @@ const Register = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [emailInUse, setEmailInUse] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -124,6 +124,7 @@ const Register = () => {
       emailReset();
       passwordReset();
       confirmPasswordReset();
+
       return navigate(-1);
     } catch (err) {
       console.error(err);
@@ -134,6 +135,13 @@ const Register = () => {
     }
   };
 
+  const getEmailHelperText = () => {
+    if (emailIsInvalid) {
+      return "Invalid email";
+    } else if (emailInUse) {
+      return "Email already exists!";
+    }
+  };
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -214,13 +222,7 @@ const Register = () => {
                   required
                   fullWidth
                   error={emailIsInvalid || emailInUse}
-                  helperText={
-                    emailIsInvalid
-                      ? "Invalid email!"
-                      : " " || emailInUse
-                      ? "Email already exists!"
-                      : " "
-                  }
+                  helperText={getEmailHelperText()}
                   id="email"
                   label="Email Address"
                   name="email"
